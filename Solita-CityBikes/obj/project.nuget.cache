@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "D6cDJDbx4Ymh8/336W80TMtHyFCMq5vx/ncExuctg1orO4oY/RcQ8dUU/ZT4/YicA6nhwursYRXSBmEO3Fkdhw==",
+  "success": true,
+  "projectFilePath": "/Users/otsokinanen/Desktop/Työnhaku/Solita/Solita-CityBikes/Solita-CityBikes/Solita-CityBikes.csproj",
+  "expectedPackageFiles": [
+    "/Users/otsokinanen/.nuget/packages/microsoft.aspnetcore.spaproxy/7.0.3/microsoft.aspnetcore.spaproxy.7.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
