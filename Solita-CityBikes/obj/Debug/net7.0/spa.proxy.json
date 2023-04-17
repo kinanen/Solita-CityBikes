@@ -1,0 +1,8 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:44470",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "/Users/otsokinanen/Desktop/Työnhaku/Solita/Solita-CityBikes/Solita-CityBikes/ClientApp/",
+"MaxTimeoutInSeconds": "120"
+}
+}

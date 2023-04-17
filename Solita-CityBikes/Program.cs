@@ -4,6 +4,8 @@
 
 builder.Services.AddControllersWithViews();
 
+Solita_CityBikes.MapPosition.ReadData();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
