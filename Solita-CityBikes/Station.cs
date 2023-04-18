@@ -4,10 +4,11 @@ namespace Solita_CityBikes;
 
 public class Station
 {
-    [Index(1)]
-    public int StationIdForJoining { get; set; }
-
     //FID,ID,Nimi,Namn,Name,Osoite,Adress,Kaupunki,Stad,Operaattor,Kapasiteet,x,y
+
+    [Index(1)]
+    public int HslStationId { get; set; }
+    
     [Ignore]
     public int StationId { get; set; }
     

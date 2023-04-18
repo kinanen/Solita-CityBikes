@@ -9,33 +9,54 @@ namespace Solita_CityBikes.Data
 	{
 		public static void Initialize(IServiceProvider serviceProvider)
 		{
-			using (var context = new StationContext(serviceProvider.GetRequiredService<DbContextOptions<StationContext>>()))
+            using (var context = new StationContext(serviceProvider.GetRequiredService<DbContextOptions<StationContext>>()))
 				{
 
-				context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
                 if (context.Stations.Any())
 				{
 					return;
 				}
-
-                // Todo: lataa csvt tietokantaan CSV Helper
-				// Lataa asemat tiedoston tiedot CSV tiedostosta ja lisää asemat Station luokan olioksi. 
-                using (var reader = new StreamReader("/Users/otsokinanen/Desktop/asemat.csv"))
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture)) // 
+                // Lataa asemat tiedoston tiedot CSV tiedostosta ja lisää asemat Station luokan olioksi. 
+                using var reader = new StreamReader("/Users/otsokinanen/Desktop/data/asemat.csv");
+                using var csv = new CsvReader(reader, CultureInfo.InvariantCulture); // 
+                var records = csv.GetRecords<Station>();
+                foreach (var record in records)
                 {
-                    var records = csv.GetRecords<Station>();
-					foreach (var record in records) {
-						context.Add(new Station { Name = record.Name, Namn = record.Namn, Nimi = record.Nimi, StationIdForJoining = record.StationIdForJoining, X = record.X, Y = record.Y});
-					}
-					
-					//context.AddRange(records);
-					context.SaveChanges();
-
+                    context.Add(new Station { Name = record.Name, Namn = record.Namn, Nimi = record.Nimi, HslStationId = record.HslStationId, X = record.X, Y = record.Y });
                 }
+
+                //context.AddRange(records);
+                context.SaveChanges();
 
             }
 
-		}
+            //using (var context = new TripContext(serviceProvider.GetRequiredService<DbContextOptions<Context>>()))
+            //{
+
+            //    context.Database.EnsureCreated();
+            //    if (context.Stations.Any())
+            //    {
+            //        return;
+            //    }
+            //    // Lataa asemat tiedoston tiedot CSV tiedostosta ja lisää asemat Station luokan olioksi. 
+            //    using (var reader = new StreamReader("/Users/otsokinanen/Desktop/data/asemat.csv"))
+            //    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture)) // 
+            //    {
+            //        var records = csv.GetRecords<Station>();
+            //        foreach (var record in records)
+            //        {
+            //            context.Add(new Station { Name = record.Name, Namn = record.Namn, Nimi = record.Nimi, StationIdForJoining = record.StationIdForJoining, X = record.X, Y = record.Y });
+            //        }
+
+            //        //context.AddRange(records);
+            //        context.SaveChanges();
+
+            //    }
+
+            //}
+
+        }
 	}
 }
 

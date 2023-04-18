@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sWd2+KaMKzdEcr+dYCKzzAN6BcQKLpoKbVSGtGdv4+i8b0DYK/RqgfqlnbwbjAzd6//SKBTMAFr46yrAz7kGvQ==",
+  "dgSpecHash": "9cpTZ2oX49rtsmE4KSSHfE93VhLVPwvWZYLyPppy2/tpiuxvEnObsT8BiBXSFJdWsaKJo6e7iV0+NsdLQHqkAA==",
   "success": true,
   "projectFilePath": "/Users/otsokinanen/Desktop/Työnhaku/Solita/Solita-CityBikes/Solita-CityBikes/Solita-CityBikes.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "/Users/otsokinanen/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.5/microsoft.entityframeworkcore.abstractions.7.0.5.nupkg.sha512",
     "/Users/otsokinanen/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.5/microsoft.entityframeworkcore.analyzers.7.0.5.nupkg.sha512",
     "/Users/otsokinanen/.nuget/packages/microsoft.entityframeworkcore.design/7.0.5/microsoft.entityframeworkcore.design.7.0.5.nupkg.sha512",
+    "/Users/otsokinanen/.nuget/packages/microsoft.entityframeworkcore.inmemory/7.0.5/microsoft.entityframeworkcore.inmemory.7.0.5.nupkg.sha512",
     "/Users/otsokinanen/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.5/microsoft.entityframeworkcore.relational.7.0.5.nupkg.sha512",
     "/Users/otsokinanen/.nuget/packages/microsoft.entityframeworkcore.sqlserver/7.0.5/microsoft.entityframeworkcore.sqlserver.7.0.5.nupkg.sha512",
     "/Users/otsokinanen/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
