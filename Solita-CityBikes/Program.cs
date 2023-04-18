@@ -1,12 +1,23 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.EntityFrameworkCore;
+using Solita_CityBikes.Data;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+//Luodaan tietokantaan yhteys
+builder.Services.AddDbContext<StationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaulContext")));
 builder.Services.AddControllersWithViews();
 
-Solita_CityBikes.MapPosition.ReadData();
-
 var app = builder.Build();
+
+
+// Luo tietokannan ja lukee tarvittessa datan sisään
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    DbInitializer.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

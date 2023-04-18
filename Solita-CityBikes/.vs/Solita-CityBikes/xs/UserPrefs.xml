@@ -1,20 +1,42 @@
 ﻿<Properties StartupConfiguration="{051CBCF7-0369-4134-A14E-AC0420347370}|Default">
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Solita-CityBikes PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Data/DbInitializer.cs">
+    <Files>
+      <File FileName="Pages/_ViewImports.cshtml" />
+      <File FileName="Pages/Error.cshtml" />
+      <File FileName="ClientApp/src/index.js" />
+      <File FileName="Program.cs" />
+      <File FileName="ClientApp/public/index.html" />
+      <File FileName="ClientApp/aspnetcore-https.js" />
+      <File FileName="ClientApp/aspnetcore-react.js" />
+      <File FileName="Properties/launchSettings.json" />
+      <File FileName="Station.cs" />
+      <File FileName="Data/StationContext.cs" />
+      <File FileName="appsettings.Development.json" />
+      <File FileName="appsettings.json" />
+      <File FileName="WeatherForecast.cs" />
+      <File FileName="Data/DbInitializer.cs" Line="22" Column="94" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Solita-CityBikes" expanded="True">
-            <Node name="Solita-CityBikes" expanded="True" selected="True" />
+            <Node name="Solita-CityBikes" expanded="True">
+              <Node name="Data" expanded="True">
+                <Node name="DbInitializer.cs" selected="True" />
+              </Node>
+              <Node name="Pages" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Solita-CityBikes PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
