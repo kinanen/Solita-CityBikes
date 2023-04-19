@@ -5,7 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //Luodaan tietokantaan yhteys
-builder.Services.AddDbContext<StationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaulContext")));
+builder.Services.AddDbContext<CityBikeContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -16,7 +17,8 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    DbInitializer.Initialize(services);
+    DbInitializer.InitializeStations(services);
+    DbInitializer.InitializeTrips(services);
 }
 
 // Configure the HTTP request pipeline.

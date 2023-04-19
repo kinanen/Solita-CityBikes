@@ -7,11 +7,14 @@ public class Trip
 {
 
     // Departure,Return,Departure station id,Departure station name,Return station id,Return station name,Covered distance (m),Duration (sec.)
+    [Ignore]
+    public int TripId { get; set; }
+
     [Index(0)]
-    public int DepartureTime { get; set; }
+    public DateTime DepartureTime { get; set; }
 
     [Index(1)]
-    public int ReturnTime { get; set; }
+    public DateTime ReturnTime { get; set; }
 
     [Index(2)]
     public int DepartureStationId { get; set; }
@@ -20,10 +23,10 @@ public class Trip
     public int ReturnStationId { get; set; }
 
     [Index(6)]
-    public int CoveredDistance{ get; set; }
+    public double CoveredDistance{ get; set; }
 
     [Index(7)]
-    public int Duration { get; set; }
+    public double Duration { get; set; }
 
 }
 
