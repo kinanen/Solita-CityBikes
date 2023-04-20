@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Solita_CityBikes;
 using Solita_CityBikes.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +31,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseDefaultFiles();
+app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseRouting();
 
@@ -41,5 +42,16 @@ app.MapControllerRoute(
 
 app.MapFallbackToFile("index.html");
 
+//{
+//    var httpClient = new HttpClient();
+//    var response = await httpClient.GetFromJsonAsync<Station[]>("https://localhost:7199/Station");
+//    foreach (var station in response)
+//    {
+//        Console.WriteLine($"Station Id: {station.StationId}, Name: {station.Name}");
+//    }
+//}
+
+
 app.Run();
+
 

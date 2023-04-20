@@ -47,7 +47,6 @@ namespace Solita_CityBikes.Data
                 ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-05.csv");
                 ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-06.csv");
                 ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-07.csv");
-                // lisää luku 06 ja 07
             }
 
         }
