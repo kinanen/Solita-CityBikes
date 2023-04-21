@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Solita_CityBikes.Data;
 
 namespace Solita_CityBikes.Controllers
@@ -64,5 +66,46 @@ namespace Solita_CityBikes.Controllers
                 _context.SaveChanges();
             }
         }
+
+        [HttpGet("TopDepartureStations")]
+        public List<DepartureStation> TopDepartureStations()
+        {
+            List<DepartureStation> topStations = new List<DepartureStation>();
+
+            using (SqlConnection connection = new SqlConnection(_context.Database.GetDbConnection().ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(@"
+                    SELECT Stations.Nimi, COUNT(*) AS DepartureCount
+                    FROM Trips
+                    JOIN Stations ON Trips.DepartureStationId = Stations.HslStationId
+                    GROUP BY Stations.Nimi
+                    ORDER BY DepartureCount DESC;
+                ", connection);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string stationName = (string)reader["Nimi"];
+                    int departureCount = (int)reader["DepartureCount"];
+
+                    topStations.Add(new DepartureStation
+                    {
+                        StationName = stationName,
+                        DepartureCount = departureCount
+                    });
+                }
+            }
+
+            return topStations;
+        }
+
+        public class DepartureStation
+        {
+            public string StationName { get; set; }
+            public int DepartureCount { get; set; }
+        }
+
     }
 }

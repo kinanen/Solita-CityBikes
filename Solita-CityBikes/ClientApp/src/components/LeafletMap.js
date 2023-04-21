@@ -3,37 +3,19 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, LayerGroup } fr
 import 'leaflet/dist/leaflet.css';
 import axios from "axios";
 import L from "leaflet";
+import Stations from "./Stations";
 
 const LeafletMap = () => {
     const testBounds = [
         [60.147921, 24.721367],
         [60.28075, 25.159346]
         ]
-
-    const [center, setCenter] = useState([60.2009, 24.9281]);
-    const [stations, setStations] = useState(0);
-    const [bounds, setBounds] = useState(testBounds);
-    const map = useMap;
-
-
-    useEffect(() => {
-        const getStations = async () => {
-            const response = await axios.get("https://localhost:7199/api/station");
-            setStations(response.data);
-        }
-        getStations();
-
-        const getAvgPosition = async () => {
-            const response = await axios.get("https://localhost:7199/api/station/avgposition");
-            setCenter([response.data[0], response.data[1]]);
-        }
-        getAvgPosition();
-
         
+    const [bounds, setBounds] = useState(testBounds);
+    const myMap = useMap;
 
-    }, []);
+    const stations  = Stations.stations;
     
-
     useEffect(() =>  {
         const minMaxPosition = () => {
             if(stations){
@@ -53,7 +35,7 @@ const LeafletMap = () => {
             setBounds(minMaxBounds);
         }
     }
-    if (stations && map) {
+    if (stations && myMap) {
         minMaxPosition();
       }
     },[stations]);
@@ -75,7 +57,6 @@ const LeafletMap = () => {
                 </Circle>
             ))}
             </LayerGroup>
-
         </MapContainer>
     )
 }
