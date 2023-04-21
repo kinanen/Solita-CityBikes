@@ -3,19 +3,37 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, LayerGroup } fr
 import 'leaflet/dist/leaflet.css';
 import axios from "axios";
 import L from "leaflet";
-import Stations from "./Stations";
 
 const LeafletMap = () => {
     const testBounds = [
         [60.147921, 24.721367],
         [60.28075, 25.159346]
         ]
-        
-    const [bounds, setBounds] = useState(testBounds);
-    const myMap = useMap;
 
-    const stations  = Stations.stations;
-    
+    const [center, setCenter] = useState([60.2009, 24.9281]);
+    const [stations, setStations] = useState(0);
+    const [bounds, setBounds] = useState(testBounds);
+    const map = useMap;
+
+
+    useEffect(() => {
+        const getStations = async () => {
+            const response = await axios.get("https://localhost:7199/api/station");
+            setStations(response.data);
+        }
+        getStations();
+
+        const getAvgPosition = async () => {
+            const response = await axios.get("https://localhost:7199/api/station/avgposition");
+            setCenter([response.data[0], response.data[1]]);
+        }
+        getAvgPosition();
+
+
+
+    }, []);
+
+
     useEffect(() =>  {
         const minMaxPosition = () => {
             if(stations){
@@ -23,7 +41,7 @@ const LeafletMap = () => {
             let minY = 100.000;
             let maxX = 0.000;
             let minX = 100.000;
-        
+
             stations.map((station) => {
                 if (station.x > maxX) maxX = station.x;
                 if (station.x < minX) minX = station.x;
@@ -35,11 +53,11 @@ const LeafletMap = () => {
             setBounds(minMaxBounds);
         }
     }
-    if (stations && myMap) {
+    if (stations && map) {
         minMaxPosition();
       }
     },[stations]);
-    
+
 
     // const zoom = 12;
 
@@ -57,16 +75,9 @@ const LeafletMap = () => {
                 </Circle>
             ))}
             </LayerGroup>
+
         </MapContainer>
     )
 }
 
 export default LeafletMap;
-/*            
- 
- center={center} zoom={zoom} 
-
-            
-            
-            
-*/

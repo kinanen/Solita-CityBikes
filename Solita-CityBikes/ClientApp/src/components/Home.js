@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LeafletMap from './LeafletMap';
 import { variables } from '../Variables';
 import axios from 'axios';
-import Stations from './Stations';
+
 
 const Home = () =>{
 
@@ -13,9 +13,6 @@ const Home = () =>{
   .catch(error => {
     console.log(error);
   });
-
-  
-
 
   console.log( )
     return (
