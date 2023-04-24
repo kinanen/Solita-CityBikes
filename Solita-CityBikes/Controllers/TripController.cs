@@ -76,10 +76,10 @@ namespace Solita_CityBikes.Controllers
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(@"
-                    SELECT Stations.Nimi, COUNT(*) AS DepartureCount
+                    SELECT TOP(25) Stations.Nimi, Stations.HslStationId, COUNT(*) AS DepartureCount
                     FROM Trips
                     JOIN Stations ON Trips.DepartureStationId = Stations.HslStationId
-                    GROUP BY Stations.Nimi
+                    GROUP BY Stations.Nimi, Stations.HslStationId
                     ORDER BY DepartureCount DESC;
                 ", connection);
 
@@ -88,23 +88,85 @@ namespace Solita_CityBikes.Controllers
                 while (reader.Read())
                 {
                     string stationName = (string)reader["Nimi"];
+                    int stationHslId = (int)reader["HslStationId"];
                     int departureCount = (int)reader["DepartureCount"];
+
 
                     topStations.Add(new DepartureStation
                     {
                         StationName = stationName,
+                        StationHslId = stationHslId,
                         DepartureCount = departureCount
-                    });
+                    }) ;
                 }
             }
 
             return topStations;
         }
 
+        [HttpGet("TopTrips")]
+        public List<TopTrip> TopTrips()
+        {
+            List<TopTrip> TopTripsList = new List<TopTrip>();
+
+            using (SqlConnection connection = new SqlConnection(_context.Database.GetDbConnection().ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(@"
+                    SELECT TOP(25)
+                      ds.Nimi AS departure_station_name,
+                      ds.HslStationId AS departure_station_id,
+                      rs.Nimi AS return_station_name,
+                      rs.HslStationId AS return_station_id,
+                      COUNT(*) AS num_trips
+                    FROM trips t
+                    JOIN stations ds ON t.DepartureStationId = ds.HslStationId
+                    JOIN stations rs ON t.ReturnStationId = rs.HslStationId
+                    GROUP BY ds.Nimi, ds.HslStationId, rs.Nimi, rs.HslStationId
+                    ORDER BY num_trips DESC;
+                ", connection);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string DSStationNimi = (string)reader["departure_station_name"];
+                    int DSStationHslId = (int)reader["departure_station_id"];
+                    string RSStationNimi = (string)reader["return_station_name"];
+                    int RSStationId = (int)reader["return_station_id"];
+                    int TripCount = (int)reader["num_trips"];
+
+
+                    TopTripsList.Add(new TopTrip
+                    {
+                        DepartureStationNimi = DSStationNimi,
+                        DepartureStationId = DSStationHslId,
+                        ReturnStationId = RSStationId,
+                        ReturnStationNimi = RSStationNimi,
+                       Count = TripCount
+
+                    }) ;
+                }
+            }
+
+            return TopTripsList;
+        }
+
         public class DepartureStation
         {
-            public string StationName { get; set; }
+            public int StationHslId { get; set; }
+            public string? StationName { get; set; }
             public int DepartureCount { get; set; }
+        }
+
+        public class TopTrip
+        {
+            public int DepartureStationId { get; set; }
+            public string? DepartureStationNimi { get; set; } 
+            public int ReturnStationId { get; set; }
+            public string? ReturnStationNimi { get; set; }
+            public int Count { get; set; }
+
         }
 
     }

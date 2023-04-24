@@ -28,9 +28,6 @@ const LeafletMap = () => {
             setCenter([response.data[0], response.data[1]]);
         }
         getAvgPosition();
-
-
-
     }, []);
 
 
