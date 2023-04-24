@@ -1,35 +1,44 @@
 ﻿<Properties StartupConfiguration="{051CBCF7-0369-4134-A14E-AC0420347370}|Default">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Station.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/TripController.cs">
     <Files>
-      <File FileName="Pages/_ViewImports.cshtml" />
+      <File FileName="Pages/_ViewImports.cshtml" Line="5" Column="1" />
       <File FileName="Pages/Error.cshtml" />
-      <File FileName="ClientApp/src/index.js" />
-      <File FileName="Program.cs" Line="32" Column="1" />
+      <File FileName="ClientApp/src/index.js" Line="1" Column="1" />
+      <File FileName="Program.cs" Line="17" Column="64" />
       <File FileName="ClientApp/public/index.html" />
-      <File FileName="ClientApp/aspnetcore-https.js" />
+      <File FileName="ClientApp/aspnetcore-https.js" Line="1" Column="1" />
       <File FileName="ClientApp/aspnetcore-react.js" />
-      <File FileName="Properties/launchSettings.json" Line="1" Column="1" />
-      <File FileName="Station.cs" Line="26" Column="2" />
-      <File FileName="appsettings.Development.json" Line="12" Column="1" />
+      <File FileName="Properties/launchSettings.json" Line="14" Column="70" />
+      <File FileName="appsettings.Development.json" Line="8" Column="70" />
       <File FileName="appsettings.json" Line="1" Column="1" />
-      <File FileName="Trip.cs" Line="12" Column="1" />
-      <File FileName="Data/TripContext.cs" Line="18" Column="1" />
-      <File FileName="Migrations/Station/StationContextModelSnapshot.cs" Line="1" Column="1" />
-      <File FileName="Migrations/20230418103719_UpdateTripContext2.cs" Line="1" Column="1" />
-      <File FileName="Data/DbInitializer.cs" Line="49" Column="91" />
-      <File FileName="Migrations/Trip/TripContextModelSnapshot.cs" Line="1" Column="1" />
-      <File FileName="ClientApp/src/Variables.js" Line="2" Column="15" />
+      <File FileName="ClientApp/src/Variables.js" Line="2" Column="32" />
       <File FileName="Migrations/CityBikeContextModelSnapshot.cs" Line="1" Column="1" />
+      <File FileName="Data/CityBikeContext.cs" Line="1" Column="1" />
+      <File FileName="Controllers/StationController.cs" Line="86" Column="6" />
+      <File FileName="Controllers/TripController.cs" Line="90" Column="59" />
+      <File FileName="ClientApp/package.json" Line="1" Column="1" />
+      <File FileName="ClientApp/src/components/Home.js" Line="28" Column="21" />
+      <File FileName="ClientApp/src/App.js" Line="1" Column="1" />
+      <File FileName="ClientApp/src/setupProxy.js" Line="1" Column="1" />
+      <File FileName="ClientApp/src/serviceWorkerRegistration.js" Line="1" Column="1" />
+      <File FileName="ClientApp/src/service-worker.js" Line="1" Column="1" />
+      <File FileName="ClientApp/src/reportWebVitals.js" Line="1" Column="1" />
+      <File FileName="ClientApp/.env" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Solita-CityBikes" expanded="True">
-            <Node name="Solita-CityBikes" expanded="True" selected="True">
-              <Node name="ClientApp" expanded="True" />
+            <Node name="Solita-CityBikes" expanded="True">
+              <Node name="ClientApp" expanded="True">
+                <Node name="src" expanded="True">
+                  <Node name="components" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Controllers" expanded="True">
+                <Node name="TripController.cs" selected="True" />
+              </Node>
               <Node name="Data" expanded="True" />
               <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
@@ -42,8 +51,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Solita-CityBikes PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>

@@ -13,7 +13,7 @@ const LeafletMap = () => {
     const [center, setCenter] = useState([60.2009, 24.9281]);
     const [stations, setStations] = useState(0);
     const [bounds, setBounds] = useState(testBounds);
-    const map = useMap;
+    const myMap = useMap;
 
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const LeafletMap = () => {
             setBounds(minMaxBounds);
         }
     }
-    if (stations && map) {
+    if (stations && myMap) {
         minMaxPosition();
       }
     },[stations]);
