@@ -6,20 +6,20 @@ import axios from 'axios';
 
 const Home = () => {
   const [stations, setStations] = useState ([]);
+  const [onViewStations, setOnViewStations] =  useState([]);
   const [topTenStations, setTopTenStations] = useState([]);
   const [topTenTrips, setTopTenTrips] = useState([]);
 
   useEffect(() => {
-      
     axios("https://localhost:7199/api/station")
       .then(response => {
         setStations(response.data);
+        setOnViewStations(response.data);
+        console.log(stations);
       });
-
 
     axios("https://localhost:7199/api/trip/topdeparturestations")
       .then(response => {
-        console.log(response.data);
         setTopTenStations(response.data);
       })
       .catch(error => {
@@ -36,8 +36,16 @@ const Home = () => {
       });
   }, []);
 
+  const viewableTopStations = topTenStations.map(station => {
+    const foundStation = stations.find(s => s.HslStationID == station.StationHslID);
+    return foundStation;
+  });
+  
+  console.log(viewableTopStations);
 
-  console.log(stations);
+  const viewTopStations = () => {
+    setOnViewStations(viewableTopStations);
+  };
 
   const viewStationList = topTenStations.map(element =>
     <li key={element.stationHslId}>{element.stationName + ": " + element.departureCount}</li>)
@@ -49,10 +57,10 @@ const Home = () => {
   return (
     <div>
       HELLO
-      <LeafletMap stationData = {stations}/>
+      <LeafletMap stationData = {onViewStations}/>
       <div id="topStations">
         <h2> Suosituimmat Asemat: </h2>
-        <button>näytä</button>
+        <button onClick={viewTopStations}>näytä</button>
         <ul>{viewStationList}</ul>
       </div>
       <div id="topTrips">
