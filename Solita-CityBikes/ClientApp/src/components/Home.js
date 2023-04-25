@@ -7,6 +7,7 @@ import axios from 'axios';
 const Home = () => {
   const [stations, setStations] = useState ([]);
   const [onViewStations, setOnViewStations] =  useState([]);
+  const [onViewTrips, setOnViewTrips] =  useState([]);
   const [topTenStations, setTopTenStations] = useState([]);
   const [topTenTrips, setTopTenTrips] = useState([]);
 
@@ -37,7 +38,7 @@ const Home = () => {
   }, []);
 
   const viewableTopStations = topTenStations.map(station => {
-    const foundStation = stations.find(s => s.HslStationID == station.StationHslID);
+    const foundStation = stations.find(s => station.stationHslId === s.hslStationId);
     return foundStation;
   });
   
@@ -54,10 +55,11 @@ const Home = () => {
     <li key={element.departureStationNimi + element.returnStationNimi}>{element.departureStationNimi + ": " + element.returnStationNimi}</li>)
 
 
+
   return (
     <div>
       HELLO
-      <LeafletMap stationData = {onViewStations}/>
+      <LeafletMap stationData = {onViewStations} tripData={onViewTrips}/>
       <div id="topStations">
         <h2> Suosituimmat Asemat: </h2>
         <button onClick={viewTopStations}>näytä</button>

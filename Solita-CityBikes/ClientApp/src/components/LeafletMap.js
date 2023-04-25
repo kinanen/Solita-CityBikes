@@ -6,6 +6,7 @@ import * as L from "leaflet";
 
 const LeafletMap = ({ stationData }) => {
 
+    const [map, setMap] = useState(null);
     const defaultBounds = [
         [60.147921, 24.721367],
         [60.28075, 25.159346]
@@ -34,42 +35,37 @@ const LeafletMap = ({ stationData }) => {
         }
         minMaxPosition();
     }, [stationData]);
+    
+    const rad = 80;
+    
+    map && console.log(map.getCenter());
 
+    // const zoom = 12;
 
-// const zoom = 12;
-
-return (
-    <MapContainer scrollWheelZoom={true} bounds={bounds}>
+    return (
+        <MapContainer scrollWheelZoom={true} bounds={bounds} ref={setMap}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
         </TileLayer>
         <LayerGroup>
             {stationData && stationData.map(station => (
-                <Circle key={station.hslStationId} center={[station.y, station.x]} radius={100}>
+                <Circle key={station.hslStationId} center={[station.y, station.x]} radius={rad}>
                     <Popup>
                         {station.nimi}
                     </Popup>
                 </Circle>
             ))}
         </LayerGroup>
-
-    </MapContainer>
-)
+    </MapContainer >
+    )
 }
 
 export default LeafletMap;
 
 /*
-
-
     //const [center, setCenter] = useState([60.2009, 24.9281]);
-
         /*const getAvgPosition = async () => {
             const response = await axios.get("https://localhost:7199/api/station/avgposition");
             setCenter([response.data[0], response.data[1]]);
         }
         getAvgPosition();*/
-
-
-
-
