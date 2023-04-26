@@ -35,7 +35,11 @@ const SetViewBounds = ({stationData}) => {
 }
 
 const LeafletMap = ({ stationData }) => {
-
+    
+    const viewStation = (id) => {
+        console.log("view stations id:", id)
+    }
+    
     const rad = 80;
 
     // const zoom = 12;
@@ -43,7 +47,9 @@ const LeafletMap = ({ stationData }) => {
     const drawStations = stationData.map(station => (
         <Circle key={station.hslStationId} center={[station.y, station.x]} radius={rad}>
             <Popup>
+                <div onClick={() => viewStation(station.hslStationId)}>
                 {station.nimi}
+                </div>
             </Popup>
         </Circle>
     ))

@@ -2,8 +2,12 @@ import React from "react";
 import {useTable} from "react-table";
 
 const TopStations = ({stationList}) => {
-        
+    
     const data = React.useMemo(() => stationList);
+
+    const handleStationClick = (args) => {
+        console.log(args);
+    }
 
     const columns = React.useMemo(
         () => [
@@ -13,6 +17,11 @@ const TopStations = ({stationList}) => {
               {
                 Header: 'Asema',
                 accessor: 'stationName',
+                Cell: ({ cell }) => (
+                    <div onClick={() => handleStationClick(cell.row.original.stationHslId)}>
+                      {cell.value}
+                    </div>
+                    ),                    
               },
               {
                 Header: 'Lähtöjä asemalta',
@@ -73,4 +82,4 @@ const TopStations = ({stationList}) => {
     )
 }
 
-export default TopStations;
+export default TopStations; 

@@ -30,7 +30,6 @@ const Home = () => {
 
     axios("https://localhost:7199/api/trip/toptrips")
       .then(response => {
-        console.log(response.data);
         setTopTrips(response.data);
       })
       .catch(error => {
@@ -42,8 +41,24 @@ const Home = () => {
     const foundStation = stations.find(s => station.stationHslId === s.hslStationId);
     return foundStation;
   });
-  
-  console.log(viewableTopStations);
+
+  const foundStations = [];
+
+  const viewTopTrips = () => {
+    (topTrips.map(trip => {
+      foundStations.push(stations.find(s => trip.departureStationId===s.hslStationId));
+      foundStations.push(stations.find(s => trip.returnStationId===s.hslStationId ));
+      //const foundStations = [...foundDepartureStations];
+      console.log(foundStations);
+    }))
+    const uniqueStations = foundStations.reduce((acc, station) => {
+      if (!acc.find(s => s.hslStationId === station.hslStationId)) {
+        acc.push(station);
+      }
+      return acc;
+    }, []);
+    setOnViewStations(uniqueStations);
+  };
 
   const viewTopStations = () => {
     setOnViewStations(viewableTopStations);
@@ -52,6 +67,7 @@ const Home = () => {
   return (
     <div>
       HELLO
+      <button onClick={()=> setOnViewStations(stations)}>Reset</button>
       <LeafletMap stationData = {onViewStations} tripData={onViewTrips}/>
       <div id="topStations">
         <h2> Suosituimmat Asemat: </h2>
@@ -60,6 +76,7 @@ const Home = () => {
       </div>
       <div id="topTrips">
         <h2> Suosituimmat Matkat: </h2>
+        <button onClick={viewTopTrips}>näytä</button>
         <TopTrips tripList={topTrips}/>
       </div>
     </div>
