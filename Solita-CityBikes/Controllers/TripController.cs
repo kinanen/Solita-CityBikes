@@ -113,16 +113,8 @@ namespace Solita_CityBikes.Controllers
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(@"
-                    SELECT TOP(25)
-                      ds.Nimi AS departure_station_name,
-                      ds.HslStationId AS departure_station_id,
-                      rs.Nimi AS return_station_name,
-                      rs.HslStationId AS return_station_id,
-                      COUNT(*) AS num_trips
-                    FROM trips t
-                    JOIN stations ds ON t.DepartureStationId = ds.HslStationId
-                    JOIN stations rs ON t.ReturnStationId = rs.HslStationId
-                    GROUP BY ds.Nimi, ds.HslStationId, rs.Nimi, rs.HslStationId
+                    SELECT TOP (25) *
+                    FROM Trip_Counts
                     ORDER BY num_trips DESC;
                 ", connection);
 

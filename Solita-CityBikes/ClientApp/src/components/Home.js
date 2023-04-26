@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap';
-import { variables } from '../Variables';
+import TopStations from './TopStations';
+import TopTrips from './TopTrips';
 import axios from 'axios';
 
 
@@ -8,8 +9,8 @@ const Home = () => {
   const [stations, setStations] = useState ([]);
   const [onViewStations, setOnViewStations] =  useState([]);
   const [onViewTrips, setOnViewTrips] =  useState([]);
-  const [topTenStations, setTopTenStations] = useState([]);
-  const [topTenTrips, setTopTenTrips] = useState([]);
+  const [topStations, setTopStations] = useState([]);
+  const [topTrips, setTopTrips] = useState([]);
 
   useEffect(() => {
     axios("https://localhost:7199/api/station")
@@ -21,7 +22,7 @@ const Home = () => {
 
     axios("https://localhost:7199/api/trip/topdeparturestations")
       .then(response => {
-        setTopTenStations(response.data);
+        setTopStations(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -30,14 +31,14 @@ const Home = () => {
     axios("https://localhost:7199/api/trip/toptrips")
       .then(response => {
         console.log(response.data);
-        setTopTenTrips(response.data);
+        setTopTrips(response.data);
       })
       .catch(error => {
         console.log(error);
       });
   }, []);
 
-  const viewableTopStations = topTenStations.map(station => {
+  const viewableTopStations = topStations.map(station => {
     const foundStation = stations.find(s => station.stationHslId === s.hslStationId);
     return foundStation;
   });
@@ -48,14 +49,6 @@ const Home = () => {
     setOnViewStations(viewableTopStations);
   };
 
-  const viewStationList = topTenStations.map(element =>
-    <li key={element.stationHslId}>{element.stationName + ": " + element.departureCount}</li>)
-
-  const viewTripList = topTenTrips.map(element =>
-    <li key={element.departureStationNimi + element.returnStationNimi}>{element.departureStationNimi + ": " + element.returnStationNimi}</li>)
-
-
-
   return (
     <div>
       HELLO
@@ -63,11 +56,11 @@ const Home = () => {
       <div id="topStations">
         <h2> Suosituimmat Asemat: </h2>
         <button onClick={viewTopStations}>näytä</button>
-        <ul>{viewStationList}</ul>
+        <TopStations stationList={topStations}/>
       </div>
       <div id="topTrips">
         <h2> Suosituimmat Matkat: </h2>
-        <ul>{viewTripList}</ul>
+        <TopTrips tripList={topTrips}/>
       </div>
     </div>
   );
