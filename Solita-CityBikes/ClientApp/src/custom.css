@@ -17,8 +17,8 @@ code {
   border-color: #1861ac;
 }
 .leaflet-container{
-  
-  width: 95em;
+  width: 90em;
+
   height: 45em;
 }
 
@@ -28,4 +28,8 @@ code {
 
 .list{
   margin: 1em;
+}
+
+.details{
+  width: 30em;
 }

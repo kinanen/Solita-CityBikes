@@ -13,13 +13,14 @@ const Home = () => {
   const [onViewTrips, setOnViewTrips] = useState([]);
   const [topStations, setTopStations] = useState([]);
   const [topTrips, setTopTrips] = useState([]);
+  const [station, setStation] = useState(null);
+  const [trip, setTrip]= useState(null)
 
   useEffect(() => {
     axios("https://localhost:7199/api/station")
       .then(response => {
         setStations(response.data);
         setOnViewStations(response.data);
-        console.log(stations);
       });
 
     axios("https://localhost:7199/api/trip/topdeparturestations")
@@ -78,23 +79,29 @@ const Home = () => {
     setOnViewTrips([]);
   };
 
+  const reset = () => {
+    setOnViewStations(stations);
+    setStation(null);
+    setTrip(null)
+  }
+
   return (
     <div>
-      <div> 
-        <button onClick={() => setOnViewStations(stations)}>Reset</button>
+      <div className='box'> 
+        <button onClick={reset}>Reset</button>
         <LeafletMap stationData={onViewStations} tripData={onViewTrips} />
-        <Details/>
+        <Details station={station} trip={trip}/>
       </div>
       <div className="box">
         <div id="topStations">
           <h2> Suosituimmat Asemat: </h2>
           <button onClick={viewTopStations}>näytä</button>
-          <TopStations stationList={topStations} />
+          <TopStations stationList={topStations} setTrip={setTrip} setStation={setStation} />
         </div>
         <div id="topTrips">
           <h2> Suosituimmat Matkat: </h2>
           <button onClick={viewTopTrips}>näytä</button>
-          <TopTrips tripList={topTrips} />
+          <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation}/>
         </div>
       </div>
     </div>

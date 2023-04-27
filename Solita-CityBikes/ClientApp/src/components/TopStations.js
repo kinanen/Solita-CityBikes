@@ -1,12 +1,14 @@
 import React from "react";
 import {useTable} from "react-table";
 
-const TopStations = ({stationList}) => {
+const TopStations = ({stationList, setStation, setTrip}) => {
     
     const data = React.useMemo(() => stationList);
 
-    const handleStationClick = (args) => {
-        console.log(args);
+    const handleStationClick = (arg) => {
+      setTrip(null);  
+      setStation(arg);
+
     }
 
     const columns = React.useMemo(

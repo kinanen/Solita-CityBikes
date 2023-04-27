@@ -1,9 +1,14 @@
 import React from "react";
 import { useTable, useExpanded } from "react-table";
 
-const TopTrips = ({ tripList }) => {
+const TopTrips = ({ tripList,setTrip,setStation }) => {
 
     const data = React.useMemo(() => tripList);
+
+    const handleTripClick = (arg) => {
+        setStation(null);
+        setTrip([arg[0],arg[1]]);
+    }
 
     const columns = React.useMemo(
         () => [
@@ -13,14 +18,29 @@ const TopTrips = ({ tripList }) => {
                     {
                         Header: 'Lähtöasema',
                         accessor: 'departureStationNimi',
+                        Cell: ({ cell }) => (
+                            <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
+                              {cell.value}
+                            </div>
+                            ),       
                     },
                     {
                         Header: 'Palautusasema',
                         accessor: 'returnStationNimi',
+                        Cell: ({ cell }) => (
+                            <div onClick={() => handleTripClick(cell.row.original.departureStationNimi)}>
+                              {cell.value}
+                            </div>
+                            ),       
                     },
                     {
                         Header: 'Matkoja',
                         accessor: 'count',
+                        Cell: ({ cell }) => (
+                            <div onClick={() => handleTripClick(cell.row.original.departureStationNimi)}>
+                              {cell.value}
+                            </div>
+                            ),       
                     }
                 ],
             },
