@@ -44,16 +44,8 @@ const TopStations = ({stationList}) => {
         data,
       })
 
-      
-
-
-    console.log(stationList)
-    const viewStationList = stationList.map(element =>
-
-        <li key={element.stationHslId}>{element.stationName + ": " + element.departureCount}</li>)
-
     return (
-        <div>
+        <div className="list">
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (

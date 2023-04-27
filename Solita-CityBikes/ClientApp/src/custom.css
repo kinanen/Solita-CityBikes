@@ -21,3 +21,11 @@ code {
   width: 95em;
   height: 45em;
 }
+
+.box{
+  display: inline-flex;
+}
+
+.list{
+  margin: 1em;
+}

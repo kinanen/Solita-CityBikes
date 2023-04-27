@@ -39,12 +39,8 @@ const TopTrips = ({ tripList }) => {
         data,
     },useExpanded)
 
-    console.log(tripList);
-    const viewTripList = tripList.map(element =>
-        <li key={element.departureStationNimi + element.returnStationNimi}>{element.departureStationNimi + ": " + element.returnStationNimi}</li>)
-
     return (
-        <div>
+        <div className="list">
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (

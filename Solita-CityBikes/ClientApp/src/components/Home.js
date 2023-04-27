@@ -1,14 +1,16 @@
 import React, { Component, useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap';
+import DrawTrips from './DrawTrips';
+import Details from './Detail';
 import TopStations from './TopStations';
 import TopTrips from './TopTrips';
 import axios from 'axios';
 
 
 const Home = () => {
-  const [stations, setStations] = useState ([]);
-  const [onViewStations, setOnViewStations] =  useState([]);
-  const [onViewTrips, setOnViewTrips] =  useState([]);
+  const [stations, setStations] = useState([]);
+  const [onViewStations, setOnViewStations] = useState([]);
+  const [onViewTrips, setOnViewTrips] = useState([]);
   const [topStations, setTopStations] = useState([]);
   const [topTrips, setTopTrips] = useState([]);
 
@@ -43,41 +45,57 @@ const Home = () => {
   });
 
   const foundStations = [];
-
+  const tripsCoordinates = [];
+  
   const viewTopTrips = () => {
-    (topTrips.map(trip => {
-      foundStations.push(stations.find(s => trip.departureStationId===s.hslStationId));
-      foundStations.push(stations.find(s => trip.returnStationId===s.hslStationId ));
-      //const foundStations = [...foundDepartureStations];
-      console.log(foundStations);
-    }))
+    topTrips.forEach(trip => {
+      const departureStation = stations.find(s => trip.departureStationId === s.hslStationId);
+      // Find the departure station object in the stations array that matches the trip's departure station ID
+      foundStations.push(departureStation);
+      // Add the departure station object to the foundStations array
+      const returnStation = stations.find(s => trip.returnStationId === s.hslStationId);
+      // Find the return station object in the stations array that matches the trip's return station ID
+      foundStations.push(returnStation);
+      // Add the return station object to the foundStations array
+      tripsCoordinates.push([[departureStation.y, departureStation.x], [returnStation.y, returnStation.x]]);
+      // Combine both departure and return station coordinates into one array and add it to the tripsCoordinates array
+    });
+    
     const uniqueStations = foundStations.reduce((acc, station) => {
       if (!acc.find(s => s.hslStationId === station.hslStationId)) {
         acc.push(station);
       }
       return acc;
     }, []);
+
+
     setOnViewStations(uniqueStations);
+    setOnViewTrips(tripsCoordinates);
   };
 
   const viewTopStations = () => {
     setOnViewStations(viewableTopStations);
+    setOnViewTrips([]);
   };
 
   return (
     <div>
-      HELLO
-      <button onClick={()=> setOnViewStations(stations)}>Reset</button>
-      <LeafletMap stationData = {onViewStations} tripData={onViewTrips}/>
-      <div id="topStations">
-        <h2> Suosituimmat Asemat: </h2>
-        <button onClick={viewTopStations}>näytä</button>
-        <TopStations stationList={topStations}/>
+      <div> 
+        <button onClick={() => setOnViewStations(stations)}>Reset</button>
+        <LeafletMap stationData={onViewStations} tripData={onViewTrips} />
+        <Details/>
       </div>
-      <div id="topTrips">
-        <h2> Suosituimmat Matkat: </h2>
-        <button onClick={viewTopTrips}>näytä</button>
-        <TopTrips tripList={topTrips}/>
+      <div className="box">
+        <div id="topStations">
+          <h2> Suosituimmat Asemat: </h2>
+          <button onClick={viewTopStations}>näytä</button>
+          <TopStations stationList={topStations} />
+        </div>
+        <div id="topTrips">
+          <h2> Suosituimmat Matkat: </h2>
+          <button onClick={viewTopTrips}>näytä</button>
+          <TopTrips tripList={topTrips} />
+        </div>
       </div>
     </div>
   );

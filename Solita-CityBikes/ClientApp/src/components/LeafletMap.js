@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, LayerGroup } fr
 import 'leaflet/dist/leaflet.css';
 import axios from "axios";
 import * as L from "leaflet";
+import DrawTrips from "./DrawTrips";
 
 const defaultBounds = [
     [60.147921, 24.721367],
@@ -34,7 +35,7 @@ const SetViewBounds = ({stationData}) => {
       }, [stationData, map]);
 }
 
-const LeafletMap = ({ stationData }) => {
+const LeafletMap = ({ stationData, tripData }) => {
     
     const viewStation = (id) => {
         console.log("view stations id:", id)
@@ -63,6 +64,7 @@ const LeafletMap = ({ stationData }) => {
             <LayerGroup>
                 {stationData && drawStations }
             </LayerGroup>
+            {tripData && <DrawTrips tripData={tripData}/>}
         </MapContainer >
     )
 }
