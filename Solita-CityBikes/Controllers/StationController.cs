@@ -36,7 +36,7 @@ namespace Solita_CityBikes.Controllers
     [HttpGet("{id}")]
     public Station Get(int id)
     {
-        return _context.Stations.FirstOrDefault(x => x.StationId == id);
+        return _context.Stations.FirstOrDefault(x => x.HslStationId == id);
     }
 
     [HttpPost]

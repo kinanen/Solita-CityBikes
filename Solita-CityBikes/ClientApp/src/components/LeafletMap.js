@@ -35,9 +35,33 @@ const SetViewBounds = ({stationData}) => {
       }, [stationData, map]);
 }
 
-const LeafletMap = ({ stationData, tripData }) => {
+const SetZoom = ({trip, station}) => {
+    const map = useMap();
+
+    useEffect(() => {
+        if (station){
+            map.setView([60.16353,24.9145], 15);
+            map.closePopup();
+            map.openPopup("Joku string", [60.16353,24.9145])
+            console.log(station);
+        }
+        if (trip){
+            map.setView([60.19353,24.4145], 15)
+            console.log(trip);
+        }
+        else{
+            map.closePopup();
+            map.fitBounds(defaultBounds);
+        }
+    },[trip, station])
+
+}
+
+const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station}) => {
     
     const viewStation = (id) => {
+        setTrip(null)
+        setStation(id)
         console.log("view stations id:", id)
     }
     
@@ -61,6 +85,7 @@ const LeafletMap = ({ stationData, tripData }) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
             </TileLayer>
             <SetViewBounds stationData={stationData} />
+            <SetZoom trip={trip} station={station} />
             <LayerGroup>
                 {stationData && drawStations }
             </LayerGroup>

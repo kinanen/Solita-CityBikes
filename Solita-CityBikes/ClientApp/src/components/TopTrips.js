@@ -28,7 +28,7 @@ const TopTrips = ({ tripList,setTrip,setStation }) => {
                         Header: 'Palautusasema',
                         accessor: 'returnStationNimi',
                         Cell: ({ cell }) => (
-                            <div onClick={() => handleTripClick(cell.row.original.departureStationNimi)}>
+                            <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
                               {cell.value}
                             </div>
                             ),       
@@ -37,7 +37,7 @@ const TopTrips = ({ tripList,setTrip,setStation }) => {
                         Header: 'Matkoja',
                         accessor: 'count',
                         Cell: ({ cell }) => (
-                            <div onClick={() => handleTripClick(cell.row.original.departureStationNimi)}>
+                            <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
                               {cell.value}
                             </div>
                             ),       

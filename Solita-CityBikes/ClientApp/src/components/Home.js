@@ -89,14 +89,14 @@ const Home = () => {
     <div>
       <div className='box'> 
         <button onClick={reset}>Reset</button>
-        <LeafletMap stationData={onViewStations} tripData={onViewTrips} />
+        <LeafletMap stationData={onViewStations} tripData={onViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} />
         <Details station={station} trip={trip}/>
       </div>
       <div className="box">
         <div id="topStations">
           <h2> Suosituimmat Asemat: </h2>
           <button onClick={viewTopStations}>näytä</button>
-          <TopStations stationList={topStations} setTrip={setTrip} setStation={setStation} />
+          <TopStations stationList={topStations} setTrip={setTrip} setStation={setStation}/>
         </div>
         <div id="topTrips">
           <h2> Suosituimmat Matkat: </h2>
