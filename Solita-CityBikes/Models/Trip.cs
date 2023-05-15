@@ -28,6 +28,13 @@ public class Trip
     [Index(7)]
     public double Duration { get; set; }
 
+    internal bool ValidateTripData()
+    {
+        if (this.CoveredDistance < 10) return false;
+        if (this.Duration < 10) return false;
+        return true;
+
+    }
 }
 
 

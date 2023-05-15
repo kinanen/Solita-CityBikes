@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { LayerGroup, Polyline } from "react-leaflet";
 
+// Piirtää saadun propsin perusteella kartalle valittujen reittien mukaiset viivat karttaan.
+
 const DrawTrips = ({tripData}) => {
     const [trips, setTrips] = useState([]);
-    let i = 1;
     useEffect(()=> {
         tripData && setTrips(tripData)
     },[tripData]);

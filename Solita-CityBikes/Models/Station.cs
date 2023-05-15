@@ -18,9 +18,16 @@ public class Station
     public string Namn { get; set; }
     [Index(4)]
     public string Name { get; set; }
+    [Index(5)]
+    public string Osoite { get; set; }
     [Index(11)]
     public double X { get; set; }
     [Index(12)]
     public double Y { get; set; }
 
+    internal bool ValidateStationData()
+    {
+        bool valid = true;
+        return valid;
+    }
 }

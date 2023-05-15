@@ -4,26 +4,33 @@ import DrawTrips from './DrawTrips';
 import Details from './Detail';
 import TopStations from './TopStations';
 import TopTrips from './TopTrips';
-import axios from 'axios';
-
+import { variables } from '../Variables';
+import Stations from '../services/Stations';
+import Trips from '../services/Trips';
+import AddStation from './AddStation';
+import AddTrip from './AddTrip';
+//Aloitussivu, lataa Asema datan tietokannasta, suosituimmat matkat ja suosituimmat asemat. 
+//hakee käyttäjän valintojen mukaan asema ja matka datan ja välittää sen karttaa, matkoja ja asemia näyttäville komponenteille.
 
 const Home = () => {
+
   const [stations, setStations] = useState([]);
   const [onViewStations, setOnViewStations] = useState([]);
   const [onViewTrips, setOnViewTrips] = useState([]);
   const [topStations, setTopStations] = useState([]);
   const [topTrips, setTopTrips] = useState([]);
   const [station, setStation] = useState(null);
-  const [trip, setTrip]= useState(null)
+  const [trip, setTrip] = useState(null)
+
 
   useEffect(() => {
-    axios("https://localhost:7199/api/station")
+    Stations.getAll()
       .then(response => {
         setStations(response.data);
         setOnViewStations(response.data);
       });
 
-    axios("https://localhost:7199/api/trip/topdeparturestations")
+    Trips.getTopDepartureStations()
       .then(response => {
         setTopStations(response.data);
       })
@@ -31,7 +38,7 @@ const Home = () => {
         console.log(error);
       });
 
-    axios("https://localhost:7199/api/trip/toptrips")
+    Trips.getTopTrips()
       .then(response => {
         setTopTrips(response.data);
       })
@@ -47,21 +54,16 @@ const Home = () => {
 
   const foundStations = [];
   const tripsCoordinates = [];
-  
+
   const viewTopTrips = () => {
     topTrips.forEach(trip => {
       const departureStation = stations.find(s => trip.departureStationId === s.hslStationId);
-      // Find the departure station object in the stations array that matches the trip's departure station ID
       foundStations.push(departureStation);
-      // Add the departure station object to the foundStations array
       const returnStation = stations.find(s => trip.returnStationId === s.hslStationId);
-      // Find the return station object in the stations array that matches the trip's return station ID
       foundStations.push(returnStation);
-      // Add the return station object to the foundStations array
       tripsCoordinates.push([[departureStation.y, departureStation.x], [returnStation.y, returnStation.x]]);
-      // Combine both departure and return station coordinates into one array and add it to the tripsCoordinates array
     });
-    
+
     const uniqueStations = foundStations.reduce((acc, station) => {
       if (!acc.find(s => s.hslStationId === station.hslStationId)) {
         acc.push(station);
@@ -85,23 +87,63 @@ const Home = () => {
     setTrip(null)
   }
 
+  const [viewAllTrips, setViewAllTrips] = useState(false);
+  const [viewAllStations, setViewAllStations] = useState(true)
+
+  const [viewAddStation, setViewAddStation] = useState (false) 
+  const [viewAddTrip, setViewAddTrip] = useState (false)
+  
+  
   return (
     <div>
-      <div className='box'> 
-        <button onClick={reset}>Reset</button>
+      <div className='box'>
         <LeafletMap stationData={onViewStations} tripData={onViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} />
-        <Details station={station} trip={trip}/>
+        <Details station={station} trip={trip} />
       </div>
       <div className="box">
-        <div id="topStations">
-          <h2> Suosituimmat Asemat: </h2>
-          <button onClick={viewTopStations}>näytä</button>
-          <TopStations stationList={topStations} setTrip={setTrip} setStation={setStation}/>
+        <div className='stationsList'>
+          <h2> Asemat </h2>
+          <div className='subHeadersForList'>
+            <h3 onClick={() => { viewTopStations() ; setViewAllStations(false) }}>Suosituimmat asemat</h3>
+            <h3 onClick={() => {setViewAllStations(true); reset()}}>Kaikki asemat</h3>
+          </div>
+          <div>
+            {viewAllStations ? (
+              <div>
+                TÄHÄN KUTSU UUDELLE KOMPONENTILLE, JOSSA TAULUKKO KAIKISTA ASEMISTA AAKKOSITTAIN JA JNE
+              </div>
+            ) : (
+              <div>
+                <TopStations stationList={topStations} setTrip={setTrip} setStation={setStation} />
+              </div>
+            )}
+          </div>
+          <div onClick={()=>setViewAddStation(true)}>
+            lisää asema
+            <AddStation viewAddStation={viewAddStation} setViewAddStation={setViewAddStation}/>
+          </div>
         </div>
-        <div id="topTrips">
-          <h2> Suosituimmat Matkat: </h2>
-          <button onClick={viewTopTrips}>näytä</button>
-          <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation}/>
+        <div className='tripsList'>
+          <h2> Matkat </h2>
+          <div className='subHeadersForList'>
+            <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>Suosituimmat matkat</h3>
+            <h3 onClick={() => { setViewAllTrips(true); reset() }}>Kaikki matkat</h3>
+          </div>
+          <div>
+            {viewAllTrips ? (
+              <div>
+                TÄHÄN KUTSU UUDELLE KOMPONENTILLE, JOSSA TAULUKKO KAIKISTA MATKOISTA
+              </div>
+            ) : (
+              <div>
+                <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} />
+              </div>
+            )}
+          </div>
+          <div onClick={()=>setViewAddTrip(true)}>
+            lisää matka
+            <AddTrip viewAddTrip={viewAddTrip} setViewAddTrip={setViewAddTrip}/>
+          </div>
         </div>
       </div>
     </div>

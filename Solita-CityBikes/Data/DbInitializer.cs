@@ -18,13 +18,18 @@ namespace Solita_CityBikes.Data
                 {
                     return;
                 }
-                // Lataa asemat tiedoston tiedot CSV tiedostosta ja lisää asemat Station luokan olioksi. 
+
+                // Lataa asemat tiedoston tiedot CSV tiedostosta ja lisää asemat Station luokan olioksi.
+
                 using var reader = new StreamReader("/Users/otsokinanen/Desktop/data/asemat.csv");
                 using var csv = new CsvReader(reader, CultureInfo.InvariantCulture); // 
                 var records = csv.GetRecords<Station>();
                 foreach (var record in records)
                 {
-                    context.Add(new Station { Name = record.Name, Namn = record.Namn, Nimi = record.Nimi, HslStationId = record.HslStationId, X = record.X, Y = record.Y });
+                 
+                 if (record.ValidateStationData()){
+                    context.Add(new Station { Name = record.Name, Namn = record.Namn, Nimi = record.Nimi, Osoite = record.Osoite, HslStationId = record.HslStationId, X = record.X, Y = record.Y });
+                    }
                 }
 
                 context.SaveChanges();
@@ -60,9 +65,11 @@ namespace Solita_CityBikes.Data
                 var records = csv.GetRecords<Trip>();
                 foreach (var record in records)
                 {
+                    if (record.ValidateTripData()) { 
                     context.Add(new Trip { DepartureTime = record.DepartureTime, DepartureStationId = record.DepartureStationId, ReturnTime = record.DepartureTime, ReturnStationId = record.ReturnStationId, CoveredDistance = record.CoveredDistance, Duration = record.Duration });
                     i++;
-                    if(i % 1000 == 0)
+                    }
+                    if (i % 1000 == 0)
                     {
                         context.SaveChanges();
                         context.Trips.RemoveRange();

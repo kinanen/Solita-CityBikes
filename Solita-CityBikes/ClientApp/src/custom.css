@@ -17,19 +17,48 @@ code {
   border-color: #1861ac;
 }
 .leaflet-container{
-  width: 90em;
-
+  width: 95em;
   height: 45em;
 }
 
 .box{
   display: inline-flex;
+  width: 100%;
 }
 
 .list{
   margin: 1em;
+
 }
 
 .details{
   width: 30em;
 }
+
+.stationsList{
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.tripsList{
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+h2{
+  width: 100%;
+}
+
+h3{
+  width: 50%;
+}
+
+.subHeadersForList{
+  width: 100% ;
+  display: inline-flex;
+}
+
