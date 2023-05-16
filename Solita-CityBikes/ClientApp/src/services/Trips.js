@@ -15,8 +15,19 @@ const getTopTrips = () => {
     return axios(baseUrl + "/trip/toptrips");
 }
 
+const postTrip = trip => {
+    return axios.post(baseUrl+'/trip', trip)
+}
+
+const putTrip = trip => {
+    return axios.put(baseUrl+'/trip', trip)
+}
+
+
 export default{
     getAll,
     getTopTrips,
-    getTopDepartureStations
+    getTopDepartureStations,
+    putTrip,
+    postTrip
 }

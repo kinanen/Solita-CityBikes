@@ -1,14 +1,15 @@
 import React, { Component, useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap';
-import DrawTrips from './DrawTrips';
 import Details from './Detail';
 import TopStations from './TopStations';
 import TopTrips from './TopTrips';
-import { variables } from '../Variables';
 import Stations from '../services/Stations';
 import Trips from '../services/Trips';
 import AddStation from './AddStation';
 import AddTrip from './AddTrip';
+import AllStations from './AllStations';
+import AllTrips from './AllTrips';
+
 //Aloitussivu, lataa Asema datan tietokannasta, suosituimmat matkat ja suosituimmat asemat. 
 //hakee käyttäjän valintojen mukaan asema ja matka datan ja välittää sen karttaa, matkoja ja asemia näyttäville komponenteille.
 
@@ -21,7 +22,10 @@ const Home = () => {
   const [topTrips, setTopTrips] = useState([]);
   const [station, setStation] = useState(null);
   const [trip, setTrip] = useState(null)
-
+  const [viewAllTrips, setViewAllTrips] = useState(false);
+  const [viewAllStations, setViewAllStations] = useState(true)
+  const [viewAddStation, setViewAddStation] = useState(false)
+  const [viewAddTrip, setViewAddTrip] = useState(false)
 
   useEffect(() => {
     Stations.getAll()
@@ -87,13 +91,6 @@ const Home = () => {
     setTrip(null)
   }
 
-  const [viewAllTrips, setViewAllTrips] = useState(false);
-  const [viewAllStations, setViewAllStations] = useState(true)
-
-  const [viewAddStation, setViewAddStation] = useState (false) 
-  const [viewAddTrip, setViewAddTrip] = useState (false)
-  
-  
   return (
     <div>
       <div className='box'>
@@ -104,13 +101,13 @@ const Home = () => {
         <div className='stationsList'>
           <h2> Asemat </h2>
           <div className='subHeadersForList'>
-            <h3 onClick={() => { viewTopStations() ; setViewAllStations(false) }}>Suosituimmat asemat</h3>
-            <h3 onClick={() => {setViewAllStations(true); reset()}}>Kaikki asemat</h3>
+            <h3 onClick={() => { viewTopStations(); setViewAllStations(false) }}>Suosituimmat asemat</h3>
+            <h3 onClick={() => { setViewAllStations(true); reset() }}>Kaikki asemat</h3>
           </div>
           <div>
             {viewAllStations ? (
               <div>
-                TÄHÄN KUTSU UUDELLE KOMPONENTILLE, JOSSA TAULUKKO KAIKISTA ASEMISTA AAKKOSITTAIN JA JNE
+                <AllStations stations={stations} />
               </div>
             ) : (
               <div>
@@ -118,35 +115,41 @@ const Home = () => {
               </div>
             )}
           </div>
-          <div onClick={()=>setViewAddStation(true)}>
-            lisää asema
-            <AddStation viewAddStation={viewAddStation} setViewAddStation={setViewAddStation}/>
-          </div>
-        </div>
-        <div className='tripsList'>
-          <h2> Matkat </h2>
-          <div className='subHeadersForList'>
-            <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>Suosituimmat matkat</h3>
-            <h3 onClick={() => { setViewAllTrips(true); reset() }}>Kaikki matkat</h3>
-          </div>
           <div>
-            {viewAllTrips ? (
-              <div>
-                TÄHÄN KUTSU UUDELLE KOMPONENTILLE, JOSSA TAULUKKO KAIKISTA MATKOISTA
-              </div>
-            ) : (
-              <div>
-                <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} />
-              </div>
-            )}
+            <div onClick={() =>{ setViewAddStation(true); console.log("set view add station to true " + viewAddStation)}}>
+            Lisää Asema
+            </div>
+            {viewAddStation ? (
+            <div>
+              <AddStation viewAddStation={viewAddStation} setViewAddStation={setViewAddStation} />
+            </div>
+            ):""}
           </div>
-          <div onClick={()=>setViewAddTrip(true)}>
-            lisää matka
-            <AddTrip viewAddTrip={viewAddTrip} setViewAddTrip={setViewAddTrip}/>
-          </div>
+      </div>
+      <div className='tripsList'>
+        <h2> Matkat </h2>
+        <div className='subHeadersForList'>
+          <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>Suosituimmat matkat</h3>
+          <h3 onClick={() => { setViewAllTrips(true); reset() }}>Kaikki matkat</h3>
+        </div>
+        <div>
+          {viewAllTrips ? (
+            <div>
+              <AllTrips />
+            </div>
+          ) : (
+            <div>
+              <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} />
+            </div>
+          )}
+        </div>
+        <div onClick={() => setViewAddTrip(true)}>
+          lisää matka
+          <AddTrip viewAddTrip={viewAddTrip} setViewAddTrip={setViewAddTrip} stations={stations}/>
         </div>
       </div>
     </div>
+    </div >
   );
 };
 

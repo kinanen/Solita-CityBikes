@@ -1,22 +1,15 @@
-import { useState } from "react";
+import StationForm from "./StationForm";
 
 const AddStation = ({ viewAddStation, setViewAddStation }) => {
-    return (
-        <div>
-            {viewAddStation ? (
-                <div>
-                    LOMAKE AUKI
-                    <button onClick={() => setViewAddStation(false)}>
-                        SULJE
-                    </button>
-                </div>
-            ) :
-                <div>
-
-                </div>
-            }
-        </div>
-    )
+        return (
+            <div>       
+                <StationForm setViewAddStation={setViewAddStation}/>
+                <button onClick={() => setViewAddStation(false)}>
+                    sulje
+                </button>    
+            </div>
+        )
+    
 }
 
 export default AddStation;

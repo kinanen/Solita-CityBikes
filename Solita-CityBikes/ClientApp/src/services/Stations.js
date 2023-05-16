@@ -11,7 +11,14 @@ const getStation = id => {
     return axios.get(baseUrl + "/station" + id)
 }
 
+const postStation = station => {
+    return axios.post(baseUrl+'/station', station)
+}
+
+const putStation = station => {
+    return axios.put(baseUrl+'/station', station)
+}
 
 export default{
-    getAll, getStation
+    getAll, getStation, putStation, postStation
 }
