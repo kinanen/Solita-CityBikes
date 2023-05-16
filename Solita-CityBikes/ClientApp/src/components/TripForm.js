@@ -47,73 +47,79 @@ const TripForm = ({ setViewAddTrip, stations }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                Lähtöasema:
-                <input
-                    type="text"
-                    list="stationList"
-                    name="departureStation"
-                    value={trip.departureStation}
-                    onChange={handleChange}
-                />
-                <datalist id="stationList">
-                    {stations.map((station, index) => (
-                        <option key={index} value={station.nimi} />
-                    ))}
-                </datalist>
-            </label>
-            <label>
-                Lähtöaika:
-                <input
-                    type="datetime-local"
-                    name="departureTime"
-                    value={trip.departureTime}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Palautusasema:
-                <input
-                    type="text"
-                    name="returnStation"
-                    value={trip.name}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Palautusaika:
-                <input
-                    type="datetime-local"
-                    name="returnTime"
-                    value={trip.returnTime}
-                    onChange={handleChange}
-                />
-            </label>
-
-
-            <br />
-            <label>
-                Ajettu matka metreissä
-                <input
-                    type="text"
-                    name="coveredDistance"
-                    value={trip.coveredDistance}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Matkan kesto sekunneissa
-                <input
-                    type="text"
-                    name="duration"
-                    value={trip.duration}
-                    onChange={handleChange}
-                />
-            </label>
-            <br />
-            <button type="submit">Submit</button>
-        </form>
+        <div className="modal-content">
+            <form onSubmit={handleSubmit}>
+                <h3>Lisää matka</h3>
+                <p>
+                    <label>
+                        Lähtöasema
+                        <input
+                            type="text"
+                            list="stationList"
+                            name="departureStation"
+                            value={trip.departureStation}
+                            onChange={handleChange}
+                        />
+                        <datalist id="stationList">
+                            {stations.map((station, index) => (
+                                <option key={index} value={station.nimi} />
+                            ))}
+                        </datalist>
+                    </label>
+                    <label>
+                        Lähtöaika
+                        <input
+                            type="datetime-local"
+                            name="departureTime"
+                            value={trip.departureTime}
+                            onChange={handleChange}
+                        />
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Palautusasema
+                        <input
+                            type="text"
+                            name="returnStation"
+                            value={trip.name}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label>
+                        Palautusaika
+                        <input
+                            type="datetime-local"
+                            name="returnTime"
+                            value={trip.returnTime}
+                            onChange={handleChange}
+                        />
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Ajettu matka metreissä
+                        <input
+                            type="text"
+                            name="coveredDistance"
+                            value={trip.coveredDistance}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label>
+                        Matkan kesto sekunneissa
+                        <input
+                            type="text"
+                            name="duration"
+                            value={trip.duration}
+                            onChange={handleChange}
+                        />
+                    </label>
+                </p>
+                <br />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     );
 };
 

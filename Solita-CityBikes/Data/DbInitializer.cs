@@ -13,7 +13,7 @@ namespace Solita_CityBikes.Data
             using (var context = new CityBikeContext(serviceProvider.GetRequiredService<DbContextOptions<CityBikeContext>>()))
             {
 
-                context.Database.EnsureCreated();
+                 context.Database.EnsureCreated();
                 if (context.Stations.Any())
                 {
                     return;

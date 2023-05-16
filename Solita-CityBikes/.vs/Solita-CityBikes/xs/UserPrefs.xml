@@ -1,5 +1,7 @@
 ﻿<Properties StartupConfiguration="{051CBCF7-0369-4134-A14E-AC0420347370}|Default">
-  <MonoDevelop.Ide.ItemProperties.Solita-CityBikes PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Solita-CityBikes-tests FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/StationController.cs">
     <Files>
       <File FileName="Pages/_ViewImports.cshtml" />
@@ -49,10 +51,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Solita-CityBikes PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

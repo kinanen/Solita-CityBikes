@@ -49,6 +49,7 @@ const Home = () => {
       .catch(error => {
         console.log(error);
       });
+      
   }, []);
 
   const viewableTopStations = topStations.map(station => {
@@ -116,40 +117,42 @@ const Home = () => {
             )}
           </div>
           <div>
-            <div onClick={() =>{ setViewAddStation(true); console.log("set view add station to true " + viewAddStation)}}>
-            Lisää Asema
+            <div onClick={() => { setViewAddStation(true) }}>
+              Lisää Asema
             </div>
-            {viewAddStation ? (
-            <div>
-              <AddStation viewAddStation={viewAddStation} setViewAddStation={setViewAddStation} />
-            </div>
-            ):""}
           </div>
+        </div>
+        <div className='tripsList'>
+          <h2> Matkat </h2>
+          <div className='subHeadersForList'>
+            <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>Suosituimmat matkat</h3>
+            <h3 onClick={() => { setViewAllTrips(true); reset() }}>Kaikki matkat</h3>
+          </div>
+          <div>
+            {viewAllTrips ? (
+              <div>
+                <AllTrips />
+              </div>
+            ) : (
+              <div>
+                <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} />
+              </div>
+            )}
+          </div>
+          <div onClick={() => setViewAddTrip(true)}>
+            Lisää matka
+          </div>
+
+        </div>
       </div>
-      <div className='tripsList'>
-        <h2> Matkat </h2>
-        <div className='subHeadersForList'>
-          <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>Suosituimmat matkat</h3>
-          <h3 onClick={() => { setViewAllTrips(true); reset() }}>Kaikki matkat</h3>
-        </div>
-        <div>
-          {viewAllTrips ? (
-            <div>
-              <AllTrips />
-            </div>
-          ) : (
-            <div>
-              <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} />
-            </div>
-          )}
-        </div>
-        <div onClick={() => setViewAddTrip(true)}>
-          lisää matka
-          <AddTrip viewAddTrip={viewAddTrip} setViewAddTrip={setViewAddTrip} stations={stations}/>
-        </div>
-      </div>
-    </div>
+      {viewAddTrip ? (
+        <AddTrip viewAddTrip={viewAddTrip} setViewAddTrip={setViewAddTrip} stations={stations} />
+      ) : ""}
+      {viewAddStation ? (
+        <AddStation viewAddStation={viewAddStation} setViewAddStation={setViewAddStation} />
+      ) : ""}
     </div >
+
   );
 };
 
