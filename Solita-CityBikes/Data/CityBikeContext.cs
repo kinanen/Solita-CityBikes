@@ -9,9 +9,12 @@ namespace Solita_CityBikes.Data
         {
         }
 
-        public DbSet<Station> Stations { get; set; }
+        public CityBikeContext() : base() { }
 
-        public DbSet<Trip> Trips { get; set; }
+        public virtual DbSet<Station> Stations { get; set; }
+
+        public virtual DbSet<Trip> Trips { get; set; }
+
 
     }
 }

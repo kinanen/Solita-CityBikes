@@ -26,6 +26,24 @@ namespace Solita_CityBikes.Controllers
             return _context.Trips.ToList();
         }
 
+        [HttpGet("getpaginatedtrips")]
+        public async Task<IActionResult> GetPaginatedTrips(int pageNumber = 1, int pageSize = 10)
+        {
+            async Task<List<Trip>> GetTrips(int pageNumber, int pageSize)
+            {
+                var trips = await _context.Trips
+                    .OrderBy(trip => trip.TripId) // Sort by your desired criteria
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                return trips;
+            }
+
+            var products = await GetTrips(pageNumber, pageSize);
+            return Ok(products);
+        }
+
         [HttpGet("{id}")]
         public Trip Get(int id)
         {

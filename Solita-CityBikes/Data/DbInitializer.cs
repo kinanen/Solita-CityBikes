@@ -13,14 +13,13 @@ namespace Solita_CityBikes.Data
             using (var context = new CityBikeContext(serviceProvider.GetRequiredService<DbContextOptions<CityBikeContext>>()))
             {
 
-                 context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
                 if (context.Stations.Any())
                 {
                     return;
                 }
 
                 // Lataa asemat tiedoston tiedot CSV tiedostosta ja lisää asemat Station luokan olioksi.
-
                 using var reader = new StreamReader("/Users/otsokinanen/Desktop/data/asemat.csv");
                 using var csv = new CsvReader(reader, CultureInfo.InvariantCulture); // 
                 var records = csv.GetRecords<Station>();

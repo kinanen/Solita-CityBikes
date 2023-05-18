@@ -8,7 +8,7 @@ const getAll = () => {
   }
 
 const getStation = id => {
-    return axios.get(baseUrl + "/station" + id)
+    return axios.get(baseUrl + "/station/" + id)
 }
 
 const postStation = station => {

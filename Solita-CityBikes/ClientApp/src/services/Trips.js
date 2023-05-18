@@ -7,12 +7,16 @@ const getAll = () => {
     return axios.get(baseUrl + "/trip");
   }
 
+const getPaginatedTrips = (pageNumber, pageSize) => {
+    return axios.get(`${baseUrl}/trip/getPaginatedTrips?pagenumber=${pageNumber}&pagesize=${pageSize}`)
+}
+
 const getTopDepartureStations = () => {
-    return axios( baseUrl + "/trip/topdeparturestations");
+    return axios.get( baseUrl + "/trip/TopDepartureStations");
 }
 
 const getTopTrips = () => {
-    return axios(baseUrl + "/trip/toptrips");
+    return axios.get(baseUrl + "/trip/toptrips");
 }
 
 const postTrip = trip => {
@@ -28,6 +32,8 @@ export default{
     getAll,
     getTopTrips,
     getTopDepartureStations,
+    getPaginatedTrips,
     putTrip,
     postTrip
+
 }

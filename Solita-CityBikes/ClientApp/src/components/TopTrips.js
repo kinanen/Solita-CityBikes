@@ -13,7 +13,7 @@ const TopTrips = ({ tripList,setTrip,setStation }) => {
     const columns = React.useMemo(
         () => [
             {
-                Header: 'Suosituimmat asemat',
+                Header: 'Suosituimmat matkat',
                 columns: [
                     {
                         Header: 'Lähtöasema',

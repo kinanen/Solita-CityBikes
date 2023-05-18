@@ -9,6 +9,8 @@ import AddStation from './AddStation';
 import AddTrip from './AddTrip';
 import AllStations from './AllStations';
 import AllTrips from './AllTrips';
+import axios from 'axios';
+import { variables } from '../Variables';
 
 //Aloitussivu, lataa Asema datan tietokannasta, suosituimmat matkat ja suosituimmat asemat. 
 //hakee käyttäjän valintojen mukaan asema ja matka datan ja välittää sen karttaa, matkoja ja asemia näyttäville komponenteille.
@@ -33,7 +35,7 @@ const Home = () => {
         setStations(response.data);
         setOnViewStations(response.data);
       });
-
+      
     Trips.getTopDepartureStations()
       .then(response => {
         setTopStations(response.data);
@@ -41,7 +43,8 @@ const Home = () => {
       .catch(error => {
         console.log(error);
       });
-
+      
+      /*
     Trips.getTopTrips()
       .then(response => {
         setTopTrips(response.data);
@@ -49,7 +52,7 @@ const Home = () => {
       .catch(error => {
         console.log(error);
       });
-      
+      */
   }, []);
 
   const viewableTopStations = topStations.map(station => {
@@ -108,7 +111,7 @@ const Home = () => {
           <div>
             {viewAllStations ? (
               <div>
-                <AllStations stations={stations} />
+                <AllStations stationList={stations} setTrip={setTrip} setStation={setStation} />
               </div>
             ) : (
               <div>
@@ -131,7 +134,7 @@ const Home = () => {
           <div>
             {viewAllTrips ? (
               <div>
-                <AllTrips />
+                <AllTrips setTrip={setTrip} setStation={setStation}/>
               </div>
             ) : (
               <div>
