@@ -8,7 +8,7 @@ using Solita_CityBikes.Data;
 
 #nullable disable
 
-namespace Solita_CityBikes.Migrations
+namespace SolitaCityBikes.Migrations
 {
     [DbContext(typeof(CityBikeContext))]
     partial class CityBikeContextModelSnapshot : ModelSnapshot
@@ -42,6 +42,10 @@ namespace Solita_CityBikes.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nimi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Osoite")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -85,6 +89,22 @@ namespace Solita_CityBikes.Migrations
                     b.HasKey("TripId");
 
                     b.ToTable("Trips");
+                });
+
+            modelBuilder.Entity("Solita_CityBikes.TripCount", b =>
+                {
+                    b.Property<int>("DepartureStationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReturnStationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.HasKey("DepartureStationId", "ReturnStationId");
+
+                    b.ToTable("TripCounts");
                 });
 #pragma warning restore 612, 618
         }

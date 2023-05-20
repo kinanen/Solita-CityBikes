@@ -39,7 +39,14 @@ namespace Solita_CityBikes.Controllers
         return _context.Stations.FirstOrDefault(x => x.HslStationId == id);
     }
 
-    [HttpPost]
+    [HttpGet("name{id}")]
+    public String GetName(int id)
+    {
+        return _context.Stations.FirstOrDefault(x => x.HslStationId == id).Nimi;
+    }
+
+
+        [HttpPost]
     public void Post([FromBody] Station station)
     {
         _context.Stations.Add(station);

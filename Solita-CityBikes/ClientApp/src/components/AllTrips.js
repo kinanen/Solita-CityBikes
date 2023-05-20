@@ -114,21 +114,4 @@ const AllTrips = ({ setTrip, setStation }) => {
     )
 }
 
-
-/*
-  return (
-    <div>
-      {trips.map((trip) => (
-        <div key={trip.TripId}>
-          <h3>{trip.departureTime}</h3>
-          <p>Price: {trip.returnTime}</p>
-        </div>
-      ))}
-      <button onClick={() => setPageNumber(pageNumber - 1)}>Previous</button>
-      <button onClick={() => setPageNumber(pageNumber + 1)}>Next</button>
-    </div>
-  );
-};
-*/
-
 export default AllTrips;

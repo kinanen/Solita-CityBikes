@@ -3,14 +3,16 @@ import LeafletMap from './LeafletMap';
 import Details from './Detail';
 import TopStations from './TopStations';
 import TopTrips from './TopTrips';
+
 import Stations from '../services/Stations';
 import Trips from '../services/Trips';
+import TripCounts from '../services/TripCounts';
+
 import AddStation from './AddStation';
 import AddTrip from './AddTrip';
 import AllStations from './AllStations';
 import AllTrips from './AllTrips';
-import axios from 'axios';
-import { variables } from '../Variables';
+
 
 //Aloitussivu, lataa Asema datan tietokannasta, suosituimmat matkat ja suosituimmat asemat. 
 //hakee käyttäjän valintojen mukaan asema ja matka datan ja välittää sen karttaa, matkoja ja asemia näyttäville komponenteille.
@@ -28,6 +30,7 @@ const Home = () => {
   const [viewAllStations, setViewAllStations] = useState(true)
   const [viewAddStation, setViewAddStation] = useState(false)
   const [viewAddTrip, setViewAddTrip] = useState(false)
+  const [topTripPage, setTopTripPage] = useState(1)
 
   useEffect(() => {
     Stations.getAll()
@@ -35,7 +38,7 @@ const Home = () => {
         setStations(response.data);
         setOnViewStations(response.data);
       });
-      
+
     Trips.getTopDepartureStations()
       .then(response => {
         setTopStations(response.data);
@@ -43,17 +46,17 @@ const Home = () => {
       .catch(error => {
         console.log(error);
       });
-      
-      /*
-    Trips.getTopTrips()
+  }, []);
+
+  useEffect(() => {
+    TripCounts.getPaginatedTripCounts(topTripPage, 25)
       .then(response => {
         setTopTrips(response.data);
       })
       .catch(error => {
         console.log(error);
       });
-      */
-  }, []);
+  }, [topTripPage]);
 
   const viewableTopStations = topStations.map(station => {
     const foundStation = stations.find(s => station.stationHslId === s.hslStationId);
@@ -78,7 +81,6 @@ const Home = () => {
       }
       return acc;
     }, []);
-
 
     setOnViewStations(uniqueStations);
     setOnViewTrips(tripsCoordinates);
@@ -134,11 +136,11 @@ const Home = () => {
           <div>
             {viewAllTrips ? (
               <div>
-                <AllTrips setTrip={setTrip} setStation={setStation}/>
+                <AllTrips setTrip={setTrip} setStation={setStation} />
               </div>
             ) : (
               <div>
-                <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} />
+                <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} setPage={setTopTripPage} />
               </div>
             )}
           </div>

@@ -21,10 +21,8 @@ const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station}
         setStation(id)
         console.log("view stations id:", id)
     }
-    
-    const rad = 80;
 
-    // const zoom = 12;
+    const rad = 75;
 
     const drawStations = stationData.map(station => (
         <Circle key={station.hslStationId} center={[station.y, station.x]} radius={rad}>

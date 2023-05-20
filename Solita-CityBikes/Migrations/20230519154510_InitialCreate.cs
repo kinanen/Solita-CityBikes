@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Solita_CityBikes.Migrations
+namespace SolitaCityBikes.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -21,12 +21,26 @@ namespace Solita_CityBikes.Migrations
                     Nimi = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Namn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Osoite = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     X = table.Column<double>(type: "float", nullable: false),
                     Y = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stations", x => x.StationId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TripCounts",
+                columns: table => new
+                {
+                    DepartureStationId = table.Column<int>(type: "int", nullable: false),
+                    ReturnStationId = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TripCounts", x => new { x.DepartureStationId, x.ReturnStationId });
                 });
 
             migrationBuilder.CreateTable(
@@ -53,6 +67,9 @@ namespace Solita_CityBikes.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Stations");
+
+            migrationBuilder.DropTable(
+                name: "TripCounts");
 
             migrationBuilder.DropTable(
                 name: "Trips");

@@ -2,12 +2,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Stations from "../services/Stations";
+import TripCounts from "../services/TripCounts";
 
 const StationDetails = ({ station }) => {
   const [stationData, setStationData] = useState([]);
 
   const [topDestinations, setTopDestinations] = useState([]);
-  const [topArrivals, setTopArrivals] = useState([]);
+  const [topReturns, setTopReturns] = useState([]);
 
   useEffect(() => {
     Stations.getStation(station)
@@ -15,18 +16,34 @@ const StationDetails = ({ station }) => {
         setStationData(response.data);
       })
 
-    /* axios(("https://localhost:7199/api/station/topdestinations/" + station)
-     .then(response =>{
-       setTopDestinations(response.data)
-     }))
-     */
+    TripCounts.getTripCountByDsId(station)
+      .then(response => {
+        setTopDestinations(response.data)
+      })
+
+    TripCounts.getTripCountByRsId(station)
+      .then(response => {
+        setTopReturns(response.data)
+      })
+
+    Stations.getStationName(station)
+      .then(response => {
+        console.log(response.data)
+      })
 
   }, [station])
 
-  const topDestinationsList = topDestinations.map((station) =>
-    <li>{station}</li>
+  const topDestinationsList = topDestinations.map((tc) => 
+      <li key={`${tc.departureStationId}${tc.returnStationId}`}>
+        {tc.returnStationId} matkoja {tc.count}
+      </li>
   );
+    
+  
 
+  const topReturnsList = topReturns.map((tc) =>
+    <li key={`${tc.returnStationId}${tc.departureStationId}`}>{tc.departureStationId} matkoja {tc.count}</li>
+  );
 
 
   return (
@@ -39,8 +56,9 @@ const StationDetails = ({ station }) => {
         {stationData && topDestinationsList}
       </ul>
       Suosituimmat lähtöasemat asemalle:
-      {topArrivals}
-
+      <ul>
+        {stationData && topReturnsList}
+      </ul>
       Recommended
 
       Station name

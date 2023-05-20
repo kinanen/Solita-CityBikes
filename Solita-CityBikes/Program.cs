@@ -39,6 +39,7 @@ using (var scope = app.Services.CreateScope())
 
     DbInitializer.InitializeStations(services);
     DbInitializer.InitializeTrips(services);
+    DbInitializer.InitializeTripCounts(services);
 }
 
 // Configure the HTTP request pipeline.
@@ -60,16 +61,6 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
-
-//{
-//    var httpClient = new HttpClient();
-//    var response = await httpClient.GetFromJsonAsync<Station[]>("https://localhost:7199/Station");
-//    foreach (var station in response)
-//    {
-//        Console.WriteLine($"Station Id: {station.StationId}, Name: {station.Name}");
-//    }
-//}
-
 
 app.Run();
 

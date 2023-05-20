@@ -6,14 +6,14 @@ using CsvHelper.Configuration;
 
 namespace Solita_CityBikes.Data
 {
-	public class DbInitializer
-	{
+    public class DbInitializer
+    {
         public static void InitializeStations(IServiceProvider serviceProvider)
         {
             using (var context = new CityBikeContext(serviceProvider.GetRequiredService<DbContextOptions<CityBikeContext>>()))
             {
-
                 context.Database.EnsureCreated();
+
                 if (context.Stations.Any())
                 {
                     return;
@@ -25,9 +25,10 @@ namespace Solita_CityBikes.Data
                 var records = csv.GetRecords<Station>();
                 foreach (var record in records)
                 {
-                 
-                 if (record.ValidateStationData()){
-                    context.Add(new Station { Name = record.Name, Namn = record.Namn, Nimi = record.Nimi, Osoite = record.Osoite, HslStationId = record.HslStationId, X = record.X, Y = record.Y });
+
+                    if (record.ValidateStationData())
+                    {
+                        context.Add(new Station { Name = record.Name, Namn = record.Namn, Nimi = record.Nimi, Osoite = record.Osoite, HslStationId = record.HslStationId, X = record.X, Y = record.Y });
                     }
                 }
 
@@ -58,17 +59,18 @@ namespace Solita_CityBikes.Data
         static void ReadTripsFromFile(CityBikeContext context, String fileName)
         {
             using (var reader = new StreamReader(fileName))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture)) // 
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 int i = 0;
                 var records = csv.GetRecords<Trip>();
                 foreach (var record in records)
                 {
-                    if (record.ValidateTripData()) { 
-                    context.Add(new Trip { DepartureTime = record.DepartureTime, DepartureStationId = record.DepartureStationId, ReturnTime = record.DepartureTime, ReturnStationId = record.ReturnStationId, CoveredDistance = record.CoveredDistance, Duration = record.Duration });
-                    i++;
+                    if (record.ValidateTripData())
+                    {
+                        context.Add(new Trip { DepartureTime = record.DepartureTime, DepartureStationId = record.DepartureStationId, ReturnTime = record.DepartureTime, ReturnStationId = record.ReturnStationId, CoveredDistance = record.CoveredDistance, Duration = record.Duration });
+                        i++;
                     }
-                    if (i % 1000 == 0)
+                    if (i % 10000 == 0)
                     {
                         context.SaveChanges();
                         context.Trips.RemoveRange();
@@ -77,7 +79,37 @@ namespace Solita_CityBikes.Data
                 context.SaveChanges();
             }
         }
-    }
 
+        public static void InitializeTripCounts(IServiceProvider serviceProvider)
+        {
+            using (var context = new CityBikeContext(serviceProvider.GetRequiredService<DbContextOptions<CityBikeContext>>()))
+            {
+
+                context.Database.EnsureCreated();
+                if (context.TripCounts.Any())
+                {
+                    return;
+                }
+
+                var tripCounts = context.Trips
+                .GroupBy(t => new { t.DepartureStationId, t.ReturnStationId })
+                .Select(g => new TripCount
+                {
+                    DepartureStationId = g.Key.DepartureStationId,
+                    ReturnStationId = g.Key.ReturnStationId,
+                    Count = g.Count()
+                })
+                .ToList();
+                
+                context.TripCounts.AddRange(tripCounts);
+                context.SaveChanges();
+
+            }
+
+        }
+
+    }
 }
+
+
 
