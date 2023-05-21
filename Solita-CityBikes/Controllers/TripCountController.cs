@@ -30,7 +30,28 @@ namespace Solita_CityBikes.Controllers
             return _context.TripCounts.ToList();
         }
 
-        [HttpGet("getpaginatedtripcounts")] 
+        [HttpGet("getstationcount")]
+        public List<StationCount> GetTripCountsByStations()
+        {
+
+            var results = _context.TripCounts
+                .GroupBy(tc => tc.DepartureStationId)
+                .Select(group => new StationCount
+                {
+                    stationId = group.Key,
+                    DepartureCount = group.Sum(x => x.Count),
+                    ReturnCount = _context.TripCounts
+                        .Where(tc => tc.ReturnStationId == group.Key)
+                        .Sum(x => x.Count)
+                })
+                .ToList();
+
+            return results;
+        }
+
+        
+
+        [HttpGet("getpaginatedtripcounts")]
         public async Task<IActionResult> GetPaginatedTripCounts(int pageNumber = 1, int pageSize = 25)
         {
             async Task<List<TripCount>> GetTripCounts(int pageNumber, int pageSize)
@@ -57,7 +78,6 @@ namespace Solita_CityBikes.Controllers
                 var TripCounts = await _context.TripCounts
                     .Where(tc => tc.DepartureStationId==dsid)
                     .OrderByDescending(tripCount => tripCount.Count)
-                    .Take(5)
                     .ToListAsync();
 
                 return TripCounts;
@@ -75,7 +95,6 @@ namespace Solita_CityBikes.Controllers
                 var TripCounts = await _context.TripCounts
                     .Where(tc => tc.ReturnStationId == rsid)
                     .OrderByDescending(tripCount => tripCount.Count)
-                    .Take(5)
                     .ToListAsync();
 
                 return TripCounts;
@@ -102,6 +121,14 @@ namespace Solita_CityBikes.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+
+        public class StationCount
+        {
+            public int stationId { get; set; }
+            public int DepartureCount { get; set; }
+            public int ReturnCount { get; set; }
         }
     }
 }

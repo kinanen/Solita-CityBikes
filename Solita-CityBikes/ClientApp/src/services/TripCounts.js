@@ -15,6 +15,10 @@ const getPaginatedTripCounts = (pageNumber, pageSize) => {
     return axios.get(`${baseUrl}/tripcount/getpaginatedtripcounts?pagenumber=${pageNumber}&pagesize=${pageSize}`)
 }
 
+const getStationDepartureCount = () => {
+    return axios.get(`${baseUrl}/tripcount/getstationcount`)
+}
+
 const getTripCountByDsId = (dsid) =>{
     return axios.get(`${baseUrl}/tripcount/departures?dsid=${dsid}`)
 }
@@ -43,5 +47,6 @@ export default{
     deleteTripCount, 
     getPaginatedTripCounts, 
     getTripCountByDsId,
-    getTripCountByRsId
+    getTripCountByRsId,
+    getStationDepartureCount
 }

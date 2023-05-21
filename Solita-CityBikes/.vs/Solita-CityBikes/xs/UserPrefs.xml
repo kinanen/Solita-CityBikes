@@ -1,23 +1,23 @@
 ﻿<Properties StartupConfiguration="{051CBCF7-0369-4134-A14E-AC0420347370}|Default">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Solita-CityBikes-tests FirstBuild="True" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/StationController.cs">
     <Files>
+      <File FileName="package-lock.json" Line="1" Column="1" IsPinned="True" />
+      <File FileName="reset-database.sh" Line="15" Column="26" IsPinned="True" />
       <File FileName="Pages/_ViewImports.cshtml" />
       <File FileName="Pages/Error.cshtml" />
       <File FileName="ClientApp/src/index.js" />
-      <File FileName="Program.cs" />
+      <File FileName="Program.cs" Line="42" Column="50" />
       <File FileName="ClientApp/public/index.html" />
       <File FileName="ClientApp/aspnetcore-https.js" />
       <File FileName="ClientApp/aspnetcore-react.js" />
-      <File FileName="Properties/launchSettings.json" />
-      <File FileName="appsettings.Development.json" />
-      <File FileName="appsettings.json" />
+      <File FileName="Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="appsettings.Development.json" Line="12" Column="96" />
+      <File FileName="appsettings.json" Line="11" Column="261" />
       <File FileName="ClientApp/src/Variables.js" />
-      <File FileName="Data/CityBikeContext.cs" Line="1" Column="1" />
-      <File FileName="Controllers/StationController.cs" Line="39" Column="59" />
-      <File FileName="Controllers/TripController.cs" Line="134" Column="62" />
+      <File FileName="Data/CityBikeContext.cs" Line="34" Column="1" />
+      <File FileName="Controllers/StationController.cs" Line="39" Column="1" />
       <File FileName="ClientApp/package.json" />
       <File FileName="ClientApp/src/components/Home.js" />
       <File FileName="ClientApp/src/App.js" />
@@ -26,32 +26,41 @@
       <File FileName="ClientApp/src/service-worker.js" />
       <File FileName="ClientApp/src/reportWebVitals.js" />
       <File FileName="ClientApp/.env" />
-      <File FileName="Models/Station.cs" Line="6" Column="2" />
-      <File FileName="Models/Trip.cs" Line="32" Column="6" />
-      <File FileName="Data/DbInitializer.cs" Line="30" Column="132" />
-      <File FileName="reset-database.sh" />
+      <File FileName="Models/Station.cs" Line="11" Column="42" />
+      <File FileName="Models/Trip.cs" Line="51" Column="5" />
+      <File FileName="Data/DbInitializer.cs" Line="6" Column="1" />
+      <File FileName="package.json" Line="1" Column="1" />
+      <File FileName="Migrations/CityBikeContextModelSnapshot.cs" Line="1" Column="1" />
+      <File FileName="../Solita-CityBikes-/UnitTest1.cs" Line="56" Column="59" />
+      <File FileName="../Solita-CityBikes-/Usings.cs" Line="1" Column="1" />
+      <File FileName="Models/TripCountPerStation.cs" Line="13" Column="1" />
+      <File FileName="Controllers/TripCountController.cs" Line="60" Column="29" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Solita-CityBikes" expanded="True">
             <Node name="Solita-CityBikes" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="StationController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True" />
               <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Pages" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="appsettings.json" expanded="True" />
             </Node>
+            <Node name="Solita-CityBikes-tests" expanded="True" />
           </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="Solita-CityBikes" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.Solita-CityBikes PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

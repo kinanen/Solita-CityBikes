@@ -12,8 +12,6 @@ const defaultBounds = [
     [60.28075, 25.159346]
 ]
 
-
-
 const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station}) => {
     
     const viewStation = (id) => {
@@ -23,12 +21,12 @@ const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station}
     }
 
     const rad = 75;
-
-    const drawStations = stationData.map(station => (
-        <Circle key={station.hslStationId} center={[station.y, station.x]} radius={rad}>
+    var i = 0
+    const drawStations = stationData.map(s => (
+        <Circle key={s.hslStationId} center={[s.y, s.x]} radius={rad}>
             <Popup>
-                <div onClick={() => viewStation(station.hslStationId)}>
-                {station.nimi}
+                <div onClick={() => viewStation(s.hslStationId)}>
+                {s.nimi}
                 </div>
             </Popup>
         </Circle>

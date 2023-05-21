@@ -18,16 +18,16 @@ const TopStations = ({stationList, setStation, setTrip}) => {
             columns: [
               {
                 Header: 'Asema',
-                accessor: 'stationName',
+                accessor: 'stationId',
                 Cell: ({ cell }) => (
-                    <div onClick={() => handleStationClick(cell.row.original.stationHslId)}>
+                    <div onClick={() => handleStationClick(cell.row.original.stationId)}>
                       {cell.value}
                     </div>
                     ),                    
               },
               {
                 Header: 'Lähtöjä asemalta',
-                accessor: 'departureCount',
+                accessor: 'count',
               }
             ],
           },

@@ -39,13 +39,12 @@ const Home = () => {
         setOnViewStations(response.data);
       });
 
-    Trips.getTopDepartureStations()
-      .then(response => {
-        setTopStations(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+
+    TripCounts.getStationDepartureCount()
+    .then(response=>{
+      console.log(response.data);
+      setTopStations(response.data.sort(((a, b) => b.departureCount - a.departureCount)));
+    })
   }, []);
 
   useEffect(() => {
@@ -59,13 +58,15 @@ const Home = () => {
   }, [topTripPage]);
 
   const viewableTopStations = topStations.map(station => {
-    const foundStation = stations.find(s => station.stationHslId === s.hslStationId);
-    return foundStation;
-  });
+    return stations.find(s => station.stationId === s.hslStationId);
+   }).filter(function( element ) {
+    return element !== undefined;
+ });
+    
+  
 
   const foundStations = [];
   const tripsCoordinates = [];
-
   const viewTopTrips = () => {
     topTrips.forEach(trip => {
       const departureStation = stations.find(s => trip.departureStationId === s.hslStationId);
@@ -121,11 +122,6 @@ const Home = () => {
               </div>
             )}
           </div>
-          <div>
-            <div onClick={() => { setViewAddStation(true) }}>
-              Lisää Asema
-            </div>
-          </div>
         </div>
         <div className='tripsList'>
           <h2> Matkat </h2>
@@ -144,11 +140,17 @@ const Home = () => {
               </div>
             )}
           </div>
-          <div onClick={() => setViewAddTrip(true)}>
+        </div>
+      </div>
+      <div className='box'>
+     
+          <div onClick={() => setViewAddTrip(true)} className="add-trip-class">
             Lisää matka
           </div>
+          <div onClick={() => { setViewAddStation(true) }} className='add-stations-class'>
+            Lisää Asema
+          </div>
 
-        </div>
       </div>
       {viewAddTrip ? (
         <AddTrip viewAddTrip={viewAddTrip} setViewAddTrip={setViewAddTrip} stations={stations} />
