@@ -6,7 +6,7 @@ import { useTable, useExpanded } from "react-table";
 const AllTrips = ({ setTrip, setStation }) => {
     const [trips, setTrips] = useState([]);
     const [pageNumber, setPageNumber] = useState(1);
-    const [pageSize, setPageSize] = useState(25);
+    const [pageSize, setPageSize] = useState(20);
 
     useEffect(() => {
         Trips.getPaginatedTrips(pageNumber, pageSize)

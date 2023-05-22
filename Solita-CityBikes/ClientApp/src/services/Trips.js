@@ -19,6 +19,15 @@ const getTopTrips = () => {
     return axios.get(baseUrl + "/trip/toptrips");
 }
 
+const getAverageDistanceByStation = (stationId) =>{
+    return axios.get(`${baseUrl}/trip/getaveragedistancebystation?stationid=${stationId}`)
+}
+
+const getAverageDurationByStation = (stationId) =>{
+    return axios.get(`${baseUrl}/trip/getaveragedurationbystation?stationid=${stationId}`)
+}
+
+
 const postTrip = trip => {
     return axios.post(baseUrl+'/trip', trip)
 }
@@ -34,6 +43,8 @@ export default{
     getTopDepartureStations,
     getPaginatedTrips,
     putTrip,
-    postTrip
+    postTrip,
+    getAverageDistanceByStation,
+    getAverageDurationByStation
 
 }

@@ -50,6 +50,24 @@ namespace Solita_CityBikes.Controllers
             return _context.Trips.FirstOrDefault(x => x.TripId == id);
         }
 
+        [HttpGet("getaveragedistancebystation")]
+        public double GetAverageDistanceByStation(int stationId)
+        {
+            var avg = _context.Trips
+            .Where(t => t.DepartureStationId == stationId && t.CoveredDistance != null)
+            .Average(c => c.CoveredDistance);
+            return avg;
+        }
+
+        [HttpGet("getaveragedurationbystation")]
+        public double GetAverageDurationByStation(int stationId)
+        {
+            var avg = _context.Trips
+            .Where(t => t.DepartureStationId == stationId && t.Duration != null)
+            .Average(c => c.Duration);
+            return avg;
+        }
+
         [HttpPost]
         public void Post([FromBody] Trip trip)
         {

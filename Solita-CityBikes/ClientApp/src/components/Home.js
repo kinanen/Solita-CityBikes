@@ -41,14 +41,15 @@ const Home = () => {
 
 
     TripCounts.getStationDepartureCount()
-    .then(response=>{
-      console.log(response.data);
-      setTopStations(response.data.sort(((a, b) => b.departureCount - a.departureCount)));
-    })
+      .then(response => {
+        console.log(response.data);
+        setTopStations(response.data.sort(((a, b) => b.departureCount - a.departureCount)));
+      })
+
   }, []);
 
   useEffect(() => {
-    TripCounts.getPaginatedTripCounts(topTripPage, 25)
+    TripCounts.getPaginatedTripCounts(topTripPage, 20)
       .then(response => {
         setTopTrips(response.data);
       })
@@ -59,11 +60,11 @@ const Home = () => {
 
   const viewableTopStations = topStations.map(station => {
     return stations.find(s => station.stationId === s.hslStationId);
-   }).filter(function( element ) {
+  }).filter(function (element) {
     return element !== undefined;
- });
-    
-  
+  });
+
+
 
   const foundStations = [];
   const tripsCoordinates = [];
@@ -111,17 +112,12 @@ const Home = () => {
             <h3 onClick={() => { viewTopStations(); setViewAllStations(false) }}>Suosituimmat asemat</h3>
             <h3 onClick={() => { setViewAllStations(true); reset() }}>Kaikki asemat</h3>
           </div>
-          <div>
-            {viewAllStations ? (
-              <div>
-                <AllStations stationList={stations} setTrip={setTrip} setStation={setStation} />
-              </div>
-            ) : (
-              <div>
-                <TopStations stationList={topStations} setTrip={setTrip} setStation={setStation} />
-              </div>
-            )}
-          </div>
+          {viewAllStations ? (
+              <AllStations stationList={stations} setTrip={setTrip} setStation={setStation} />
+          ) : (
+              <TopStations stations={stations} stationList={topStations} setOnViewStations={setOnViewStations} setTrip={setTrip} setStation={setStation} />
+          )}
+
         </div>
         <div className='tripsList'>
           <h2> Matkat </h2>
@@ -129,27 +125,20 @@ const Home = () => {
             <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>Suosituimmat matkat</h3>
             <h3 onClick={() => { setViewAllTrips(true); reset() }}>Kaikki matkat</h3>
           </div>
-          <div>
             {viewAllTrips ? (
-              <div>
                 <AllTrips setTrip={setTrip} setStation={setStation} />
-              </div>
             ) : (
-              <div>
                 <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} setPage={setTopTripPage} />
-              </div>
             )}
-          </div>
         </div>
       </div>
       <div className='box'>
-     
-          <div onClick={() => setViewAddTrip(true)} className="add-trip-class">
-            Lisää matka
-          </div>
-          <div onClick={() => { setViewAddStation(true) }} className='add-stations-class'>
-            Lisää Asema
-          </div>
+        <div onClick={() => setViewAddTrip(true)} className="add-trip-class">
+          Lisää matka
+        </div>
+        <div onClick={() => { setViewAddStation(true) }} className='add-stations-class'>
+          Lisää Asema
+        </div>
 
       </div>
       {viewAddTrip ? (

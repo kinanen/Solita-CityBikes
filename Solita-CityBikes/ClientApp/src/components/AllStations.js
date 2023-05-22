@@ -3,7 +3,7 @@ import { useTable, usePagination } from "react-table";
 
 const AllStations = ({ stationList, setStation, setTrip }) => {
   const [pageIndex, setPageIndex] = useState(0);
-  const [pageSize, setPageSize] = useState(25);
+  const [pageSize, setPageSize] = useState(20);
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleStationClick = (arg) => {

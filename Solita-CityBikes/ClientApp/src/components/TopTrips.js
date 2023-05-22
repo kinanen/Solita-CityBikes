@@ -4,7 +4,6 @@ import { useTable, useExpanded } from "react-table";
 
 const TopTrips = ({ tripList, setTrip, setStation, setPage }) => {
     const [pageNumber, setPageNumber] = useState(1);
-    const [pageSize, setPageSize] = useState(25);
     const data = React.useMemo(() => tripList);
 
     console.log(tripList);
@@ -89,6 +88,7 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage }) => {
                 </tbody>
             </table>
             <button onClick={() =>{ if(pageNumber > 1){setPageNumber(pageNumber - 1); setPage(pageNumber)}}}>Edelliset</button>
+            sivu <strong>{pageNumber}</strong>
             <button onClick={() =>{ setPageNumber(pageNumber + 1); setPage(pageNumber)}}>Seuraavat</button>
         </div>
     )
