@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { variables } from '../Variables'
+
 
 
 const baseUrl = process.env.REACT_APP_API_URI;
