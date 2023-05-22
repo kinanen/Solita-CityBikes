@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, LayerGroup } from 'react-leaflet'
+import { useEffect } from "react";
+import {useMap} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import axios from "axios";
 import * as L from "leaflet";
-import DrawTrips from "./DrawTrips";
-import ViewBounds from "./ViewBounds";
+
 
 const MapZoom = ({trip, station}) => {
     const map = useMap();

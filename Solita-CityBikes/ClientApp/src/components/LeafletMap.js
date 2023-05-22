@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, LayerGroup } from 'react-leaflet'
+import React from "react";
+import { MapContainer, TileLayer, Popup, Circle, LayerGroup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
-import axios from "axios";
-import * as L from "leaflet";
 import DrawTrips from "./DrawTrips";
 import ViewBounds from "./ViewBounds";
 import MapZoom from "./MapZoom"
@@ -21,7 +19,7 @@ const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station}
     }
 
     const rad = 75;
-    var i = 0
+
     const drawStations = stationData.map(s => (
         <Circle key={s.hslStationId} center={[s.y, s.x]} radius={rad}>
             <Popup>

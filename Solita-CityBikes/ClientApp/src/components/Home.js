@@ -1,13 +1,10 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import LeafletMap from './LeafletMap';
 import Details from './Detail';
 import TopStations from './TopStations';
 import TopTrips from './TopTrips';
-
 import Stations from '../services/Stations';
-import Trips from '../services/Trips';
 import TripCounts from '../services/TripCounts';
-
 import AddStation from './AddStation';
 import AddTrip from './AddTrip';
 import AllStations from './AllStations';
@@ -31,6 +28,7 @@ const Home = () => {
   const [viewAddStation, setViewAddStation] = useState(false)
   const [viewAddTrip, setViewAddTrip] = useState(false)
   const [topTripPage, setTopTripPage] = useState(1)
+  const pageSize = 20;
 
   useEffect(() => {
     Stations.getAll()
@@ -49,7 +47,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    TripCounts.getPaginatedTripCounts(topTripPage, 20)
+    TripCounts.getPaginatedTripCounts(topTripPage, pageSize)
       .then(response => {
         setTopTrips(response.data);
       })

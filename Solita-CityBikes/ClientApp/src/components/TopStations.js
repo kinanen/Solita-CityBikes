@@ -4,8 +4,8 @@ import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 
 const TopStations = ({ stations, stationList, setStation, setTrip, setOnViewStations }) => {
   const [pageIndex, setPageIndex] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
   const [searchQuery, setSearchQuery] = useState('');
+  const pageSize = 20;
 
   const data = useMemo(() => stationList, [stationList]);
 

@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap, Circle, LayerGroup } from 'react-leaflet'
+import { useMap} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
-import axios from "axios";
-import * as L from "leaflet";
-import DrawTrips from "./DrawTrips";
 
 const SetViewBounds = ({stationData,defaultBounds}) => {    
     const map = useMap();
-    const [bounds, setBounds] = useState(defaultBounds);
 
     useEffect(() => {
         if (stationData) {
@@ -24,7 +20,6 @@ const SetViewBounds = ({stationData,defaultBounds}) => {
           });
     
           const minMaxBounds = [[minY, minX], [maxY, maxX]];
-          setBounds(minMaxBounds);
           map.fitBounds(minMaxBounds);
         }
       }, [stationData, map]);

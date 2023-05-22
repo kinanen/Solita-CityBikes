@@ -103,43 +103,6 @@ namespace Solita_CityBikes.Controllers
             }
         }
 
-        [HttpGet("TopDepartureStations")]
-        public List<DepartureStation> TopDepartureStations()
-        {
-            List<DepartureStation> topStations = new List<DepartureStation>();
-
-            using (SqlConnection connection = new SqlConnection(_context.Database.GetDbConnection().ConnectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(@"
-                    SELECT TOP(25) Stations.Nimi, Stations.HslStationId, COUNT(*) AS DepartureCount
-                    FROM Trips
-                    JOIN Stations ON Trips.DepartureStationId = Stations.HslStationId
-                    GROUP BY Stations.Nimi, Stations.HslStationId
-                    ORDER BY DepartureCount DESC;
-                ", connection);
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string stationName = (string)reader["Nimi"];
-                    int stationHslId = (int)reader["HslStationId"];
-                    int departureCount = (int)reader["DepartureCount"];
-
-
-                    topStations.Add(new DepartureStation
-                    {
-                        StationName = stationName,
-                        StationHslId = stationHslId,
-                        DepartureCount = departureCount
-                    }) ;
-                }
-            }
-
-            return topStations;
-        }
-
         public class DepartureStation
         {
             public int StationHslId { get; set; }

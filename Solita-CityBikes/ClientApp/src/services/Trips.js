@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 const baseUrl = process.env.REACT_APP_API_URI;
 
 const getAll = () => {
@@ -9,10 +8,6 @@ const getAll = () => {
 
 const getPaginatedTrips = (pageNumber, pageSize) => {
     return axios.get(`${baseUrl}/trip/getPaginatedTrips?pagenumber=${pageNumber}&pagesize=${pageSize}`)
-}
-
-const getTopDepartureStations = () => {
-    return axios.get( baseUrl + "/trip/TopDepartureStations");
 }
 
 const getTopTrips = () => {
@@ -36,11 +31,9 @@ const putTrip = trip => {
     return axios.put(baseUrl+'/trip', trip)
 }
 
-
 export default{
     getAll,
     getTopTrips,
-    getTopDepartureStations,
     getPaginatedTrips,
     putTrip,
     postTrip,

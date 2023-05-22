@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Stations from "../services/Stations";
 import TripCounts from "../services/TripCounts";
 import Trips from "../services/Trips";
@@ -9,8 +8,6 @@ const StationDetails = ({ station: stationId }) => {
   const [stationData, setStationData] = useState([]);
   const [departures, setDepartures] = useState([]);
   const [returns, setReturns] = useState([]);
-  const [topDestinations, setTopDestinations] = useState([]);
-  const [topReturns, setTopReturns] = useState([]);
   const [totalDepartures, setTotalDepartures] = useState([]);
   const [totalReturns, setTotalReturns] = useState([]);
   const [avgDuration, setAvgDuration]= useState(0);
