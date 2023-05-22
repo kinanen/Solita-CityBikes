@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { variables } from '../Variables'
 
-const baseUrl = variables.API_URL;
+
+const baseUrl = process.env.REACT_APP_API_URI;
 
 const getAll = () => {
     return axios.get(baseUrl + "/station")
