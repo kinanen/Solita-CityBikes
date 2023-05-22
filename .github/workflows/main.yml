@@ -48,13 +48,13 @@ jobs:
 
       - name: Build with dotnet
 
-        run: dotnet build Solita-CityBikes/Solita-CityBikes.csproj --configuration Release
+        run: dotnet build Solita-CityBikes/Solita-CityBikes.csproj
 
 
 
       - name: dotnet publish
 
-        run: dotnet publish Solita-CityBikes/Solita-CityBikes.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish Solita-CityBikes/Solita-CityBikes.csproj -o ${{env.DOTNET_ROOT}}/myapp
 
 
 
