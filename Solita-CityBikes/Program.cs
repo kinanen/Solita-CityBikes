@@ -12,6 +12,7 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("https://localhost:7199",
+                                             "https://otso-citybike.azurewebsites.net",
                                               "http://localhost:5078",
                                               "https://localhost:44470")
                                               .AllowAnyHeader()
