@@ -18,9 +18,24 @@ const getAverageDistanceByStation = (stationId) =>{
     return axios.get(`${baseUrl}/trip/getaveragedistancebystation?stationid=${stationId}`)
 }
 
+const getAverageDistanceByDStationandRStation = (dsid, rsid) =>{
+    return axios.get(`${baseUrl}/trip/getaveragedistancebystation?dsid=${dsid}&rsid=${rsid}`)
+}
+
 const getAverageDurationByStation = (stationId) =>{
     return axios.get(`${baseUrl}/trip/getaveragedurationbystation?stationid=${stationId}`)
 }
+
+const getAverageDurationByDStationandRStation = (dsid, rsid) =>{
+    return axios.get(`${baseUrl}/trip/getaveragedurationbystation?dsid=${dsid}&rsid=${rsid}`)
+}
+
+const getTripCountPerMonthStation = (dsid, rsid, month) =>{
+    const year = 2021
+    return axios.get(`${baseUrl}/trip/gettripcountpermonthstation?dsid=${dsid}&rsid=${rsid}&month=${month}&year=${year}`)
+}
+//[HttpGet("getaveragedurationbystation")]
+//public int GetTripCountPerMonthStation(int dsid, int rsid, int month, int year)
 
 
 const postTrip = trip => {
@@ -38,6 +53,9 @@ export default{
     putTrip,
     postTrip,
     getAverageDistanceByStation,
-    getAverageDurationByStation
+    getAverageDurationByStation,
+    getTripCountPerMonthStation,
+    getAverageDurationByDStationandRStation,
+    getAverageDistanceByDStationandRStation
 
 }

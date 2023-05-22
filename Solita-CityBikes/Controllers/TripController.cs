@@ -54,7 +54,16 @@ namespace Solita_CityBikes.Controllers
         public double GetAverageDistanceByStation(int stationId)
         {
             var avg = _context.Trips
-            .Where(t => t.DepartureStationId == stationId && t.CoveredDistance != null)
+            .Where(t => t.DepartureStationId == stationId)
+            .Average(c => c.CoveredDistance);
+            return avg;
+        }
+
+        [HttpGet("getaveragedistancebystation")]
+        public double GetAverageDistanceByStation(int dsid,int rsid)
+        {
+            var avg = _context.Trips
+            .Where(t => t.DepartureStationId == rsid && t.ReturnStationId==rsid)
             .Average(c => c.CoveredDistance);
             return avg;
         }
@@ -63,10 +72,31 @@ namespace Solita_CityBikes.Controllers
         public double GetAverageDurationByStation(int stationId)
         {
             var avg = _context.Trips
-            .Where(t => t.DepartureStationId == stationId && t.Duration != null)
+            .Where(t => t.DepartureStationId == stationId)
             .Average(c => c.Duration);
             return avg;
         }
+
+        [HttpGet("getaveragedurationbystation")]
+        public double GetAverageDurationByStation(int dsid, int rsid)
+        {
+            var avg = _context.Trips
+            .Where(t => t.DepartureStationId == rsid && t.ReturnStationId == rsid)
+            .Average(c => c.Duration);
+            return avg;
+        }
+
+        [HttpGet("gettripcountpermonthstation")]
+        public int GetTripCountPerMonthStation(int dsid, int rsid, int month, int year)
+        {
+            DateTime targetDate = new DateTime(year, month, 1); // Target month and year
+
+            int count = _context.Trips
+                .Where(t => t.DepartureStationId == dsid && t.ReturnStationId == rsid)
+                .Count(e => e.DepartureTime.Month == targetDate.Month && e.DepartureTime.Year == targetDate.Year);
+            return count;
+        }
+
 
         [HttpPost]
         public void Post([FromBody] Trip trip)

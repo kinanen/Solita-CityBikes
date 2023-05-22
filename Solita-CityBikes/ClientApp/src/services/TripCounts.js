@@ -7,7 +7,7 @@ const getAll = () => {
   }
 
 const getTripCount = (dsid, rsid) => {
-    return axios.get(baseUrl + "/tripcount/" + dsid + rsid)
+    return axios.get(`${baseUrl}/tripcount/gettripcount?dsid=${dsid}&rsid=${rsid}`)
 }
 
 const getPaginatedTripCounts = (pageNumber, pageSize) => {

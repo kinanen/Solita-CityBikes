@@ -49,7 +49,15 @@ namespace Solita_CityBikes.Controllers
             return results;
         }
 
-        
+        [HttpGet("gettripcount")]
+        public int GetTripCount(int rsid, int dsid)
+        {
+            return _context.TripCounts
+                .Where(tc => tc.ReturnStationId == rsid && tc.DepartureStationId == dsid)
+                .Select(tc => tc.Count)
+                .FirstOrDefault();
+
+        }
 
         [HttpGet("getpaginatedtripcounts")]
         public async Task<IActionResult> GetPaginatedTripCounts(int pageNumber = 1, int pageSize = 25)
@@ -103,26 +111,6 @@ namespace Solita_CityBikes.Controllers
             var products = await GetTripCounts(rsid);
             return Ok(products);
         }
-
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
 
         public class StationCount
         {
