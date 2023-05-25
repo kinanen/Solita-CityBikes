@@ -33,18 +33,24 @@ const TopStations = ({ stations, stationList, setStation, setTrip, setOnViewStat
             Header: 'Asema',
             accessor: 'stationId',
             Cell: ({ cell }) => (
-              <div onClick={() => handleStationClick(cell.row.original.stationId)}>
+              <a href="#" onClick={() => handleStationClick(cell.row.original.stationId)}>
                 {stations.find(s => cell.value === s.hslStationId).nimi}
-              </div>
+              </a>
             ),
           },
           {
             Header: 'Lähtöjä asemalta',
             accessor: 'departureCount',
+            Cell: (cell) =>(
+              <div style={{textAlign:'right'}}>{cell.value}</div>
+            )
           },
           {
-            Header: 'Palautuksia asemalle',
+            Header:'Palautuksia asemalle',
             accessor: 'returnCount',
+            Cell: (cell) =>(
+              <div style={{textAlign:'right'}}>{cell.value}</div>
+            )
           }
         ],
       },
@@ -87,7 +93,6 @@ const TopStations = ({ stations, stationList, setStation, setTrip, setOnViewStat
 
   
   useEffect(() => {
-    console.log(viewableTopStations);
     setOnViewStations(viewableTopStations);
   }, [page])
 

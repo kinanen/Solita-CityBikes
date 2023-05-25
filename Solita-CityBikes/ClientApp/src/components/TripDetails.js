@@ -50,17 +50,19 @@ const TripDetails = ({ trip, stations, setStation }) => {
     fetchData();
   }, [trip]);
 
-  console.log(station1, station2);
-
+  const secView = (arg) => {
+    if(arg < 10 ) return `0${arg}`
+    else return arg
+}  
   return (
     <div>
       {station1 && station2 ? (
         <>
           <h3>{station1 + " - " + station2}</h3>
-          {tripCount ? <>matkoja yhteensä <strong>{tripCount}</strong> </>:""}
+          {tripCount ? <>matkoja yhteensä pysäkkien välillä <strong>{tripCount}</strong> </>:""}
           {}
-          <p>keskimääräinen matkan pituus asemalta: <strong>{Math.round(avgDistance/1000 * 100) / 100}km</strong></p>
-        <p>keskimääräinen matkan kesto tällä matkalla:<strong> {Math.floor(avgDuration/60)}:{Math.round(avgDuration%60)}</strong></p>
+          <p>keskimääräinen matkan pituus asemien välillä: <strong>{Math.round(avgDistance/1000 * 100) / 100}km</strong></p>
+        <p>keskimääräinen matkan kesto tällä matkalla:<strong> {Math.floor(avgDuration/60)}:{secView(Math.round(avgDuration%60))}</strong></p>
         </>
       ) : (
         "Ladataan..."

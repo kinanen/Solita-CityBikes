@@ -20,14 +20,16 @@ const AllStations = ({ stationList, setStation, setTrip }) => {
             Header: 'Aseman nimi',
             accessor: 'nimi',
             Cell: ({ cell }) => (
-              <div onClick={() => handleStationClick(cell.row.original.hslStationId)}>
+              <a href="#" onClick={() => handleStationClick(cell.row.original.hslStationId)}>
                 {cell.value}
-              </div>
+              </a>
             ),
           },
           {
             Header: 'Osoite',
             accessor: 'osoite',
+            Cell: ({cell})=>(
+            <div onClick={() => handleStationClick(cell.row.original.hslStationId)}>{cell.value}</div>)
           }
         ],
       },

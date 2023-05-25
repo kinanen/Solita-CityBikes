@@ -5,8 +5,6 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage, stations }) => {
     const [pageNumber, setPageNumber] = useState(1);
     const data = React.useMemo(() => tripList);
 
-    console.log(tripList);
-
     const handleTripClick = (arg) => {
         setStation(null);
         setTrip([arg[0],arg[1]]);
@@ -19,28 +17,23 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage, stations }) => {
                 Header: 'Suosituimmat matkat',
                 columns: [
                     {
-                        Header: 'Lähtöasema',
+                        Header: 'Lähtö- ja kohdeasema',
                         accessor: 'departureStationId',
-                        Cell: ({ cell }) => (
-                            <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
-                              {stations && stations.find(s => cell.value === s.hslStationId).nimi}
-                            </div>
-                            ),       
-                    },
+                        Cell: ({ cell }) => {
+                          const departureStation = stations.find((s) => cell.value === s.hslStationId);
+                          const returnStation = stations.find((s) => cell.row.original.returnStationId === s.hslStationId);
+                          return (
+                            <a href="#" onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
+                              {departureStation && returnStation ? `${departureStation.nimi} - ${returnStation.nimi}` : ''}
+                            </a>
+                          );
+                        },
+                      },
                     {
-                        Header: 'Palautusasema',
-                        accessor: 'returnStationId',
-                        Cell: ({ cell }) => (
-                            <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
-                              {stations && stations.find(s => cell.value === s.hslStationId).nimi}
-                            </div>
-                            ),       
-                    },
-                    {
-                        Header: 'Matkoja',
+                        Header: 'Matkoja välillä yhteensä',
                         accessor: 'count',
                         Cell: ({ cell }) => (
-                            <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
+                            <div style={{textAlign:'right'}} onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
                               {cell.value}
                             </div>
                             ),       
@@ -63,7 +56,7 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage, stations }) => {
     },useExpanded)
 
     return (
-        <div>
+        <div className='top-list-container'> 
         {stations &&
         <div className="list">
             <table {...getTableProps()}>

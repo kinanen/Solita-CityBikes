@@ -66,6 +66,7 @@ const TripForm = ({ setViewAddTrip, stations }) => {
                             ))}
                         </datalist>
                     </label>
+                    <br/>
                     <label>
                         Lähtöaika
                         <input
@@ -81,11 +82,13 @@ const TripForm = ({ setViewAddTrip, stations }) => {
                         Palautusasema
                         <input
                             type="text"
+                            list="stationList"
                             name="returnStation"
                             value={trip.name}
                             onChange={handleChange}
                         />
                     </label>
+                    <br/>
                     <label>
                         Palautusaika
                         <input
@@ -106,6 +109,7 @@ const TripForm = ({ setViewAddTrip, stations }) => {
                             onChange={handleChange}
                         />
                     </label>
+                    <br/>
                     <label>
                         Matkan kesto sekunneissa
                         <input

@@ -4,7 +4,7 @@ import Stations from "../services/Stations";
 import TripCounts from "../services/TripCounts";
 import Trips from "../services/Trips";
 
-const StationDetails = ({ station: stationId, stations, setTrip, setStation}) => {
+const StationDetails = ({ station: stationId, stations, setTrip, setStation }) => {
   const [stationData, setStationData] = useState([]);
   const [departures, setDepartures] = useState([]);
   const [returns, setReturns] = useState([]);
@@ -12,7 +12,7 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation}) =>
   const [totalReturns, setTotalReturns] = useState([]);
   const [avgDuration, setAvgDuration] = useState(0);
   const [avgDistance, setAvgDistance] = useState(0);
-  
+
   useEffect(() => {
     if (departures.length > 0) {
       setTotalDepartures(departures.map(tc => tc.count).reduce((a, b) => a + b));
@@ -21,7 +21,7 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation}) =>
       setTotalReturns(returns.map(tc => tc.count).reduce((a, b) => a + b));
     }
   }, [departures, returns]);
-  
+
   useEffect(() => {
     Stations.getStation(stationId)
       .then(response => {
@@ -53,25 +53,30 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation}) =>
 
   const viewTrip = (arg) => {
     setStation(null);
-    setTrip([arg[0],arg[1]])
+    setTrip([arg[0], arg[1]])
   }
   const topDestinationsList = departures
-  .slice(0, 5)
-  .map((tc) => (
-    <li onClick={()=>viewTrip([tc.departureStationId,tc.returnStationId])} key={`${tc.departureStationId}${tc.returnStationId}`}>
-      {stations.find(s => tc.returnStationId === s.hslStationId).nimi + " "} 
-       matkoja {tc.count}
-    </li>
-  ));
+    .slice(0, 5)
+    .map((tc) => (
+      <li onClick={() => viewTrip([tc.departureStationId, tc.returnStationId])} key={`${tc.departureStationId}${tc.returnStationId}`}>
+        {stations.find(s => tc.returnStationId === s.hslStationId).nimi + " "}
+        matkoja {tc.count}
+      </li>
+    ));
 
   const topReturnsList = returns
-  .slice(0, 5)
-  .map((tc) => (
-    <li onClick={()=>viewTrip([tc.departureStationId,tc.returnStationId])} key={`${tc.returnStationId}${tc.departureStationId}`}>
-      {stations.find(s => tc.departureStationId === s.hslStationId).nimi+ " "} 
-       matkoja {tc.count}
-    </li>
-  ));
+    .slice(0, 5)
+    .map((tc) => (
+      <li onClick={() => viewTrip([tc.departureStationId, tc.returnStationId])} key={`${tc.returnStationId}${tc.departureStationId}`}>
+        {stations.find(s => tc.departureStationId === s.hslStationId).nimi + " "}
+        matkoja {tc.count}
+      </li>
+    ));
+
+  const secView = (arg) => {
+    if (arg < 10) return `0${arg}`
+    else return arg
+  }
 
   return (
     <div>
@@ -82,7 +87,7 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation}) =>
         lähtöjä: <strong>{totalDepartures}</strong><br />
         palautuksia asemalle:<strong> {totalReturns}</strong><br />
         keskimääräinen matkan pituus asemalta: <strong>{Math.round(avgDistance / 1000 * 100) / 100}km</strong><br />
-        keskimääräinen matkan kesto asemalta: <strong> {Math.floor(avgDuration / 60)}min{Math.round(avgDuration % 60)}sek</strong><br />
+        keskimääräinen matkan kesto asemalta: <strong> {Math.floor(avgDuration / 60)}:{secView(Math.round(avgDuration % 60))}</strong><br />
       </div>
       <div className="stationDataDetailLists">
         Suosituimmat kohdeasemat asemalta:

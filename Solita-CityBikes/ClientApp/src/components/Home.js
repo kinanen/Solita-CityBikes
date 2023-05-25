@@ -40,7 +40,6 @@ const Home = () => {
 
     TripCounts.getStationDepartureCount()
       .then(response => {
-        console.log(response.data);
         setTopStations(response.data.sort(((a, b) => b.departureCount - a.departureCount)));
       })
     
@@ -102,7 +101,7 @@ const Home = () => {
         <LeafletMap stationData={onViewStations} tripData={onViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} />
         <Details station={station} trip={trip} stations={stations} setTrip={setTrip} setStation={setStation} />
       </div>
-      <div className="box">
+      <div className="bottom-half">
         <div className='stationsList'>
           <h2> Asemat </h2>
           <div className='subHeadersForList'>
@@ -130,12 +129,13 @@ const Home = () => {
         </div>
       </div>
       <div className='box'>
-        <div onClick={() => setViewAddTrip(true)} className="add-trip-class">
-          Lisää matka
-        </div>
-        <div onClick={() => { setViewAddStation(true) }} className='add-stations-class'>
+      <a onClick={() => { setViewAddStation(true) }} className='add-station-class'>
           Lisää Asema
-        </div>
+        </a>
+        <a onClick={() => setViewAddTrip(true)} className="add-trip-class">
+          Lisää matka
+        </a>
+
 
       </div>
       {viewAddTrip ? (
