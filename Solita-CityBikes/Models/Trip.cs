@@ -52,6 +52,9 @@ public class Trip
         */
         if (this.CoveredDistance < 10) return false;
         if (this.Duration < 10) return false;
+        TimeSpan difference = new TimeSpan();
+        difference = this.ReturnTime.Subtract(this.DepartureTime);
+        if (difference.TotalSeconds < 10) return false;
         return true;
 
     }

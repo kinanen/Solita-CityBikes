@@ -49,9 +49,10 @@ namespace Solita_CityBikes.Data
                     return;
                 }
 
-                ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-05.csv");
-                ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-06.csv");
-                ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-07.csv");
+                ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-testi.csv");
+                //ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-05.csv");
+                //ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-06.csv");
+                //ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-07.csv");
             }
 
         }
@@ -67,13 +68,13 @@ namespace Solita_CityBikes.Data
                 {
                     if (record.ValidateTripData())
                     {
-                        context.Add(new Trip { DepartureTime = record.DepartureTime, DepartureStationId = record.DepartureStationId, ReturnTime = record.DepartureTime, ReturnStationId = record.ReturnStationId, CoveredDistance = record.CoveredDistance, Duration = record.Duration });
+                        context.Add(new Trip { DepartureTime = record.DepartureTime, DepartureStationId = record.DepartureStationId, ReturnTime = record.ReturnTime, ReturnStationId = record.ReturnStationId, CoveredDistance = record.CoveredDistance, Duration = record.Duration });
                         i++;
                     }
-                    if (i % 10000 == 0)
+                    if (i % 100 == 0)
                     {
                         context.SaveChanges();
-                        context.Trips.RemoveRange();
+                        context.RemoveRange();
                     }
                 }
                 context.SaveChanges();

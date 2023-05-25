@@ -53,37 +53,65 @@ namespace Solita_CityBikes.Controllers
         [HttpGet("getaveragedistancebystation")]
         public double GetAverageDistanceByStation(int stationId)
         {
-            var avg = _context.Trips
+            try
+            {
+                var avg = _context.Trips
             .Where(t => t.DepartureStationId == stationId)
             .Average(c => c.CoveredDistance);
-            return avg;
+                return avg;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
-        [HttpGet("getaveragedistancebystation")]
-        public double GetAverageDistanceByStation(int dsid,int rsid)
+        [HttpGet("getaveragedistancebystations")]
+        public double GetAverageDistanceByStations(int dsid,int rsid)
         {
-            var avg = _context.Trips
-            .Where(t => t.DepartureStationId == rsid && t.ReturnStationId==rsid)
-            .Average(c => c.CoveredDistance);
-            return avg;
+            try
+            {
+                var avg = _context.Trips
+                .Where(t => t.DepartureStationId == dsid && t.ReturnStationId == rsid)
+                .Average(c => c.CoveredDistance);
+                return avg;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         [HttpGet("getaveragedurationbystation")]
         public double GetAverageDurationByStation(int stationId)
         {
-            var avg = _context.Trips
-            .Where(t => t.DepartureStationId == stationId)
-            .Average(c => c.Duration);
-            return avg;
+            try
+            {
+                var avg = _context.Trips
+                .Where(t => t.DepartureStationId == stationId)
+                .Average(c => c.Duration);
+                return avg;
+            }
+            catch
+            {
+                return 0;
+            }
+
         }
 
-        [HttpGet("getaveragedurationbystation")]
-        public double GetAverageDurationByStation(int dsid, int rsid)
+        [HttpGet("getaveragedurationbystations")]
+        public double GetAverageDurationByStations(int dsid, int rsid)
         {
+            try { 
             var avg = _context.Trips
-            .Where(t => t.DepartureStationId == rsid && t.ReturnStationId == rsid)
+            .Where(t => t.DepartureStationId == dsid && t.ReturnStationId == rsid)
             .Average(c => c.Duration);
             return avg;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         [HttpGet("gettripcountpermonthstation")]

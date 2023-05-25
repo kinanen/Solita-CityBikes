@@ -12,6 +12,7 @@ const StationDetails = ({ station: stationId }) => {
   const [totalReturns, setTotalReturns] = useState([]);
   const [avgDuration, setAvgDuration]= useState(0);
   const [avgDistance, setAvgDistance]=useState(0);
+  const [topReturns, setTopReturns]=useState([]);
 
 
   useEffect(() => {
@@ -54,6 +55,15 @@ const StationDetails = ({ station: stationId }) => {
       setTotalReturns(returns.map((tc) => tc.count).reduce((a, b) => a + b))
     }
 
+    const returnStationName = async (id) => {
+      const response = await Stations.getStationName(id);
+      return response.data;
+    };
+
+    setTopReturns (() => returns.slice(0, 5).map(async (tc) => {
+      await returnStationName(tc.returnStationId) }))
+
+      
   }, [returns, departures])
 
   const topDestinationsList = departures.slice(0, 5).map((tc) =>
@@ -62,40 +72,29 @@ const StationDetails = ({ station: stationId }) => {
     </li>
   );
 
-  const topReturnsList = returns.slice(0, 5).map((tc) =>
-    <li key={`${tc.returnStationId}${tc.departureStationId}`}>{tc.departureStationId} matkoja {tc.count}</li>
-  );
-
-
-
+  topReturns && console.log(topReturns);
 
   return (
     <div>
       <h3>{stationData.nimi}</h3>
-      <p>Aseman osoite:
-        {stationData.osoite}</p>
-      <div>
-        <p>Matkoja asemalta mittausjaksolla :</p>
-        <p> lähtöjä: {totalDepartures}</p>
-        <p>palautuksia asemalle: {totalReturns}</p>
-        <p>keskimääräinen matkan pituus asemalta: {Math.round(avgDistance/1000 * 100) / 100
-}km</p>
-        <p>keskimääräinen matkan kesto asemalta: {Math.floor(avgDuration/60)}min{Math.round(avgDuration%60)}sek</p>
+      <p>{stationData.osoite}</p>
+      <div className="stationDataDetails">
+        Matkoja asemalta mittausjaksolla <br/>
+        lähtöjä: <strong>{totalDepartures}</strong><br/>
+        palautuksia asemalle:<strong> {totalReturns}</strong><br/>
+        keskimääräinen matkan pituus asemalta: <strong>{Math.round(avgDistance/1000 * 100) / 100}km</strong><br/>
+        keskimääräinen matkan kesto asemalta:<strong> {Math.floor(avgDuration/60)}min{Math.round(avgDuration%60)}sek</strong><br/>
       </div>
+      <div className="stationDataDetailLists">
       Suosituimmat kohdeasemat asemalta:
       <ul>
         {stationData && topDestinationsList}
       </ul>
       Suosituimmat lähtöasemat asemalle:
       <ul>
-        {stationData && topReturnsList}
+        {stationData && ":)"}
       </ul>
-
-      The average distance of a journey starting from the station
-      The average distance of a journey ending at the station
-
-      Ability to filter all the calculations per month
-
+      </div>
     </div>
   )
 }

@@ -7,6 +7,8 @@ const TripDetails = ({ trip }) => {
   const [station1, setStation1] = useState();
   const [station2, setStation2] = useState();
   const [tripCount, setTripCount] = useState(0);
+  const [avgDuration, setAvgDuration]= useState("lataa..");
+  const [avgDistance, setAvgDistance]=useState("lataa..");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,17 +36,17 @@ const TripDetails = ({ trip }) => {
         console.error("Error fetching monthly trips data:", error);
       }
       try{
-        Trips.getAverageDurationByDStationandRStation(trip[0], trip[1], 5)
+        Trips.getAverageDurationByDStationandRStation(trip[0], trip[1])
         .then(response =>{
-            console.log(response.data)
+            setAvgDuration(response.data)
         })
       } catch (error){
         console.error("Error fetching avg duration data:", error);
       }
       try{
-        Trips.getAverageDistanceByDStationandRStation(trip[0], trip[1], 5)
+        Trips.getAverageDistanceByDStationandRStation(trip[0], trip[1])
         .then(response =>{
-            console.log(response.data)
+            setAvgDistance(response.data)
         })
       } catch (error){
         console.error("Error fetching avg distance data:", error);
@@ -61,11 +63,11 @@ const TripDetails = ({ trip }) => {
     <div>
       {station1 && station2 ? (
         <>
-          {station1.nimi + " - " + station2.nimi}
-          {tripCount ? <>matkoja yhteensä {tripCount} </>:""}
+          <h3>{station1.nimi + " - " + station2.nimi}</h3>
+          {tripCount ? <>matkoja yhteensä <strong>{tripCount}</strong> </>:""}
           {}
-          matkan keskimääräinen kesto,
-          matkan keskimääräinen pituus
+          <p>keskimääräinen matkan pituus asemalta: <strong>{Math.round(avgDistance/1000 * 100) / 100}km</strong></p>
+        <p>keskimääräinen matkan kesto tällä matkalla:<strong> {Math.floor(avgDuration/60)}min{Math.round(avgDuration%60)}sek</strong></p>
         </>
       ) : (
         "Ladataan..."
