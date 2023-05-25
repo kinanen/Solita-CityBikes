@@ -9,7 +9,7 @@ const DrawTrips = ({tripData}) => {
         tripData && setTrips(tripData)
     },[tripData]);
 
-    const pathColor = {color: 'yellow'}
+    const pathColor = {color: '#fcbc19'}
     const drawLines = trips.map(trip =>(
         <Polyline key={trip}  pathOptions={pathColor} positions={trip}></Polyline>
     ));

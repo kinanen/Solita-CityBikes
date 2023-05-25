@@ -5,6 +5,7 @@ import Trips from "../services/Trips";
 const TripDetails = ({ trip, stations, setStation }) => {
   const [station1, setStation1] = useState();
   const [station2, setStation2] = useState();
+  const [tripsPerMonth,setTripsPerMonth]= useState()
   const [tripCount, setTripCount] = useState(0);
   const [avgDuration, setAvgDuration]= useState("lataa..");
   const [avgDistance, setAvgDistance]=useState("lataa..");
@@ -21,10 +22,21 @@ const TripDetails = ({ trip, stations, setStation }) => {
         console.error("Error fetching trip count data:", error);
       }
       try{
+        const trips=[];
         Trips.getTripCountPerMonthStation(trip[0], trip[1], 5)
         .then(response =>{
-            console.log(response.data)
+            trips [0] = response.data;
         })
+        Trips.getTripCountPerMonthStation(trip[0], trip[1], 6)
+        .then(response =>{
+            trips [1] = response.data;
+        })
+        Trips.getTripCountPerMonthStation(trip[0], trip[1], 7)
+        .then(response =>{
+            trips [2] = response.data;
+        })
+        setTripsPerMonth(trips)
+        
       } catch (error){
         console.error("Error fetching monthly trips data:", error);
       }
@@ -60,7 +72,8 @@ const TripDetails = ({ trip, stations, setStation }) => {
         <>
           <h3>{station1 + " - " + station2}</h3>
           {tripCount ? <>matkoja yhteensä pysäkkien välillä <strong>{tripCount}</strong> </>:""}
-          {}
+          <br/>
+          {tripsPerMonth ? <>Matkat kuukausittain<br/> 05/2021: <strong>{tripsPerMonth[0]}</strong>matkaa<br/> 06/2021:<strong>{tripsPerMonth[1]}</strong>matkaa<br/>07/2021 <strong>{tripsPerMonth[2]}</strong>matkaa</>:""}
           <p>keskimääräinen matkan pituus asemien välillä: <strong>{Math.round(avgDistance/1000 * 100) / 100}km</strong></p>
         <p>keskimääräinen matkan kesto tällä matkalla:<strong> {Math.floor(avgDuration/60)}:{secView(Math.round(avgDuration%60))}</strong></p>
         </>

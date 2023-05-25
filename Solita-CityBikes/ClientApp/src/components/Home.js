@@ -98,7 +98,7 @@ const Home = () => {
   return (
     <div>
       <div className='box'>
-        <LeafletMap stationData={onViewStations} tripData={onViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} />
+        <LeafletMap stationData={onViewStations} tripData={onViewTrips} setOnViewTrips={setOnViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} stations={stations}/>
         <Details station={station} trip={trip} stations={stations} setTrip={setTrip} setStation={setStation} />
       </div>
       <div className="bottom-half">

@@ -10,12 +10,11 @@ const defaultBounds = [
     [60.28075, 25.159346]
 ]
 
-const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station}) => {
+const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station, setOnViewTrips, stations}) => {
     
     const viewStation = (id) => {
         setTrip(null)
         setStation(id)
-        console.log("view stations id:", id)
     }
 
     const rad = 75;
@@ -30,18 +29,24 @@ const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station}
         </Circle>
     ))
 
+
+        const stadiaTileUrl = 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png';
+        const stadiaAttribution =
+          '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, ' +
+          '&copy; <a href="https://openmaptiles.org/">OpenMapTiles</a>, ' +
+          '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+      
+
     return (
         <MapContainer scrollWheelZoom={false} bounds={defaultBounds}>
-            <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">
-            </TileLayer>
-            <ViewBounds stationData={stationData} defaultBounds={defaultBounds} />
-            <MapZoom trip={trip} station={station} />
-            <LayerGroup>
-                {stationData && drawStations }
-            </LayerGroup>
-            {tripData && <DrawTrips tripData={tripData}/>}
-        </MapContainer >
+        <TileLayer attribution={stadiaAttribution} url={stadiaTileUrl} maxZoom={16} />
+        <ViewBounds stationData={stationData} defaultBounds={defaultBounds} />
+        <MapZoom trip={trip} station={station} setOnViewTrips={setOnViewTrips} stations={stations} />
+        <LayerGroup>
+          {stationData && drawStations}
+        </LayerGroup>
+        {tripData && <DrawTrips tripData={tripData} />}
+      </MapContainer>
     )
 }
 

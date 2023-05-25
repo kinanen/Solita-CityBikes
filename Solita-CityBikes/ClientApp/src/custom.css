@@ -4,7 +4,7 @@ a {
 }
 
 body{
-  background-color: #f7f7f7;
+  background-color: #f8d63e;
 }
 
 .btn:focus,
@@ -79,8 +79,8 @@ button {
 
 .list {
   text-align: left;
-  margin: 1em;
-  width: 100%;
+  margin-left: 2em;
+  width: 90%;
 
 }
 
@@ -119,6 +119,23 @@ button {
   margin-left: 0.5em;
 
 }
+
+
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+
+th {
+  padding: 5px;
+}
+
+td {
+  background-color: #eaeaea;
+  padding: 12px;
+}
+
 
 h2 {
   width: 100%;
