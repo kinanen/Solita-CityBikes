@@ -101,7 +101,7 @@ const Home = () => {
     <div>
       <div className='box'>
         <LeafletMap stationData={onViewStations} tripData={onViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} />
-        <Details station={station} trip={trip} />
+        <Details station={station} trip={trip} stations={stations} />
       </div>
       <div className="box">
         <div className='stationsList'>

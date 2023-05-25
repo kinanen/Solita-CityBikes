@@ -3,18 +3,16 @@ import StationDetails from "./StationDetails";
 import TripDetails from "./TripDetails";
 
 // Näyttää aseman tai matkan yksityiskohtaiset tiedot
-const Details = ({ trip, station }) => {
+const Details = ({ trip, station, stations }) => {
     if (station) {
         return (
             <div className="details">
-                <StationDetails station={station}/>
+                <StationDetails station={station} stations={stations}/>
             </div>
         )
     }
     if (trip) {
         return (
-            // Get station names from database
-            // get other data from DB considering trip
             <div className="details">
                 <TripDetails trip = {trip}/>
             </div>
