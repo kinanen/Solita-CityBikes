@@ -4,7 +4,7 @@ import Stations from "../services/Stations";
 import TripCounts from "../services/TripCounts";
 import Trips from "../services/Trips";
 
-const StationDetails = ({ station: stationId, stations}) => {
+const StationDetails = ({ station: stationId, stations, setTrip, setStation}) => {
   const [stationData, setStationData] = useState([]);
   const [departures, setDepartures] = useState([]);
   const [returns, setReturns] = useState([]);
@@ -12,9 +12,16 @@ const StationDetails = ({ station: stationId, stations}) => {
   const [totalReturns, setTotalReturns] = useState([]);
   const [avgDuration, setAvgDuration] = useState(0);
   const [avgDistance, setAvgDistance] = useState(0);
-  const [topReturns, setTopReturns] = useState([]);
-  const [topDepartures, setTopDepartures] = useState([]);
-
+  
+  useEffect(() => {
+    if (departures.length > 0) {
+      setTotalDepartures(departures.map(tc => tc.count).reduce((a, b) => a + b));
+    }
+    if (returns.length > 0) {
+      setTotalReturns(returns.map(tc => tc.count).reduce((a, b) => a + b));
+    }
+  }, [departures, returns]);
+  
   useEffect(() => {
     Stations.getStation(stationId)
       .then(response => {
@@ -47,20 +54,16 @@ const StationDetails = ({ station: stationId, stations}) => {
       })
   }, [stationId])
 
-  useEffect(() => {
-    if (departures.length > 0) {
-      setTotalDepartures(departures.map(tc => tc.count).reduce((a, b) => a + b))
-    }
-    if (returns.length > 0) {
-      setTotalReturns(returns.map((tc) => tc.count).reduce((a, b) => a + b))
-    }
 
-  },[stationId]);
 
+  const viewTrip = (arg) => {
+    setStation(null);
+    setTrip([arg[0],arg[1]])
+  }
   const topDestinationsList = departures
   .slice(0, 5)
   .map((tc) => (
-    <li key={`${tc.departureStationId}${tc.returnStationId}`}>
+    <li onClick={()=>viewTrip([tc.departureStationId,tc.returnStationId])} key={`${tc.departureStationId}${tc.returnStationId}`}>
       {stations.find(s => tc.returnStationId === s.hslStationId).nimi} 
        matkoja {tc.count}
     </li>
@@ -69,7 +72,7 @@ const StationDetails = ({ station: stationId, stations}) => {
   const topReturnsList = returns
   .slice(0, 5)
   .map((tc) => (
-    <li key={`${tc.returnStationId}${tc.departureStationId}`}>
+    <li onClick={()=>viewTrip([tc.departureStationId,tc.returnStationId])} key={`${tc.returnStationId}${tc.departureStationId}`}>
       {stations.find(s => tc.departureStationId === s.hslStationId).nimi} 
        matkoja {tc.count}
     </li>

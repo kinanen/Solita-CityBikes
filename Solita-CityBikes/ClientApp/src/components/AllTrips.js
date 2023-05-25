@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useTable, useExpanded } from "react-table";
 
 
-const AllTrips = ({ setTrip, setStation }) => {
+const AllTrips = ({ setTrip, setStation, stations}) => {
     const [trips, setTrips] = useState([]);
     const [pageNumber, setPageNumber] = useState(1);
     const pageSize = 20;
@@ -34,7 +34,7 @@ const AllTrips = ({ setTrip, setStation }) => {
                         accessor: 'departureStationId',
                         Cell: ({ cell }) => (
                             <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
-                                {cell.value}
+                                {(stations.find(s => cell.value === s.hslStationId).nimi)}
                             </div>
                         ),
                     },
@@ -43,7 +43,7 @@ const AllTrips = ({ setTrip, setStation }) => {
                         accessor: 'returnStationId',
                         Cell: ({ cell }) => (
                             <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
-                                {cell.value}
+                                {(stations.find(s => cell.value === s.hslStationId).nimi)}
                             </div>
                         ),
                     },
@@ -52,7 +52,7 @@ const AllTrips = ({ setTrip, setStation }) => {
                         accessor: 'duration',
                         Cell: ({ cell }) => (
                             <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
-                                {cell.value}
+                                {Math.floor(cell.value/60)+":"+Math.round(cell.value%60)}
                             </div>
                         ),
                     },
@@ -61,7 +61,7 @@ const AllTrips = ({ setTrip, setStation }) => {
                         accessor: 'coveredDistance',
                         Cell: ({ cell }) => (
                             <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
-                                {cell.value}
+                                {Math.round(cell.value/1000 * 100) / 100}
                             </div>
                         ),
                     }

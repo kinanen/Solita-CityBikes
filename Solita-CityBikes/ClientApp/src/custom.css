@@ -30,6 +30,15 @@ button{
   display: inline-flex;
   width: 100%;
 }
+.stationsList{
+flex: 1 1 0px;
+width: 100%;
+}
+
+.tripsList{
+  flex: 1 1 0px;
+  width: 100%;
+}
 
 .list{
   text-align: left;

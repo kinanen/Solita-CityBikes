@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect} from "react";
+import { useMemo, useState, useEffect } from "react";
 import React from "react";
 import { useTable, useSortBy, usePagination, useExpanded } from "react-table";
 
@@ -21,11 +21,20 @@ const TopStations = ({ stations, stationList, setStation, setTrip, setOnViewStat
         Header: 'Suosituimmat asemat',
         columns: [
           {
+            Header: '#',
+            accessor: 'rowNumber',
+            Cell: ({ cell }) => (
+              <div onClick={() => handleStationClick(cell.row.original.stationId)}>
+                {cell.value}
+              </div>
+            ),
+          },
+          {
             Header: 'Asema',
             accessor: 'stationId',
             Cell: ({ cell }) => (
               <div onClick={() => handleStationClick(cell.row.original.stationId)}>
-                {cell.value}
+                {stations.find(s => cell.value === s.hslStationId).nimi}
               </div>
             ),
           },
@@ -46,19 +55,8 @@ const TopStations = ({ stations, stationList, setStation, setTrip, setOnViewStat
   const filteredData = useMemo(() => {
     return data.filter(item => item
       //item.nimi.toLowerCase().includes(searchQuery.toLowerCase())
-      
     );
   }, [data, searchQuery]);
-
-  const viewableTopStations = filteredData.map(station => {
-    return stations.find(s => station.stationId === s.hslStationId);
-  }).filter(function (element) {
-    return element !== undefined;
-  });
-
-  useEffect(()=>{
-    setOnViewStations(viewableTopStations);
-  },[filteredData])
 
   const {
     getTableProps,
@@ -75,43 +73,59 @@ const TopStations = ({ stations, stationList, setStation, setTrip, setOnViewStat
     columns,
     data: filteredData,
     initialState: { pageIndex, pageSize },
-  }, 
-  useSortBy,
-  usePagination
+  },
+    useSortBy,
+    usePagination
 
   );
 
+  const viewableTopStations = page.map(station => {
+    return stations.find(s => station.values.stationId === s.hslStationId);
+  }).filter(function (element) {
+    return element !== undefined;
+  });
+
+  
+  useEffect(() => {
+    console.log(viewableTopStations);
+    setOnViewStations(viewableTopStations);
+  }, [page])
+
+
+
+  /*
   const handleSearch = event => {
     setSearchQuery(event.target.value);
     setPageIndex(0);
   };
+  */
 
   return (
     <div className="list">
-      <div className="search-bar">
-        <input type="text" value={searchQuery} onChange={handleSearch} placeholder="Search" />
+      {/* <div className="search-bar">
+         type="text" value={searchQuery} onChange={handleSearch} placeholder="Search" />}
       </div>
+    */}
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                {column.render('Header')}
-                {/* Add a sort direction indicator */}
-                <span>
-                  {column.isSorted
-                    ? column.isSortedDesc
-                      ? ' 🔽'
-                      : ' 🔼'
-                    : ''}
-                </span></th>
+                  {column.render('Header')}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' 🔽'
+                        : ' 🔼'
+                      : ''}
+                  </span></th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row, i) => {
+          {page.map((row) => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>

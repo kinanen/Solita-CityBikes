@@ -49,10 +49,10 @@ namespace Solita_CityBikes.Data
                     return;
                 }
 
-                ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-testi.csv");
-                //ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-05.csv");
-                //ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-06.csv");
-                //ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-07.csv");
+                //ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-testi.csv");
+                ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-05.csv");
+                ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-06.csv");
+                ReadTripsFromFile(context, "/Users/otsokinanen/Desktop/data/2021-07.csv");
             }
 
         }

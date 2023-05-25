@@ -1,8 +1,7 @@
-import TripCounts from '../services/TripCounts';
 import React, { useEffect, useState } from 'react';
 import { useTable, useExpanded } from "react-table";
 
-const TopTrips = ({ tripList, setTrip, setStation, setPage }) => {
+const TopTrips = ({ tripList, setTrip, setStation, setPage, stations }) => {
     const [pageNumber, setPageNumber] = useState(1);
     const data = React.useMemo(() => tripList);
 
@@ -12,6 +11,7 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage }) => {
         setStation(null);
         setTrip([arg[0],arg[1]]);
     }
+
 
     const columns = React.useMemo(
         () => [
@@ -23,7 +23,7 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage }) => {
                         accessor: 'departureStationId',
                         Cell: ({ cell }) => (
                             <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
-                              {cell.value}
+                              {stations && stations.find(s => cell.value === s.hslStationId).nimi}
                             </div>
                             ),       
                     },
@@ -32,7 +32,7 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage }) => {
                         accessor: 'returnStationId',
                         Cell: ({ cell }) => (
                             <div onClick={() => handleTripClick([cell.row.original.departureStationId, cell.row.original.returnStationId])}>
-                              {cell.value}
+                              {stations && stations.find(s => cell.value === s.hslStationId).nimi}
                             </div>
                             ),       
                     },
@@ -63,6 +63,8 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage }) => {
     },useExpanded)
 
     return (
+        <div>
+        {stations &&
         <div className="list">
             <table {...getTableProps()}>
                 <thead>
@@ -90,7 +92,9 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage }) => {
             <button onClick={() =>{ if(pageNumber > 1){setPageNumber(pageNumber - 1); setPage(pageNumber)}}}>Edelliset</button>
             sivu <strong>{pageNumber}</strong>
             <button onClick={() =>{ setPageNumber(pageNumber + 1); setPage(pageNumber)}}>Seuraavat</button>
-        </div>
+            </div>
+        }
+    </div>
     )
 }
 

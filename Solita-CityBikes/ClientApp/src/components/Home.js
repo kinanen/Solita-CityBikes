@@ -31,7 +31,7 @@ const Home = () => {
   const pageSize = 20;
 
   useEffect(() => {
-    Stations.getAll()
+    const getStations = async () => await Stations.getAll()
       .then(response => {
         setStations(response.data);
         setOnViewStations(response.data);
@@ -43,7 +43,8 @@ const Home = () => {
         console.log(response.data);
         setTopStations(response.data.sort(((a, b) => b.departureCount - a.departureCount)));
       })
-
+    
+    getStations();
   }, []);
 
   useEffect(() => {
@@ -86,34 +87,32 @@ const Home = () => {
     setOnViewTrips(tripsCoordinates);
   };
 
-  const viewTopStations = () => {
-    setOnViewStations(viewableTopStations);
-    setOnViewTrips([]);
-  };
-
   const reset = () => {
     setOnViewStations(stations);
+    setOnViewTrips([]);
     setStation(null);
     setTrip(null)
   }
+
+  if(stations.length < 1){return <div>ladataan...</div>}
 
   return (
     <div>
       <div className='box'>
         <LeafletMap stationData={onViewStations} tripData={onViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} />
-        <Details station={station} trip={trip} stations={stations} />
+        <Details station={station} trip={trip} stations={stations} setTrip={setTrip} setStation={setStation} />
       </div>
       <div className="box">
         <div className='stationsList'>
           <h2> Asemat </h2>
           <div className='subHeadersForList'>
-            <h3 onClick={() => { viewTopStations(); setViewAllStations(false) }}>Suosituimmat asemat</h3>
+            <h3 onClick={() => { setViewAllStations(false); setOnViewTrips([]); }}>Suosituimmat asemat</h3>
             <h3 onClick={() => { setViewAllStations(true); reset() }}>Kaikki asemat</h3>
           </div>
-          {viewAllStations ? (
-              <AllStations stationList={stations} setTrip={setTrip} setStation={setStation} />
+          {stations && viewAllStations ? (
+            <AllStations stationList={stations} setTrip={setTrip} setStation={setStation} />
           ) : (
-              <TopStations stations={stations} stationList={topStations} setOnViewStations={setOnViewStations} setTrip={setTrip} setStation={setStation} />
+            <TopStations stations={stations} stationList={topStations} setOnViewStations={setOnViewStations} setTrip={setTrip} setStation={setStation} />
           )}
 
         </div>
@@ -123,11 +122,11 @@ const Home = () => {
             <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>Suosituimmat matkat</h3>
             <h3 onClick={() => { setViewAllTrips(true); reset() }}>Kaikki matkat</h3>
           </div>
-            {viewAllTrips ? (
-                <AllTrips setTrip={setTrip} setStation={setStation} />
-            ) : (
-                <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} setPage={setTopTripPage} />
-            )}
+          {stations && viewAllTrips ? (
+            <AllTrips stations={stations} setTrip={setTrip} setStation={setStation} />
+          ) : (
+            <TopTrips tripList={topTrips} setTrip={setTrip} setStation={setStation} setPage={setTopTripPage} stations={stations} />
+          )}
         </div>
       </div>
       <div className='box'>
