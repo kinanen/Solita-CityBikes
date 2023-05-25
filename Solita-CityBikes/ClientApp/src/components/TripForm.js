@@ -117,7 +117,10 @@ const TripForm = ({ setViewAddTrip, stations }) => {
                     </label>
                 </p>
                 <br />
-                <button type="submit">Submit</button>
+                <button type="submit">Tallenna</button>
+                <button onClick={() => setViewAddTrip(false)}>
+                    Peruuta
+            </button>    
             </form>
         </div>
     );

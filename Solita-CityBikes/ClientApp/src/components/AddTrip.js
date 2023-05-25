@@ -5,9 +5,6 @@ const AddTrip = ({setViewAddTrip, stations}) => {
     return (
         <div className="inputForm">
             <TripForm setViewAddTrip={setViewAddTrip} stations={stations}/>
-            <button onClick={() => setViewAddTrip(false)}>
-                    sulje
-                </button>    
         </div>
     )
 }

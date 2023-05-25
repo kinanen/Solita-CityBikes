@@ -106,7 +106,8 @@ const StationForm = ({ setViewAddStation }) => {
                     </label>
                 </p>
                 <br />
-                <button type="submit">Submit</button>
+                <button type="submit">Tallenna</button>
+                <button onClick={() => setViewAddStation(false)}> Peruuta </button>    
             </form>
         </div>
     );

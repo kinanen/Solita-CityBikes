@@ -42,7 +42,14 @@ namespace Solita_CityBikes.Controllers
     [HttpGet("name{id}")]
     public String GetName(int id)
     {
-        return _context.Stations.FirstOrDefault(x => x.HslStationId == id).Nimi;
+            try
+            {
+                return _context.Stations.FirstOrDefault(x => x.HslStationId == id).Nimi;
+            }
+            catch
+            {
+                return "Virhe, asemaa ei löydetty";
+            }
     }
 
 

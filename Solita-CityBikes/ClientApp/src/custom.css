@@ -63,6 +63,8 @@ width: 100%;
 
 .details{
   width: 30em;
+  overflow: scroll;
+  height: 40em;
 }
 
 .stationsList{

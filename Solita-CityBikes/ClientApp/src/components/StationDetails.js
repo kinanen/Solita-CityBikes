@@ -38,11 +38,6 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation}) =>
         setReturns(response.data);
       })
 
-    Stations.getStationName(stationId)
-      .then(response => {
-        console.log(response.data)
-      })
-
     Trips.getAverageDistanceByStation(stationId)
       .then(response => {
         setAvgDistance(response.data)
@@ -64,7 +59,7 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation}) =>
   .slice(0, 5)
   .map((tc) => (
     <li onClick={()=>viewTrip([tc.departureStationId,tc.returnStationId])} key={`${tc.departureStationId}${tc.returnStationId}`}>
-      {stations.find(s => tc.returnStationId === s.hslStationId).nimi} 
+      {stations.find(s => tc.returnStationId === s.hslStationId).nimi + " "} 
        matkoja {tc.count}
     </li>
   ));
@@ -73,7 +68,7 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation}) =>
   .slice(0, 5)
   .map((tc) => (
     <li onClick={()=>viewTrip([tc.departureStationId,tc.returnStationId])} key={`${tc.returnStationId}${tc.departureStationId}`}>
-      {stations.find(s => tc.departureStationId === s.hslStationId).nimi} 
+      {stations.find(s => tc.departureStationId === s.hslStationId).nimi+ " "} 
        matkoja {tc.count}
     </li>
   ));
@@ -87,7 +82,7 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation}) =>
         lähtöjä: <strong>{totalDepartures}</strong><br />
         palautuksia asemalle:<strong> {totalReturns}</strong><br />
         keskimääräinen matkan pituus asemalta: <strong>{Math.round(avgDistance / 1000 * 100) / 100}km</strong><br />
-        keskimääräinen matkan kesto asemalta:<strong> {Math.floor(avgDuration / 60)}min{Math.round(avgDuration % 60)}sek</strong><br />
+        keskimääräinen matkan kesto asemalta: <strong> {Math.floor(avgDuration / 60)}min{Math.round(avgDuration % 60)}sek</strong><br />
       </div>
       <div className="stationDataDetailLists">
         Suosituimmat kohdeasemat asemalta:

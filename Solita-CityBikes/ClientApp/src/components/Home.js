@@ -106,8 +106,8 @@ const Home = () => {
         <div className='stationsList'>
           <h2> Asemat </h2>
           <div className='subHeadersForList'>
-            <h3 onClick={() => { setViewAllStations(false); setOnViewTrips([]); }}>Suosituimmat asemat</h3>
             <h3 onClick={() => { setViewAllStations(true); reset() }}>Kaikki asemat</h3>
+            <h3 onClick={() => { setViewAllStations(false); setOnViewTrips([]); }}>Suosituimmat asemat</h3>
           </div>
           {stations && viewAllStations ? (
             <AllStations stationList={stations} setTrip={setTrip} setStation={setStation} />

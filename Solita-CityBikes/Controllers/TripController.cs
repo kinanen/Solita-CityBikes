@@ -139,13 +139,23 @@ namespace Solita_CityBikes.Controllers
             var existingTrip = _context.Trips.FirstOrDefault(x => x.TripId == id);
             if (existingTrip != null)
             {
-
                 existingTrip.DepartureTime = trip.DepartureTime;
                 existingTrip.ReturnTime = trip.ReturnTime;
                 existingTrip.DepartureStationId = trip.DepartureStationId;
                 existingTrip.ReturnStationId = trip.ReturnStationId;
                 existingTrip.Duration = trip.Duration;
                 existingTrip.CoveredDistance = trip.CoveredDistance;
+                _context.SaveChanges();
+            }
+            else
+            {
+                Trip newTrip = new Trip();
+                newTrip.DepartureTime = trip.DepartureTime;
+                newTrip.ReturnTime = trip.ReturnTime;
+                newTrip.DepartureStationId = trip.DepartureStationId;
+                newTrip.ReturnStationId = trip.ReturnStationId;
+                newTrip.Duration = trip.Duration;
+                newTrip.CoveredDistance = trip.CoveredDistance;
                 _context.SaveChanges();
             }
         }
