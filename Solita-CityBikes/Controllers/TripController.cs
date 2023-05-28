@@ -117,12 +117,18 @@ namespace Solita_CityBikes.Controllers
         [HttpGet("gettripcountpermonthstation")]
         public int GetTripCountPerMonthStation(int dsid, int rsid, int month, int year)
         {
-            DateTime targetDate = new DateTime(year, month, 1); // Target month and year
-
-            int count = _context.Trips
-                .Where(t => t.DepartureStationId == dsid && t.ReturnStationId == rsid)
-                .Count(e => e.DepartureTime.Month == targetDate.Month && e.DepartureTime.Year == targetDate.Year);
-            return count;
+            try
+            {
+                DateTime targetDate = new DateTime(year, month, 1);
+                int count = _context.Trips
+                    .Where(t => t.DepartureStationId == dsid && t.ReturnStationId == rsid)
+                    .Count(e => e.DepartureTime.Month == targetDate.Month && e.DepartureTime.Year == targetDate.Year);
+                return count;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
 

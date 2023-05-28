@@ -24,6 +24,12 @@ code {
   margin-right: 1em;
 }
 
+h3:hover{
+  background-color: #5a5a5a;
+  color: #ffe46d;
+  padding: 2%;
+}
+
 button {
   margin: 0.5em;
   background-color: #fcbc19;
@@ -135,7 +141,6 @@ td {
   background-color: #eaeaea;
   padding: 12px;
 }
-
 
 h2 {
   width: 100%;

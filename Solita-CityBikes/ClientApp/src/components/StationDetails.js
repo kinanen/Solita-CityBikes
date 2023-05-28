@@ -58,8 +58,8 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation }) =
   const topDestinationsList = departures
     .slice(0, 5)
     .map((tc) => (
-      <li onClick={() => viewTrip([tc.departureStationId, tc.returnStationId])} key={`${tc.departureStationId}${tc.returnStationId}`}>
-        <a>{stations.find(s => tc.returnStationId === s.hslStationId).nimi + " "}
+      <li key={`${tc.departureStationId}${tc.returnStationId}`}>
+        <a href="#" onClick={() => viewTrip([tc.departureStationId, tc.returnStationId])} >{stations.find(s => tc.returnStationId === s.hslStationId).nimi + " "}
         matkoja: </a>{tc.count}
       </li>
     ));
@@ -67,8 +67,8 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation }) =
   const topReturnsList = returns
     .slice(0, 5)
     .map((tc) => (
-      <li onClick={() => viewTrip([tc.departureStationId, tc.returnStationId])} key={`${tc.returnStationId}${tc.departureStationId}`}>
-        <a>{stations.find(s => tc.departureStationId === s.hslStationId).nimi + " "}
+      <li key={`${tc.returnStationId}${tc.departureStationId}`}>
+        <a href="#" onClick={() => viewTrip([tc.departureStationId, tc.returnStationId])}>{stations.find(s => tc.departureStationId === s.hslStationId).nimi + " "}
         matkoja: {tc.count}</a>
       </li>
     ));

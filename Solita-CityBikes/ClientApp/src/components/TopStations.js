@@ -14,6 +14,12 @@ const TopStations = ({ stations, stationList, setStation, setTrip, setOnViewStat
     setStation(arg);
 
   }
+  
+  const getStationNames=(id)=>{
+    try{ const name = stations.find(s => id === s.hslStationId).nimi
+      return name}
+      catch { return `Aseman id:tä (${id}) ei löytynyt tietokannasta`}
+  }
 
   const columns = React.useMemo(
     () => [
@@ -34,7 +40,7 @@ const TopStations = ({ stations, stationList, setStation, setTrip, setOnViewStat
             accessor: 'stationId',
             Cell: ({ cell }) => (
               <a href="#" onClick={() => handleStationClick(cell.row.original.stationId)}>
-                {stations.find(s => cell.value === s.hslStationId).nimi}
+                {getStationNames(cell.value)}
               </a>
             ),
           },

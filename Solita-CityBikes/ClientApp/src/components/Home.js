@@ -105,8 +105,8 @@ const Home = () => {
         <div className='stationsList'>
           <h2> Asemat </h2>
           <div className='subHeadersForList'>
-            <h3 onClick={() => { setViewAllStations(true); reset() }}>Kaikki asemat</h3>
-            <h3 onClick={() => { setViewAllStations(false); setOnViewTrips([]); }}>Suosituimmat asemat</h3>
+            <h3 onClick={() => { setViewAllStations(true); reset() }}>{viewAllStations ? <><strong>•</strong></>: ""}Kaikki asemat</h3>
+            <h3 onClick={() => { setViewAllStations(false); setOnViewTrips([]); }}>{viewAllStations ?"": <><strong>•</strong></>}Suosituimmat asemat</h3>
           </div>
           {stations && viewAllStations ? (
             <AllStations stationList={stations} setTrip={setTrip} setStation={setStation} />
@@ -118,8 +118,8 @@ const Home = () => {
         <div className='tripsList'>
           <h2> Matkat </h2>
           <div className='subHeadersForList'>
-            <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>Suosituimmat matkat</h3>
-            <h3 onClick={() => { setViewAllTrips(true); reset() }}>Kaikki matkat</h3>
+            <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>{viewAllTrips ?"": <><strong>•</strong></>} Suosituimmat matkat</h3>
+            <h3 onClick={() => { setViewAllTrips(true); reset() }}> {viewAllTrips ? <><strong>•</strong></>:""}Kaikki matkat</h3>
           </div>
           {stations && viewAllTrips ? (
             <AllTrips stations={stations} setTrip={setTrip} setStation={setStation} />

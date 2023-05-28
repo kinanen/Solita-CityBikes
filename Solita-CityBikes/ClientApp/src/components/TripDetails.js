@@ -66,16 +66,27 @@ const TripDetails = ({ trip, stations, setStation }) => {
     if(arg < 10 ) return `0${arg}`
     else return arg
 }  
+
+const viewTripsPerMonth = (arg) =>{
+  if(arg<0) return " virhe tietojen hakemisessa."
+  else{
+    return arg
+  }
+}
+
   return (
     <div>
       {station1 && station2 ? (
         <>
-          <h3>{station1 + " - " + station2}</h3>
-          {tripCount ? <>matkoja yhteensä pysäkkien välillä <strong>{tripCount}</strong> </>:"Ladataan .. "}
+          <h3 onClick={()=>setStation(trip[0])}>{station1 }</h3> 
+          <h3> - </h3> 
+          <h3 onClick={()=>setStation(trip[1])}>{station2}</h3>
+          
+          {tripCount ? <>matkoja yhteensä pysäkkien välillä <strong>{tripCount}</strong> </>:"Ladataan ... "}
           <br/>
-          {tripsPerMonth ? <>Matkat kuukausittain<br/> 05/2021: <strong>{tripsPerMonth[0] ? tripsPerMonth[0]: "Ladataan .. "}</strong>matkaa<br/> 06/2021:<strong>{tripsPerMonth[1]}</strong>matkaa<br/>07/2021 <strong>{tripsPerMonth[2]}</strong>matkaa</>:"Ladataan .. "}
+          {tripsPerMonth ? <>Matkat kuukausittain<br/> 05/2021: <strong>{tripsPerMonth[0] ? viewTripsPerMonth(tripsPerMonth[0]): " Ladataan ja lasketaan kuukausittaisia matkoja pysäkkien välillä, tässä voi kestää hetki! "}</strong>matkaa<br/> 06/2021:<strong>{tripsPerMonth[1] ? viewTripsPerMonth(tripsPerMonth[1]): "ladataan ..."}</strong>matkaa<br/>07/2021 <strong>{tripsPerMonth[2] ? viewTripsPerMonth(tripsPerMonth[2]) : "ladataan ..." }</strong> matkaa</>:"Ladataan .. "}
           <p>keskimääräinen matkan pituus asemien välillä: {avgDistance ? <><strong>{Math.round(avgDistance/1000 * 100) / 100}km</strong></>: "Ladataan .. "}</p>
-        <p>keskimääräinen matkan kesto tällä matkalla:<strong> {Math.floor(avgDuration/60)}:{secView(Math.round(avgDuration%60))}</strong></p>
+        <p>keskimääräinen matkan kesto tällä matkalla:  {avgDuration ? <><strong>{Math.floor(avgDuration/60)}:{secView(Math.round(avgDuration%60))}</strong></>: "Ladataan .. "}</p>
         </>
       ) : (
         "Ladataan..."
