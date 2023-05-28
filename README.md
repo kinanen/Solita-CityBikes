@@ -11,16 +11,19 @@ In my app you can view station information about all Citybikes stations for bike
 The station info available in the app: 
   - Station location in the map
   - Station basic information
-  - Top trips form an to the station
+  - Top trips form and to the station
   - Average Trip info about station
   - Map and List view for ALL STATIONS and TOP STATIONS
-  - View table of all Stations and station info, in sortable and filterable table with search function
+  - All stations view offers a search by station name feature, and is implemented with React Table, List is paginated.
+  - Top stations view is sortable by returns or by departures, and shows current page's stations on map, list is implemented with React Table, List is paginated.
 
 The trip info available in the app 
   - Trip polyline in the map between stations
-  - Trip count between stations in the data perioid
-  - View Top 25 most common trips on the map. 
-  - View table of all trips with basic info in sortable and filterable table with search function
+  - Trip count between stations in the data perioid, and by month
+  - Single trips info shows total trips, monthly trips, average trip duration and average distance between two stations.
+  - View Top 25 trips on the map. 
+  - Top trips and All trips list views are paginated. Pagination is implemented by sql and ef core
+
   
 ## Technologies used in project
 
@@ -66,3 +69,4 @@ The project has been done as a part of application process to Solita Dev Academy
   - Simple and well structured code in backend
   - SQL database works as intended + usage of ef core, which was new for me
   - Quick and reasonably easy process of moving app to run on Azure 
+  - Clear data views and selection of representable data
