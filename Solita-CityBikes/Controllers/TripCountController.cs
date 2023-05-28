@@ -33,7 +33,6 @@ namespace Solita_CityBikes.Controllers
         [HttpGet("getstationcount")]
         public List<StationCount> GetTripCountsByStations()
         {
-
                 var results = _context.TripCounts
                 .GroupBy(tc => tc.DepartureStationId)
                 .Select(group => new StationCount
@@ -46,7 +45,7 @@ namespace Solita_CityBikes.Controllers
                 })
                 .ToList();
                 return results;
-
+           
         }
 
         [HttpGet("gettripcount")]

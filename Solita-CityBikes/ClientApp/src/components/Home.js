@@ -56,14 +56,6 @@ const Home = () => {
       });
   }, [topTripPage]);
 
-  const viewableTopStations = topStations.map(station => {
-    return stations.find(s => station.stationId === s.hslStationId);
-  }).filter(function (element) {
-    return element !== undefined;
-  });
-
-
-
   const foundStations = [];
   const tripsCoordinates = [];
   const viewTopTrips = () => {

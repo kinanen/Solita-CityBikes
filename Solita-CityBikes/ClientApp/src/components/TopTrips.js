@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTable, useExpanded } from "react-table";
 
 const TopTrips = ({ tripList, setTrip, setStation, setPage, stations }) => {
