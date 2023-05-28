@@ -68,8 +68,8 @@ const StationDetails = ({ station: stationId, stations, setTrip, setStation }) =
     .slice(0, 5)
     .map((tc) => (
       <li onClick={() => viewTrip([tc.departureStationId, tc.returnStationId])} key={`${tc.returnStationId}${tc.departureStationId}`}>
-        {stations.find(s => tc.departureStationId === s.hslStationId).nimi + " "}
-        matkoja {tc.count}
+        <a>{stations.find(s => tc.departureStationId === s.hslStationId).nimi + " "}
+        matkoja {tc.count}</a>
       </li>
     ));
 
