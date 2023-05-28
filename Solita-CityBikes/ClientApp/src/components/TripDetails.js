@@ -71,10 +71,10 @@ const TripDetails = ({ trip, stations, setStation }) => {
       {station1 && station2 ? (
         <>
           <h3>{station1 + " - " + station2}</h3>
-          {tripCount ? <>matkoja yhteensä pysäkkien välillä <strong>{tripCount}</strong> </>:""}
+          {tripCount ? <>matkoja yhteensä pysäkkien välillä <strong>{tripCount}</strong> </>:"Ladataan .. "}
           <br/>
-          {tripsPerMonth ? <>Matkat kuukausittain<br/> 05/2021: <strong>{tripsPerMonth[0]}</strong>matkaa<br/> 06/2021:<strong>{tripsPerMonth[1]}</strong>matkaa<br/>07/2021 <strong>{tripsPerMonth[2]}</strong>matkaa</>:""}
-          <p>keskimääräinen matkan pituus asemien välillä: <strong>{Math.round(avgDistance/1000 * 100) / 100}km</strong></p>
+          {tripsPerMonth ? <>Matkat kuukausittain<br/> 05/2021: <strong>{tripsPerMonth[0] ? tripsPerMonth[0]: "Ladataan .. "}</strong>matkaa<br/> 06/2021:<strong>{tripsPerMonth[1]}</strong>matkaa<br/>07/2021 <strong>{tripsPerMonth[2]}</strong>matkaa</>:"Ladataan .. "}
+          <p>keskimääräinen matkan pituus asemien välillä: {avgDistance ? <><strong>{Math.round(avgDistance/1000 * 100) / 100}km</strong></>: "Ladataan .. "}</p>
         <p>keskimääräinen matkan kesto tällä matkalla:<strong> {Math.floor(avgDuration/60)}:{secView(Math.round(avgDuration%60))}</strong></p>
         </>
       ) : (
