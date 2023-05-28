@@ -22,9 +22,9 @@ const LeafletMap = ({ stationData, tripData, setTrip, setStation, trip, station,
     const drawStations = stationData.map(s => (
         <Circle key={s.hslStationId} center={[s.y, s.x]} radius={rad} color="#fcbc19">
             <Popup>
-                <div onClick={() => viewStation(s.hslStationId)}>
+                <a href="#" onClick={() => viewStation(s.hslStationId)}>
                 {s.nimi}
-                </div>
+                </a>
             </Popup>
         </Circle>
     ))
