@@ -54,9 +54,8 @@ The project has been done as a part of application process to Solita Dev Academy
   - More unified way of working in all components in React app
   - Setting all similar components in same way, for clearer code
   - Using Varibles file in react app rather than passing some props to several components
+  - Refiguring Stations, Trips, and TripCounts API modules
   - 
-  - 
-
 
  Left for next time:
   - Finishing Post and Put API's and data validator for the input form for both station and trip

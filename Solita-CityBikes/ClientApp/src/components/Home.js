@@ -121,10 +121,10 @@ const Home = () => {
         </div>
       </div>
       <div className='box'>
-      <a onClick={() => { setViewAddStation(true) }} className='add-station-class'>
+      <a href="#" onClick={() => { setViewAddStation(true) }} className='add-station-class'>
           Lisää Asema
         </a>
-        <a onClick={() => setViewAddTrip(true)} className="add-trip-class">
+        <a href="#" onClick={() => setViewAddTrip(true)} className="add-trip-class">
           Lisää matka
         </a>
 

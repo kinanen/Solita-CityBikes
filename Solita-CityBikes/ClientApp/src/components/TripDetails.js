@@ -25,15 +25,15 @@ const TripDetails = ({ trip, stations, setStation }) => {
         const trips=[];
         Trips.getTripCountPerMonthStation(trip[0], trip[1], 5)
         .then(response =>{
-            trips [0] = response.data;
+            trips[0] = response.data;
         })
         Trips.getTripCountPerMonthStation(trip[0], trip[1], 6)
         .then(response =>{
-            trips [1] = response.data;
+            trips[1] = response.data;
         })
         Trips.getTripCountPerMonthStation(trip[0], trip[1], 7)
         .then(response =>{
-            trips [2] = response.data;
+            trips[2] = response.data;
         })
         setTripsPerMonth(trips)
         

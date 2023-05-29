@@ -1,9 +1,9 @@
 import React from "react";
 import { MapContainer, TileLayer, Popup, Circle, LayerGroup } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css';
 import DrawTrips from "./DrawTrips";
 import ViewBounds from "./ViewBounds";
 import MapZoom from "./MapZoom"
+import 'leaflet/dist/leaflet.css';
 
 const defaultBounds = [
     [60.147921, 24.721367],

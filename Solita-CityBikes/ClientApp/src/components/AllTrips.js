@@ -22,10 +22,12 @@ const AllTrips = ({ setTrip, setStation, stations}) => {
         setStation(null);
         setTrip([arg[0], arg[1]]);
     }
+
     const secView = (arg) => {
         if(arg < 10 ) return `0${arg}`
         else return arg
     }  
+    
     const columns = React.useMemo(
         () => [
             {
