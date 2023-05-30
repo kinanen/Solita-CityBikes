@@ -83,9 +83,9 @@ const initialTrips=[
         returnStationId: 3,
         coveredDistance:1000,
         duration: 200
-    }
+    },
     {
-        tripId:2,
+        tripId:12,
         departureTime:"2021-06-17T18.40.00.0000000",
         returnTime:"2021-06-17T19.00.00.0000000",
         departureStationId:3,
@@ -94,7 +94,30 @@ const initialTrips=[
         duration: 1000
     }
 ] 
+const initialTripCouts = [
+    //  public int DepartureStationId { get; set; }
+    //  public int ReturnStationId { get; set; }
+    //  public int Count { get; set; }
+    {
+        departureStationId : 1,
+        returnStationId : 2,
+        count :7
+    },
+    {
+        departureStationId : 3,
+        returnStationId : 2,
+        count :12
+    },
+    {
+        departureStationId : 3,
+        returnStationId : 1,
+        count :12
+    }
 
+
+
+]
 export default {
-    initialStations
+    initialStations,
+    initialTrips
 }
