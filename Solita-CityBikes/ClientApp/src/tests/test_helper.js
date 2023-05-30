@@ -94,7 +94,7 @@ const initialTrips=[
         duration: 1000
     }
 ] 
-const initialTripCouts = [
+const initialTripCounts = [
     //  public int DepartureStationId { get; set; }
     //  public int ReturnStationId { get; set; }
     //  public int Count { get; set; }
@@ -119,5 +119,6 @@ const initialTripCouts = [
 ]
 export default {
     initialStations,
-    initialTrips
+    initialTrips,
+    initialTripCounts
 }

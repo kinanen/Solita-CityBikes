@@ -1,5 +1,8 @@
 ﻿<Properties StartupConfiguration="{051CBCF7-0369-4134-A14E-AC0420347370}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/StationController.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Solita-CityBikes PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/TripCount.cs">
     <Files>
       <File FileName="package-lock.json" Line="1" Column="1" IsPinned="True" />
       <File FileName="reset-database.sh" Line="15" Column="26" IsPinned="True" />
@@ -14,7 +17,7 @@
       <File FileName="appsettings.Development.json" />
       <File FileName="appsettings.json" />
       <File FileName="Data/CityBikeContext.cs" />
-      <File FileName="Controllers/StationController.cs" Line="39" Column="1" />
+      <File FileName="Controllers/StationController.cs" />
       <File FileName="ClientApp/package.json" />
       <File FileName="ClientApp/src/components/Home.js" />
       <File FileName="ClientApp/src/App.js" />
@@ -29,11 +32,13 @@
       <File FileName="package.json" />
       <File FileName="Migrations/CityBikeContextModelSnapshot.cs" />
       <File FileName="Controllers/TripCountController.cs" />
+      <File FileName="Controllers/TripController.cs" />
+      <File FileName="Models/TripCount.cs" Line="13" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Solita-CityBikes" expanded="True" selected="True">
+          <Node name="Solita-CityBikes" expanded="True">
             <Node name="Solita-CityBikes" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True" />
@@ -42,6 +47,7 @@
               <Node name="Pages" expanded="True" />
               <Node name="package.json" expanded="True" />
             </Node>
+            <Node name="Solita-CityBikes-tests" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -50,8 +56,5 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Solita-CityBikes PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

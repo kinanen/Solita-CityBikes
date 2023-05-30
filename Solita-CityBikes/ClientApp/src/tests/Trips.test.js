@@ -194,7 +194,7 @@ describe('Trips', () => {
         });
     });
 
-    describe('postStation', () => {
+    describe('postTrip', () => {
         test('should successfully create a new trip', async () => {
             const tripData = {
                 departureTime:"2021-06-17T18.40.00.0000000",
