@@ -12,10 +12,22 @@ public class StationControllerTest
 {
     private StationController _controller;
 
+    Station mockStation = new Station
+    {
+        HslStationId = 0,
+        Nimi = "asema0",
+        Namn = "asema0",
+        Name = "asema0",
+        Osoite = "asema0osoite",
+        X = 25.000,
+        Y = 60.000
+    };
     public StationControllerTest()
     {
+
+
         var data = new List<Station>
-         {
+         {mockStation,
          new Station
 
              {
@@ -60,6 +72,24 @@ public class StationControllerTest
 
         _controller = new StationController(mockContext.Object);
     }
+    [Fact]
+    public void TestGet1()
+    {
+        var response = _controller.Get();
+        var value = response;
+        Assert.NotNull(value);
+        Assert.Contains(mockStation, value);
+    }
+
+    [Fact]
+    public void TestGet2()
+    {
+        var response = _controller.Get();
+        var value = response;
+        Assert.NotNull(value);
+        Assert.Equal(4, value.Count());
+    }
+
 
     [Fact]
     public void TestGetName1()
@@ -87,6 +117,8 @@ public class StationControllerTest
         Assert.NotNull(value);
         Assert.Equal("Virhe, asemaa ei löydetty", value);
     }
+
+
 
 }
 

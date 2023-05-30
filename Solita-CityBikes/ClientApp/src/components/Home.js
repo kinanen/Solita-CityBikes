@@ -5,8 +5,7 @@ import TopStations from './TopStations';
 import TopTrips from './TopTrips';
 import Stations from '../services/Stations';
 import TripCounts from '../services/TripCounts';
-import AddStation from './AddStation';
-import AddTrip from './AddTrip';
+
 import AllStations from './AllStations';
 import AllTrips from './AllTrips';
 
@@ -25,8 +24,6 @@ const Home = () => {
   const [trip, setTrip] = useState(null)
   const [viewAllTrips, setViewAllTrips] = useState(false);
   const [viewAllStations, setViewAllStations] = useState(true)
-  const [viewAddStation, setViewAddStation] = useState(false)
-  const [viewAddTrip, setViewAddTrip] = useState(false)
   const [topTripPage, setTopTripPage] = useState(1)
   const pageSize = 20;
 
@@ -42,7 +39,7 @@ const Home = () => {
       .then(response => {
         setTopStations(response.data.sort(((a, b) => b.departureCount - a.departureCount)));
       })
-    
+
     getStations();
   }, []);
 
@@ -85,20 +82,20 @@ const Home = () => {
     setTrip(null)
   }
 
-  if(stations.length < 1){return <div>ladataan...</div>}
+  if (stations.length < 1) { return <div>ladataan...</div> }
 
   return (
     <div>
       <div className='box'>
-        <LeafletMap stationData={onViewStations} tripData={onViewTrips} setOnViewTrips={setOnViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} stations={stations}/>
+        <LeafletMap stationData={onViewStations} tripData={onViewTrips} setOnViewTrips={setOnViewTrips} setTrip={setTrip} setStation={setStation} trip={trip} station={station} stations={stations} />
         <Details station={station} trip={trip} stations={stations} setTrip={setTrip} setStation={setStation} />
       </div>
       <div className="bottom-half">
         <div className='stationsList'>
           <h2> Asemat </h2>
           <div className='subHeadersForList'>
-            <h3 onClick={() => { setViewAllStations(true); reset() }}>{viewAllStations ? <><strong>•</strong></>: ""}Kaikki asemat</h3>
-            <h3 onClick={() => { setViewAllStations(false); setOnViewTrips([]); }}>{viewAllStations ?"": <><strong>•</strong></>}Suosituimmat asemat</h3>
+            <h3 onClick={() => { setViewAllStations(true); reset() }}>{viewAllStations ? <><strong>•</strong></> : ""}Kaikki asemat</h3>
+            <h3 onClick={() => { setViewAllStations(false); setOnViewTrips([]); }}>{viewAllStations ? "" : <><strong>•</strong></>}Suosituimmat asemat</h3>
           </div>
           {stations && viewAllStations ? (
             <AllStations stationList={stations} setTrip={setTrip} setStation={setStation} />
@@ -110,8 +107,8 @@ const Home = () => {
         <div className='tripsList'>
           <h2> Matkat </h2>
           <div className='subHeadersForList'>
-            <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>{viewAllTrips ?"": <><strong>•</strong></>} Suosituimmat matkat</h3>
-            <h3 onClick={() => { setViewAllTrips(true); reset() }}> {viewAllTrips ? <><strong>•</strong></>:""}Kaikki matkat</h3>
+            <h3 onClick={() => { setViewAllTrips(false); viewTopTrips() }}>{viewAllTrips ? "" : <><strong>•</strong></>} Suosituimmat matkat</h3>
+            <h3 onClick={() => { setViewAllTrips(true); reset() }}> {viewAllTrips ? <><strong>•</strong></> : ""}Kaikki matkat</h3>
           </div>
           {stations && viewAllTrips ? (
             <AllTrips stations={stations} setTrip={setTrip} setStation={setStation} />
@@ -120,24 +117,7 @@ const Home = () => {
           )}
         </div>
       </div>
-      <div className='box'>
-      <a href="#" onClick={() => { setViewAddStation(true) }} className='add-station-class'>
-          Lisää Asema
-        </a>
-        <a href="#" onClick={() => setViewAddTrip(true)} className="add-trip-class">
-          Lisää matka
-        </a>
-
-
-      </div>
-      {viewAddTrip ? (
-        <AddTrip viewAddTrip={viewAddTrip} setViewAddTrip={setViewAddTrip} stations={stations} />
-      ) : ""}
-      {viewAddStation ? (
-        <AddStation viewAddStation={viewAddStation} setViewAddStation={setViewAddStation} />
-      ) : ""}
-    </div >
-
+    </div>
   );
 };
 

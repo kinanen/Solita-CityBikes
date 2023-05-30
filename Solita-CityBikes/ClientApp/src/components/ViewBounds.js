@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect } from "react";
 import { useMap} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 
-const SetViewBounds = ({stationData,defaultBounds}) => {    
+const SetViewBounds = ({stationData}) => {    
     const map = useMap();
 
     useEffect(() => {

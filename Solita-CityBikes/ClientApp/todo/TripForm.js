@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Trips from "../services/Trips"
-import DatalistInput, { useComboboxControls } from 'react-datalist-input';
+
 
 const TripForm = ({ setViewAddTrip, stations }) => {
     const [trip, setTrip] = useState({
