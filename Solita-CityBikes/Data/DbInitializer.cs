@@ -71,7 +71,7 @@ namespace Solita_CityBikes.Data
                         context.Add(new Trip { DepartureTime = record.DepartureTime, DepartureStationId = record.DepartureStationId, ReturnTime = record.ReturnTime, ReturnStationId = record.ReturnStationId, CoveredDistance = record.CoveredDistance, Duration = record.Duration });
                         i++;
                     }
-                    if (i % 100000 == 0)
+                    if (i % 1000 == 0)
                     {
                         context.SaveChanges();
                         context.RemoveRange();

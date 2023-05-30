@@ -23,13 +23,14 @@ namespace Solita_CityBikes.Controllers
             _context = context;
         }
 
-        // 
+        // Returns all TripCounts
         [HttpGet]
         public IEnumerable<TripCount> Get()
         {
             return _context.TripCounts.ToList();
         }
 
+        //Returns all stations with departure and return counts
         [HttpGet("getstationcount")]
         public List<StationCount> GetTripCountsByStations()
         {
@@ -48,8 +49,10 @@ namespace Solita_CityBikes.Controllers
            
         }
 
+
+        //Takes departurestation and return station as arguments and returns count between them
         [HttpGet("gettripcount")]
-        public int GetTripCount(int rsid, int dsid)
+        public int GetTripCount(int dsid, int rsid )
         {
             return _context.TripCounts
                 .Where(tc => tc.ReturnStationId == rsid && tc.DepartureStationId == dsid)
@@ -58,6 +61,7 @@ namespace Solita_CityBikes.Controllers
 
         }
 
+        // Returns paginated TripCounts, takes page number and Page lenght as argument
         [HttpGet("getpaginatedtripcounts")]
         public async Task<IActionResult> GetPaginatedTripCounts(int pageNumber = 1, int pageSize = 25)
         {
@@ -76,7 +80,7 @@ namespace Solita_CityBikes.Controllers
             return Ok(products);
         }
 
-        // GET api/values/5
+        // Returns Departures from certain station, takes station Id as argument
         [HttpGet("departures")]
         public async Task<IActionResult> GetDepartures(int dsid)
         {
@@ -94,6 +98,8 @@ namespace Solita_CityBikes.Controllers
             return Ok(products);
         }
 
+
+        // Returns Count of all returns to certain station with Station Id
         [HttpGet("returns")]
         public async Task<IActionResult> GetReturns(int rsid)
         {

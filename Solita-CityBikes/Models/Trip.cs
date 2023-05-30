@@ -50,6 +50,7 @@ public class Trip
 
     The same approach could be used for the station data where the addition coordinates should be validated to be valid geographic coordinates.
         */
+
         if (this.CoveredDistance < 10) return false;
         if (this.Duration < 10) return false;
         TimeSpan difference = new TimeSpan();

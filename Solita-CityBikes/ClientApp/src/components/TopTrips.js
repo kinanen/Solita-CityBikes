@@ -10,7 +10,6 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage, stations }) => {
         setTrip([arg[0],arg[1]]);
     }
 
-
     const columns = React.useMemo(
         () => [
             {
@@ -53,7 +52,9 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage, stations }) => {
     } = useTable({
         columns,
         data,
-    },useExpanded)
+    },
+    useExpanded
+    );
 
     return (
         <div className='top-list-container'> 
@@ -82,9 +83,9 @@ const TopTrips = ({ tripList, setTrip, setStation, setPage, stations }) => {
                     })}
                 </tbody>
             </table>
-            <button onClick={() =>{ if(pageNumber > 1){setPageNumber(pageNumber - 1); setPage(pageNumber)}}}>Edelliset</button>
+            <button onClick={() => { if (pageNumber > 1) { setPageNumber(prevPageNumber => prevPageNumber - 1); setPage(pageNumber - 1); } }}>Edelliset</button>
             sivu <strong>{pageNumber}</strong>
-            <button onClick={() =>{ setPageNumber(pageNumber + 1); setPage(pageNumber)}}>Seuraavat</button>
+            <button onClick={() => { setPageNumber(prevPageNumber => prevPageNumber + 1); setPage(pageNumber + 1); }}>Seuraavat</button>
             </div>
         }
     </div>

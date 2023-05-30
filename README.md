@@ -24,14 +24,18 @@ The trip info available in the app
   - View Top 25 trips on the map. 
   - Top trips and All trips list views are paginated. Pagination is implemented by sql and ef core
 
+App uses data from SQL server database, in where all given data has been uploaded. Some justifications has been done locally when seeting database up. 
+
   
 ## Technologies used in project
 
 Application is done with Microsoft SQL server, C# backend and React frontend. 
 Application is running at Azure Web App service.
 
-Tests in C# backend are done with .... 
+Tests in C# backend are done with XUnit
 Tests for React frontend and applications data API are done using JEST 
+
+## 
 
 ## Data used in the project
 
@@ -45,8 +49,10 @@ The journey data owned by City Bike Finland :
     - https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv
     
 The station data by Helsinki Region Transport’s (HSL): 
-    Dataset: https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv
-    License and information: https://www.avoindata.fi/data/en/dataset/hsl-n-kaupunkipyoraasemat/resource/a23eef3a-cc40-4608-8aa2-c730d17e8902
+    Dataset: 
+    https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv
+    License and information:
+    https://www.avoindata.fi/data/en/dataset/hsl-n-kaupunkipyoraasemat/resource/a23eef3a-cc40-4608-8aa2-c730d17e8902
     
 ## Process and Room for improvment
 The project has been done as a part of application process to Solita Dev Academy, some used tech and libraries used in the project hase been new to me so there has been some ups and downs, and much of learning thruout the process. 
@@ -71,3 +77,37 @@ The project has been done as a part of application process to Solita Dev Academy
   - SQL database works as intended + usage of ef core, which was new for me
   - Quick and reasonably easy process of moving app to run on Azure 
   - Clear data views and selection of representable data
+
+
+
+Clone the Repository: Begin by cloning the repository from GitHub, just as you would for any other repository. Use the git clone command followed by the repository URL to clone it to your local machine.
+
+    git clone git@github.com:kinanen/Solita-CityBikes.git
+
+Install Dependencies: Navigate to the project directory using your terminal or command prompt:
+
+C# React apps often use the .NET Core framework and rely on package managers like npm or Yarn for managing front-end dependencies. Use the appropriate command to install the necessary dependencies. Typically, this can be done using the following command:
+
+    dotnet restore
+
+Additionally, if the project has a package.json file, you'll need to install the front-end dependencies using npm or Yarn. Navigate to the ClientApp folder (or the folder where the React code is located) and run:
+
+    npm install
+
+or
+
+    yarn
+
+Configure Environment Variables: If your C# React app requires any environment variables, ensure they are properly configured. Look for any instructions or configuration files (e.g., .env or .env.local) that specify the required variables and their values. Adjust them according to your local environment if necessary.
+
+For the database you will need username and password to insert into appsettings.Development.json and to appsettings.json. Username and password stored in this repo are not active. You can request credentials from me by mail: otso.kinanen(at)gmail.com
+
+Start the Development Server: Once the dependencies are installed and environment variables are configured, you can start the development server. Use the following command:
+
+    dotnet run
+
+This command will build and run the C# server, which will also serve the React front-end. It should launch the app in your browser, typically at https://localhost:7199/api 
+
+Any changes you make to the React or C# code will be automatically recompiled and reflected in the browser.
+
+That's it! You have successfully started a C# React app locally. Remember to consult any additional instructions or documentation provided with the repository if there are specific setup steps or requirements for that particular project.

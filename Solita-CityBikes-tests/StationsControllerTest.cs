@@ -4,7 +4,8 @@ using Moq;
 using Solita_CityBikes;
 using Solita_CityBikes.Controllers;
 using Solita_CityBikes.Data;
-using System.Reflection.Metadata; 
+using System.Reflection.Metadata;
+
 
 namespace Solita_CityBikes_;
 
@@ -14,7 +15,7 @@ public class StationControllerTest
 
     Station mockStation = new Station
     {
-        HslStationId = 0,
+        HslStationId = 10,
         Nimi = "asema0",
         Namn = "asema0",
         Name = "asema0",
@@ -90,6 +91,44 @@ public class StationControllerTest
         Assert.Equal(4, value.Count());
     }
 
+    [Fact]
+    public void TestGet3()
+    {
+        var response = _controller.Get();
+        var value = response;
+        Assert.NotNull(value);
+        Assert.DoesNotContain(new Station { 
+                HslStationId=5,
+                Nimi="asema5",
+                Namn="asema5",
+                Name="asema5",
+                Osoite="asema5osoite",
+                X=25.500,
+                Y=60.500
+            }, value);
+    }
+
+    [Fact]
+    public void TestGetById1()
+    {
+        int id = 10;
+        var response = _controller.Get(id);
+        var value = response.Value;
+        Assert.NotNull(value);
+        Assert.Equal(mockStation,value);
+    }
+
+    [Fact]
+    public void TestGetById2()
+    {
+        int id = 00;
+        var response = _controller.Get(id);
+        var statusCode = (response.Result as StatusCodeResult)?.StatusCode;
+
+        Assert.Null(response.Value); 
+        Assert.Equal(404, statusCode); 
+    }
+
 
     [Fact]
     public void TestGetName1()
@@ -117,8 +156,6 @@ public class StationControllerTest
         Assert.NotNull(value);
         Assert.Equal("Virhe, asemaa ei löydetty", value);
     }
-
-
 
 }
 

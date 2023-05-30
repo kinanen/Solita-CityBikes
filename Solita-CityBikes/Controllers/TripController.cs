@@ -44,12 +44,6 @@ namespace Solita_CityBikes.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
-        public Trip Get(int id)
-        {
-            return _context.Trips.FirstOrDefault(x => x.TripId == id);
-        }
-
         [HttpGet("getaveragedistancebystation")]
         public double GetAverageDistanceByStation(int stationId)
         {
@@ -131,14 +125,15 @@ namespace Solita_CityBikes.Controllers
             }
         }
 
-
+        /* NOT IN USE
         [HttpPost]
         public void Post([FromBody] Trip trip)
         {
             _context.Trips.Add(trip);
             _context.SaveChanges();
         }
-
+        */
+        /* NOT IN USE
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Trip trip)
         {
@@ -165,7 +160,8 @@ namespace Solita_CityBikes.Controllers
                 _context.SaveChanges();
             }
         }
-
+        */ 
+        /* NOT IN USE
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
@@ -176,7 +172,7 @@ namespace Solita_CityBikes.Controllers
                 _context.SaveChanges();
             }
         }
-
+        */
         public class DepartureStation
         {
             public int StationHslId { get; set; }
