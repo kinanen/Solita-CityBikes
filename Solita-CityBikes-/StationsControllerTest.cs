@@ -8,11 +8,11 @@ using System.Reflection.Metadata; 
 
 namespace Solita_CityBikes_;
 
-public class UnitTest1
+public class StationControllerTest
 {
     private StationController _controller;
 
-    public UnitTest1()
+    public StationControllerTest()
     {
         var data = new List<Station>
          {
@@ -62,26 +62,30 @@ public class UnitTest1
     }
 
     [Fact]
-    public void Test1()
-    {
-
-        var response = _controller.GetAverage() as OkObjectResult;
-
-        var value = response.Value as double[];
-
+    public void TestGetName1()
+    { 
+        var response = _controller.GetName(2) as String;
+        var value = response;
         Assert.NotNull(value);
-
-        Assert.Equal(value, new Double[] { 0.2, 0.2 });
-
+        Assert.Equal("asema2", value);
     }
 
     [Fact]
-    public void Test2()
+    public void TestGetName2()
     {
-        var response = _controller.GetAverage() as OkObjectResult;
-        var value = response.Value as double[];
+        var response = _controller.GetName(2) as String;
+        var value = response;
         Assert.NotNull(value);
-        Assert.NotEqual(value, new Double[] { 0.3, 0.2 });
+        Assert.NotEqual("station1", value);
+    }
+
+    [Fact]
+    public void TestGetName3()
+    {
+        var response = _controller.GetName(4) as String;
+        var value = response;
+        Assert.NotNull(value);
+        Assert.Equal("Virhe, asemaa ei löydetty", value);
     }
 
 }

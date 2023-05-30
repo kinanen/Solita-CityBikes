@@ -9,7 +9,7 @@ using Solita_CityBikes.Data;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Solita_CityBikes.Controllers
-{ 
+{
     [ApiController]
     [Route("api/[controller]")]
     [EnableCors("_myAllowSpecificOrigins")]
@@ -24,24 +24,37 @@ namespace Solita_CityBikes.Controllers
         }
 
 
-    // GET: api/values
-    
-    [HttpGet]
+        // GET: api/values
 
-    public IEnumerable<Station> Get()
-    {
-        return _context.Stations.ToList();
-    }
+        [HttpGet]
 
-    [HttpGet("{id}")]
-    public Station Get(int id)
-    {
-        return _context.Stations.FirstOrDefault(x => x.HslStationId == id);
-    }
+        public IEnumerable<Station> Get()
+        {
+            return _context.Stations.ToList();
+        }
 
-    [HttpGet("name{id}")]
-    public String GetName(int id)
-    {
+        [HttpGet("{id}")]
+        public ActionResult<Station> Get(int id)
+        {
+            try
+            {
+                var station = _context.Stations.FirstOrDefault(x => x.HslStationId == id);
+                if (station == null)
+                {
+                    return NotFound(); 
+                }
+
+                return station;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while retrieving the station.");
+            }
+        }
+
+        [HttpGet("name{id}")]
+        public String GetName(int id)
+        {
             try
             {
                 return _context.Stations.FirstOrDefault(x => x.HslStationId == id).Nimi;
@@ -50,54 +63,54 @@ namespace Solita_CityBikes.Controllers
             {
                 return "Virhe, asemaa ei löydetty";
             }
-    }
+        }
 
 
         [HttpPost]
-    public void Post([FromBody] Station station)
-    {
-        _context.Stations.Add(station);
-        _context.SaveChanges();
-    }
-
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] Station station)
-    {
-        var existingStation = _context.Stations.FirstOrDefault(x => x.StationId == id);
-        if (existingStation != null)
+        public void Post([FromBody] Station station)
         {
-            existingStation.Name = station.Name;
+            _context.Stations.Add(station);
             _context.SaveChanges();
         }
-    }
 
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-        var existingStation = _context.Stations.FirstOrDefault(x => x.StationId == id);
-        if (existingStation != null)
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] Station station)
         {
-            _context.Stations.Remove(existingStation);
-            _context.SaveChanges();
+            var existingStation = _context.Stations.FirstOrDefault(x => x.StationId == id);
+            if (existingStation != null)
+            {
+                existingStation.Name = station.Name;
+                _context.SaveChanges();
+            }
         }
-    }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            var existingStation = _context.Stations.FirstOrDefault(x => x.StationId == id);
+            if (existingStation != null)
+            {
+                _context.Stations.Remove(existingStation);
+                _context.SaveChanges();
+            }
+        }
 
 
-    [HttpGet("AvgPosition")]
-    public IActionResult GetAverage()
-    {
-        try
+        [HttpGet("AvgPosition")]
+        public IActionResult GetAverage()
         {
-            double AvgX = _context.Stations.Average(x => x.X);
-            double AvgY = _context.Stations.Average(x => x.Y);
-            double[]  Avg =new double[] { Math.Round(AvgY, 4), Math.Round(AvgX,4) };
-            return Ok(Avg);
+            try
+            {
+                double AvgX = _context.Stations.Average(x => x.X);
+                double AvgY = _context.Stations.Average(x => x.Y);
+                double[] Avg = new double[] { Math.Round(AvgY, 4), Math.Round(AvgX, 4) };
+                return Ok(Avg);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
 
 
     }
