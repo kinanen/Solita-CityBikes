@@ -13,12 +13,40 @@ public class UnitTest1
     private StationController _controller;
 
     public UnitTest1()
-    { 
+    {
         var data = new List<Station>
          {
-         new Station { HslStationId = 1, X = 0.2, Y = 0.2 },
-         new Station { HslStationId = 2,X = 0.2, Y = 0.2 },
-         new Station { HslStationId = 3,X = 0.2, Y = 0.2 },
+         new Station
+
+             {
+                HslStationId=1,
+                Nimi= "asema1",
+                Namn= "asema1",
+                Name= "asema1",
+                Osoite= "asema1osoite",
+                X= 25.100,
+                Y= 60.100
+            },
+         new Station 
+            {
+                HslStationId=2,
+                Nimi="asema2",
+                Namn="asema2",
+                Name="asema2",
+                Osoite="asema2osoite",
+                X=25.200,
+                Y=60.200
+            },
+         new Station
+            {
+                HslStationId=1,
+                Nimi="asema3",
+                Namn="asema3",
+                Name="asema3",
+                Osoite="asema3osoite",
+                X=25.300,
+                Y=60.300
+            },
          }.AsQueryable();
 
         var mockSet = new Mock<DbSet<Station>>();
