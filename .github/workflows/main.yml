@@ -25,7 +25,7 @@ jobs:
         run: dotnet build Solita-CityBikes/Solita-CityBikes.csproj
 
       - name: Test
-        run: dotnet test --no-restore --verbosity normal Solita-CityBikes-tests/Solita-CityBikes-tests.csproj
+        run: dotnet test --verbosity normal Solita-CityBikes-tests/Solita-CityBikes-tests.csproj
 
       - name: dotnet publish
         run: dotnet publish Solita-CityBikes/Solita-CityBikes.csproj -o ${{env.DOTNET_ROOT}}/myapp
