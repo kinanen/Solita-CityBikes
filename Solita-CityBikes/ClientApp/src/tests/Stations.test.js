@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 import Stations from '../services/Stations';
 import test_helper from './test_helper';

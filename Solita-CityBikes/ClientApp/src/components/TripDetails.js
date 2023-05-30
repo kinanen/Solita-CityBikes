@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import TripCounts from "../services/TripCounts";
 import Trips from "../services/Trips";

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 import TripCounts from '../services/TripCounts';
 import test_helper from './test_helper';

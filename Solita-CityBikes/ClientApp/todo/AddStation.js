@@ -1,6 +1,6 @@
 import StationForm from "./StationForm";
 
-const AddStation = ({ viewAddStation, setViewAddStation }) => {
+const AddStation = ({setViewAddStation }) => {
         return (
             <div className="inputForm">       
                 <StationForm setViewAddStation={setViewAddStation}/>
