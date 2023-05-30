@@ -46,7 +46,7 @@ namespace Solita_CityBikes.Controllers
 
                 return station;
             }
-            catch (Exception ex)
+            catch
             {
                 return StatusCode(500, "An error occurred while retrieving the station.");
             }
@@ -95,7 +95,8 @@ namespace Solita_CityBikes.Controllers
             }
         }
 
-
+        /*
+         * NOT IN USE
         [HttpGet("AvgPosition")]
         public IActionResult GetAverage()
         {
@@ -111,6 +112,7 @@ namespace Solita_CityBikes.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        */
 
 
     }

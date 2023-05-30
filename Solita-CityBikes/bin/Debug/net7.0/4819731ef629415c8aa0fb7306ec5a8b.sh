@@ -15,16 +15,16 @@ function list_child_processes () {
     fi;
 }
 
-ps 15129;
+ps 16280;
 while [ $? -eq 0 ];
 do
   sleep 1;
-  ps 15129 > /dev/null;
+  ps 16280 > /dev/null;
 done;
 
-for child in $(list_child_processes 15132);
+for child in $(list_child_processes 16282);
 do
   echo killing $child;
   kill -s KILL $child;
 done;
-rm /Users/otsokinanen/Desktop/Työnhaku/Solita/Solita-CityBikes/Solita-CityBikes/bin/Debug/net7.0/0c6cc1ea61f5411bae099118a946a556.sh;
+rm /Users/otsokinanen/Desktop/Työnhaku/Solita/Solita-CityBikes/Solita-CityBikes/bin/Debug/net7.0/4819731ef629415c8aa0fb7306ec5a8b.sh;
