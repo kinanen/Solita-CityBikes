@@ -40,9 +40,9 @@ Tests for React frontend and applications data API are done using JEST
 Data used in the project is offered by City Bike Finland and Helsinki Region Transport. Data is available in the links below. 
 
 The journey data owned by City Bike Finland : 
-    - https://dev.hsl.fi/citybikes/od-trips-2021/2021-05.csv
-    - https://dev.hsl.fi/citybikes/od-trips-2021/2021-06.csv
-    - https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv
+   - https://dev.hsl.fi/citybikes/od-trips-2021/2021-05.csv
+   - https://dev.hsl.fi/citybikes/od-trips-2021/2021-06.csv
+   - https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv
     
 The station data by Helsinki Region Transport’s (HSL): 
     Dataset: 
