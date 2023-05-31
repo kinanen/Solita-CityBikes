@@ -72,6 +72,7 @@ namespace Solita_CityBikes.Tests
             var value = response;
             Assert.Equal(2, value.Count());
         }
+
         [Fact]
         public void TestGetCountsByStations2()
         //get trip counts by stations, correct length
@@ -99,15 +100,16 @@ namespace Solita_CityBikes.Tests
             Assert.Equal(0, value);
         }
 
-
+        [Fact]
         //get returns for one station with data
+        public void TestReturnCountStation()
+        {
+            var response = _controller.GetTripCount(10, 2);
+            var value = response;
+            Assert.Equal(300, value);
+        }
 
-        // get returns for station no data
-
-        // get departures for stations with data
-
-        //get departures for station with no data
-
+       
     }
 
 
