@@ -31,7 +31,7 @@ App uses data from SQL server database
 Application is done with Microsoft SQL server, C# backend and React frontend. 
 Application is running at Azure Web App service.
 
-Tests in C# backend are done with XUnit
+Tests in C# backend are done with XUnit, Backend test run when pushing to git hub and building app to Azure
 Tests for React frontend and applications data API are done using JEST 
 
 
@@ -68,8 +68,7 @@ The project has been done as a part of application process to Solita Dev Academy
  Left for next time:
   - Finishing Post and Put API's and data validator for the input form for both station and trip
   - E2E tests
-  - Simpler and more reliable data read-in
-  - revisiting sql table needs and application data usage
+  - revisiting sql table needs and application data usage, providing faster responses for some functions
   - Finalizing frontends design
   
  Things I am proud of: 
