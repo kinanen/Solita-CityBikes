@@ -100,7 +100,7 @@ or
 
 Configure Environment Variables: If your C# React app requires any environment variables, ensure they are properly configured. Look for any instructions or configuration files (e.g., .env or .env.local) that specify the required variables and their values. Adjust them according to your local environment if necessary.
 
-For the database you will need username and password to insert into appsettings.Development.json and to appsettings.json. Username and password stored in this repo are not active. You can request credentials from me by mail: 
+To run the app and to access the database you will need appsettings.json file, which is not included in the git repo. You can request the file and credentials to the database from me by mail: 
 otso.kinanen(at)gmail.com
 
 Start the Development Server: Once the dependencies are installed and environment variables are configured, you can start the development server. Use the following command:
