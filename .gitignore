@@ -397,5 +397,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# appsettings to git ignore
 appsettings.json
 appsettings.Development.json
