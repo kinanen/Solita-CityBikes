@@ -100,6 +100,14 @@ namespace Solita_CityBikes.Tests
         }
 
 
+        //get returns for one station with data
+
+        // get returns for station no data
+
+        // get departures for stations with data
+
+        //get departures for station with no data
+
     }
 
 

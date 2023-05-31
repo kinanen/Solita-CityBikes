@@ -28,7 +28,7 @@ public class Trip
     [Index(7)]
     public double Duration { get; set; }
 
-    internal bool ValidateTripData()
+    public bool ValidateTripData()
     {
         /*The journeys are in the dataset in the next format Departure time, arrival time, departure station id, departure station name, target station id, target station name, length of the trip in meters, Duration (sec.)
 

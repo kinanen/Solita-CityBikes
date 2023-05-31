@@ -24,11 +24,11 @@ public class Station
     [Index(12)]
     public double Y { get; set; }
 
-    internal bool ValidateStationData()
+    public bool ValidateStationData()
     {
         if (this.X > 25.500 || this.X < 24.000) return false;
-        if (this.Y > 59.000 || this.Y < 60.500) return false;
-        if (Nimi==null) return false;
+        if (this.Y < 59.000 || this.Y > 60.500) return false;
+        if (Nimi==null || Nimi.Length < 1) return false;
         if (Osoite == null || Osoite.Length < 1) return false;
         return true;
     }

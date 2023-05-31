@@ -25,7 +25,7 @@ namespace Solita_CityBikes.Data
                 var records = csv.GetRecords<Station>();
                 foreach (var record in records)
                 {
-
+                    
                     if (record.ValidateStationData())
                     {
                         context.Add(new Station { Name = record.Name, Namn = record.Namn, Nimi = record.Nimi, Osoite = record.Osoite, HslStationId = record.HslStationId, X = record.X, Y = record.Y });

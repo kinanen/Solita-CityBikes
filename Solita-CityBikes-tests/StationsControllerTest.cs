@@ -7,7 +7,7 @@ using Solita_CityBikes.Data;
 using System.Reflection.Metadata;
 
 
-namespace Solita_CityBikes_;
+namespace Solita_CityBikes.Tests;
 
 public class StationControllerTest
 {
@@ -75,6 +75,7 @@ public class StationControllerTest
     }
     [Fact]
     public void TestGet1()
+        // get all stations testing if countains mock station
     {
         var response = _controller.Get();
         var value = response;
@@ -84,6 +85,7 @@ public class StationControllerTest
 
     [Fact]
     public void TestGet2()
+        // get all stations testing that count is correct
     {
         var response = _controller.Get();
         var value = response;
@@ -92,24 +94,8 @@ public class StationControllerTest
     }
 
     [Fact]
-    public void TestGet3()
-    {
-        var response = _controller.Get();
-        var value = response;
-        Assert.NotNull(value);
-        Assert.DoesNotContain(new Station { 
-                HslStationId=5,
-                Nimi="asema5",
-                Namn="asema5",
-                Name="asema5",
-                Osoite="asema5osoite",
-                X=25.500,
-                Y=60.500
-            }, value);
-    }
-
-    [Fact]
     public void TestGetById1()
+        // Get station returns correct station with id
     {
         int id = 10;
         var response = _controller.Get(id);
@@ -120,6 +106,7 @@ public class StationControllerTest
 
     [Fact]
     public void TestGetById2()
+        // returns 404 status if trying to get non existing station
     {
         int id = 00;
         var response = _controller.Get(id);
@@ -132,6 +119,7 @@ public class StationControllerTest
 
     [Fact]
     public void TestGetName1()
+        // returns name of station by id
     { 
         var response = _controller.GetName(2) as String;
         var value = response;
@@ -139,23 +127,17 @@ public class StationControllerTest
         Assert.Equal("asema2", value);
     }
 
-    [Fact]
-    public void TestGetName2()
-    {
-        var response = _controller.GetName(2) as String;
-        var value = response;
-        Assert.NotNull(value);
-        Assert.NotEqual("station1", value);
-    }
 
     [Fact]
     public void TestGetName3()
+        // returnin error message if station not found
     {
         var response = _controller.GetName(4) as String;
         var value = response;
         Assert.NotNull(value);
         Assert.Equal("Virhe, asemaa ei löydetty", value);
     }
+
 
 }
 
