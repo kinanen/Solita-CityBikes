@@ -80,13 +80,14 @@ The project has been done as a part of application process to Solita Dev Academy
 
 
 ## Instructions to run project on your local environment
+
 Clone the Repository: Begin by cloning the repository from GitHub, just as you would for any other repository. Use the git clone command followed by the repository URL to clone it to your local machine.
 
     git clone git@github.com:kinanen/Solita-CityBikes.git
 
 Install Dependencies: Navigate to the project directory using your terminal or command prompt:
 
-C# React apps often use the .NET Core framework and rely on package managers like npm or Yarn for managing front-end dependencies. Use the appropriate command to install the necessary dependencies. Typically, this can be done using the following command:
+C# React apps often use the .NET Core framework and rely on package managers like npm or Yarn for managing front-end dependencies. Use the appropriate command to install the necessary dependencies. This can be done using the following command:
 
     dotnet restore
 
@@ -98,8 +99,6 @@ or
 
     yarn
 
-Configure Environment Variables: If your C# React app requires any environment variables, ensure they are properly configured. Look for any instructions or configuration files (e.g., .env or .env.local) that specify the required variables and their values. Adjust them according to your local environment if necessary.
-
 To run the app and to access the database you will need appsettings.json file, which is not included in the git repo. You can request the file and credentials to the database from me by mail: 
 otso.kinanen(at)gmail.com
 
@@ -107,7 +106,7 @@ Start the Development Server: Once the dependencies are installed and environmen
 
     dotnet run
 
-This command will build and run the C# server, which will also serve the React front-end. It should launch the app in your browser https://localhost:7199/api 
+This command will build and run the C# server, which will also serve the React front-end. It should launch the app in your browser https://localhost:7199/api (these instructions have been written with kind help of chatGPT, if something goes wrong ask help from me!)
 
 
 Thank you for reading! If you have questions or anything comes to mind don't hesitate to askby mail: otso.kinanen(at)gmail.com
