@@ -109,3 +109,5 @@ Start the Development Server: Once the dependencies are installed and environmen
 
 This command will build and run the C# server, which will also serve the React front-end. It should launch the app in your browser https://localhost:7199/api 
 
+
+Thank you for reading! If you have questions or anything comes to mind don't hesitate to askby mail: otso.kinanen(at)gmail.com
