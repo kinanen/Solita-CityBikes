@@ -1,5 +1,5 @@
 # Solita-CityBikes
-This is Helsinki citybikes application made by Otso Kinanen as assignment to Solita Dev Academy. 
+This is unofficial Helsinki citybikes webapplication made by Otso Kinanen. 
 In the application you can examine Helsinki Citybike data form summer 2021, view stations and trip details. 
 Application is Up and running at : https://otso-citybike.azurewebsites.net/
 
